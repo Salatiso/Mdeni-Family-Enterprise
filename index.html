@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mdeni Family Enterprise</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FFF8E1; /* Creamy background for warmth */
+        }
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        /* Custom Xhosa-inspired pattern (simple example) */
+        .xhosa-pattern {
+            background-image:
+                linear-gradient(45deg, #FFD700 25%, transparent 25%),
+                linear-gradient(-45deg, #FFD700 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #FFD700 75%),
+                linear-gradient(-45deg, transparent 75%, #FFD700 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+        }
+        .nav-button {
+            @apply px-4 py-2 text-sm font-medium text-gray-700 hover:bg-amber-500 hover:text-white rounded-lg transition-colors duration-300;
+        }
+        .active-nav-button {
+            @apply bg-amber-600 text-white;
+        }
+        .content-section {
+            @apply min-h-screen p-6 md:p-12 flex flex-col justify-center items-center opacity-0 transition-opacity duration-1000;
+            display: none; /* Initially hidden */
+        }
+        .content-section.active {
+            display: flex; /* Show active section */
+            opacity: 1;
+        }
+        .card {
+            @apply bg-white p-6 rounded-xl shadow-lg transition-all duration-300 hover:shadow-2xl;
+        }
+        .carousel-container {
+            @apply relative w-full overflow-hidden;
+        }
+        .carousel-track {
+            @apply flex transition-transform duration-500 ease-in-out;
+        }
+        .carousel-item {
+            @apply min-w-full md:min-w-[50%] lg:min-w-[33.33%] p-4 flex-shrink-0;
+        }
+        .carousel-button {
+            @apply absolute top-1/2 -translate-y-1/2 bg-black bg-opacity-50 text-white p-2 rounded-full hover:bg-opacity-75 transition-colors;
+        }
+        /* Basic Timeline Styles */
+        .timeline { @apply relative mt-8; }
+        .timeline::before {
+            @apply content-[''] absolute left-1/2 top-0 w-1 bg-amber-500 h-full -ml-0.5;
+        }
+        .timeline-item { @apply relative mb-8 pl-8 md:pl-0; }
+        .timeline-item:nth-child(odd) .timeline-content { @apply md:ml-[55%] md:pl-8; }
+        .timeline-item:nth-child(odd) .timeline-marker { @apply md:left-1/2 md:-ml-3; }
+        .timeline-item:nth-child(even) .timeline-content { @apply md:mr-[55%] md:text-right md:pr-8; }
+        .timeline-item:nth-child(even) .timeline-marker { @apply md:left-1/2 md:-ml-3; } /* Simplified for center */
+
+        .timeline-marker {
+            @apply absolute left-0 top-1 w-6 h-6 bg-amber-600 rounded-full border-4 border-white;
+        }
+        .timeline-content { @apply bg-white p-4 rounded-lg shadow-md; }
+        .timeline-content h3 { @apply text-lg font-semibold text-amber-700; }
+
+        /* Modal for more details */
+        .modal {
+            @apply fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center p-4 z-50 opacity-0 pointer-events-none transition-opacity duration-300;
+        }
+        .modal.active {
+            @apply opacity-100 pointer-events-auto;
+        }
+        .modal-content {
+            @apply bg-white p-6 rounded-lg shadow-xl max-w-2xl w-full max-h-[80vh] overflow-y-auto;
+        }
+    </style>
+</head>
+<body class="bg-amber-50 text-gray-800">
+
+    <nav class="sticky top-0 z-40 bg-white/80 backdrop-blur-md shadow-md">
+        <div class="container mx-auto px-4 py-3 flex flex-wrap justify-between items-center">
+            <h1 class="font-display text-2xl font-bold text-amber-700">Mdeni Family Enterprise</h1>
+            <div class="space-x-1 mt-2 md:mt-0">
+                <button class="nav-button active-nav-button" data-target="home">Home</button>,
+                <button class="nav-button" data-target="vision">Our Vision</button>
+                <button class="nav-button" data-target="team">Meet the Team</button>
+                <button class="nav-button" data-target="ventures">Our Ventures</button>
+                <button class="nav-button" data-target="journey">Our Journey</button>
+                <button class="nav-button" data-target="learning">Learning Hub</button>
+                <button class="nav-button" data-target="flamea">Flamea</button>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <section id="home" class="content-section active relative">
+            <div class="xhosa-pattern"></div>
+            <div class="text-center z-10">
+                <h2 class="font-display text-5xl md:text-7xl font-bold text-amber-800 mb-6">Siyanamukela! Welcome!</h2>
+                <p class="text-xl md:text-2xl text-gray-700 mb-8 max-w-3xl mx-auto">
+                    Building a legacy, together. Rooted in family, driven by purpose.
+                    This is the Mdeni Family Enterprise.
+                </p>
+                <img src="https://placehold.co/600x400/A0522D/FFFFFF?text=Our+Family+Heritage+(Transkei+Inspired)" alt="Family Heritage - Placeholder for Transkei landscape or family gathering" class="mx-auto rounded-xl shadow-2xl mb-8">
+                <p class="text-lg text-gray-600">"Umntu ngumntu ngabantu." <br> (A person is a person through other people.)</p>
+            </div>
+        </section>
+
+        <section id="vision" class="content-section bg-amber-100 relative">
+            <div class="xhosa-pattern opacity-5"></div>
+            <div class="text-center z-10 max-w-4xl">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-amber-800 mb-10">Our Guiding Light</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="card">
+                        <h3 class="font-display text-3xl text-amber-700 mb-4">Our Vision</h3>
+                        <p class="text-gray-600">To be a leading family-owned enterprise recognized for its innovation, integrity, and commitment to empowering its members and the community, building a lasting legacy for generations to come, rooted in our Xhosa heritage and South African identity.</p>
+                    </div>
+                    <div class="card">
+                        <h3 class="font-display text-3xl text-amber-700 mb-4">Our Mission</h3>
+                        <p class="text-gray-600">To strategically manage and grow a diversified portfolio of ventures in OHS consulting, property management, digital solutions, education, and publishing, while fostering the professional development of family members and contributing positively to society through its non-profit activities.</p>
+                    </div>
+                </div>
+                 <img src="https://placehold.co/400x300/DEB887/333333?text=African+Symbol+of+Unity" alt="Symbol of Unity - Placeholder" class="mx-auto rounded-lg shadow-lg mt-10">
+            </div>
+        </section>
+
+        <section id="team" class="content-section">
+            <div class="container mx-auto text-center">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-amber-800 mb-12">Meet Our Family Team</h2>
+                <div class="carousel-container">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/36454F/FFFFFF?text=Salatiso+M." alt="Salatiso Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Salatiso L. Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Chief Strategic & Operations Officer (CSOO)</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">The visionary architect, ensuring operational excellence and guiding our legacy. "I am a father to my son; all else is a means to this end."</p>
+                                <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="salatiso">View Details & Training</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/800020/FFFFFF?text=Visa+M." alt="Visa Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Visa Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Chief Executive Officer (CEO)</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">The public face and leader, driving our company's growth and upholding our family values. Product Champion for SafetyHelp.</p>
+                                 <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="visa">View Details & Training</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/FFC0CB/333333?text=Tina+M." alt="Tina Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Tina Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Head of Marketing & Communications</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">Our creative storyteller, connecting us with the world through engaging marketing and social media.</p>
+                                 <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="tina">View Details & Training</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/4682B4/FFFFFF?text=Kwakho+M." alt="Kwakho Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Kwakho Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Head of Operations Support & Curriculum Dev.</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">The backbone of our operations, ensuring smooth processes and developing impactful learning for Sazi Life.</p>
+                                 <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="kwakho">View Details & Training</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/228B22/FFFFFF?text=Nozukile+M." alt="Nozukile Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Nozukile Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Chairperson of the Family Council</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">Our respected matriarch, guiding us with wisdom and ensuring our family values remain at our core.</p>
+                                 <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="nozukile">View Details & Training</button>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="card text-left h-full flex flex-col">
+                                <img src="https://placehold.co/300x300/008080/FFFFFF?text=Solo+M." alt="Solonwabo Mdeni" class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-amber-300">
+                                <h3 class="text-xl font-semibold text-amber-700 text-center">Solonwabo M. Mdeni</h3>
+                                <p class="text-gray-500 text-sm text-center mb-2">Junior Product Designer & Technical Apprentice</p>
+                                <p class="text-gray-600 text-sm mb-3 flex-grow">Our young tech innovator, bringing fresh perspectives and skills to our digital ventures. Visit his art: <a href="https://solonwabo.art/" target="_blank" class="text-blue-500 hover:underline">solonwabo.art</a></p>
+                                 <button class="mt-auto w-full bg-amber-500 text-white py-2 px-4 rounded-lg hover:bg-amber-600 transition-colors view-details-btn" data-member="solonwabo">View Details & Training</button>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="carousel-button left-0 ml-2 prev-btn">&lt;</button>
+                    <button class="carousel-button right-0 mr-2 next-btn">&gt;</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="ventures" class="content-section bg-green-50">
+            <div class="container mx-auto text-center">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-green-800 mb-12">Our Family Ventures</h2>
+                <p class="text-lg text-gray-700 mb-8">Showcasing our diverse range of services and platforms, each contributing to our family's mission.</p>
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="card">SafetyHelp (OHS Platform) - Visa leads</div>
+                    <div class="card">Sazi Life (Education) - Kwakho leads</div>
+                    <div class="card">Salatiso Mdeni Ventures (Consulting)</div>
+                    <div class="card">Digital Creations & Publishing</div>
+                    <div class="card">Property Management</div>
+                    <div class="card">Flamea (Non-Profit Arm)</div>
+                </div>
+                 <img src="https://placehold.co/500x300/90EE90/333333?text=Ventures+Collage" alt="Ventures Collage - Placeholder" class="mx-auto rounded-lg shadow-lg mt-10">
+            </div>
+        </section>
+
+        <section id="journey" class="content-section">
+            <div class="container mx-auto text-center">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-amber-800 mb-12">Our Journey to Launch</h2>
+                <div class="timeline max-w-3xl mx-auto">
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Phase 1: Foundation & Legal (Est. 4-8 Weeks from May 20, 2025)</h3>
+                            <p class="text-sm text-gray-600">Company Name & Registration, Trust Research, Bank Accounts, SARS Reg, NPO Reg for Flamea.</p>
+                            <button class="text-xs text-amber-600 hover:underline view-details-btn" data-member="journey_phase1">More Details</button>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Phase 2: Operational & Content Setup (Est. 4-6 Weeks following)</h3>
+                            <p class="text-sm text-gray-600">Internal Agreements, Venture Consolidation, Financial Systems, Service Offerings, IP Inventory, Induction Materials.</p>
+                             <button class="text-xs text-amber-600 hover:underline view-details-btn" data-member="journey_phase2">More Details</button>
+                        </div>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <h3>Phase 3: Internal Launch & Initial Operations (Ongoing)</h3>
+                            <p class="text-sm text-gray-600">Internal Website, Training Plan Commencement, Marketing Content Creation, Regular Council Meetings.</p>
+                            <button class="text-xs text-amber-600 hover:underline view-details-btn" data-member="journey_phase3">More Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="learning" class="content-section bg-blue-50">
+             <div class="container mx-auto text-center">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-blue-800 mb-12">Empowering Our Growth: The Learning Hub</h2>
+                <p class="text-lg text-gray-700 mb-8">Dedicated resources and training paths for each family member to grow into their roles and beyond.</p>
+                <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                    <div class="card">General Company Induction (All)</div>
+                    <div class="card">CEO Training Path (Visa)</div>
+                    <div class="card">Marketing Training Path (Tina)</div>
+                    <div class="card">Operations & Curriculum Training Path (Kwakho)</div>
+                    <div class="card">Tech Apprentice Path (Solonwabo)</div>
+                </div>
+                <p class="mt-8 text-gray-600">Click on a team member's "View Details & Training" button in the "Meet the Team" section for specific resources!</p>
+            </div>
+        </section>
+
+        <section id="flamea" class="content-section bg-purple-50">
+            <div class="container mx-auto text-center">
+                <h2 class="font-display text-4xl md:text-5xl font-bold text-purple-800 mb-12">Flamea: Our Heart for the Community</h2>
+                <p class="text-lg text-gray-700 mb-8">Promoting equality through education, fathers' and family rights advocacy, and community upliftment initiatives.</p>
+                <img src="https://placehold.co/400x300/E6E6FA/333333?text=Flamea+Logo+Concept" alt="Flamea Logo - Placeholder" class="mx-auto rounded-lg shadow-lg">
+                <p class="mt-8 text-gray-600">Learn more at <a href="https://flamea.org/" target="_blank" class="text-purple-600 hover:underline">flamea.org</a> (once updated with new affiliation).</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <button class="absolute top-4 right-4 text-gray-700 hover:text-black text-2xl closeModalBtn">&times;</button>
+            <div id="modalBody">
+                </div>
+        </div>
+    </div>
+
+
+    <script>
+        // Navigation
+        const navButtons = document.querySelectorAll('.nav-button');
+        const contentSections = document.querySelectorAll('.content-section');
+        const modal = document.getElementById('detailsModal');
+        const modalBody = document.getElementById('modalBody');
+        const closeModalButtons = document.querySelectorAll('.closeModalBtn');
+
+        function showSection(targetId) {
+            contentSections.forEach(section => {
+                section.classList.remove('active');
+            });
+            navButtons.forEach(button => {
+                button.classList.remove('active-nav-button');
+                if (button.dataset.target === targetId) {
+                    button.classList.add('active-nav-button');
+                }
+            });
+            const targetSection = document.getElementById(targetId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+                // For single-page feel, scroll to top of section
+                // window.scrollTo({ top: targetSection.offsetTop - 60, behavior: 'smooth' }); // Adjust 60 for nav height
+            }
+        }
+
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                showSection(button.dataset.target);
+            });
+        });
+
+        // Carousel Logic
+        const carousels = document.querySelectorAll('.carousel-container');
+        carousels.forEach(carousel => {
+            const track = carousel.querySelector('.carousel-track');
+            const items = Array.from(track.children);
+            const nextButton = carousel.querySelector('.next-btn');
+            const prevButton = carousel.querySelector('.prev-btn');
+            let itemWidth = items[0].getBoundingClientRect().width;
+            let currentIndex = 0;
+            const visibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth); // Recalculate based on actual visible items
+
+            function updateCarousel() {
+                itemWidth = items[0].getBoundingClientRect().width; // Recalculate on update
+                track.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+            }
+            
+            function autoSlide() {
+                if (currentIndex < items.length - visibleItems) {
+                    currentIndex++;
+                } else {
+                    currentIndex = 0;
+                }
+                updateCarousel();
+            }
+
+            let slideInterval = setInterval(autoSlide, 5000); // Auto-slide every 5 seconds
+
+            carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+            carousel.addEventListener('mouseleave', () => slideInterval = setInterval(autoSlide, 5000));
+
+
+            if (nextButton) {
+                nextButton.addEventListener('click', () => {
+                    if (currentIndex < items.length - visibleItems) { // Adjust for multiple visible items
+                        currentIndex++;
+                    } else {
+                        currentIndex = 0; // Loop to start
+                    }
+                    updateCarousel();
+                });
+            }
+
+            if (prevButton) {
+                prevButton.addEventListener('click', () => {
+                    if (currentIndex > 0) {
+                        currentIndex--;
+                    } else {
+                        currentIndex = items.length - visibleItems; // Loop to end
+                    }
+                    updateCarousel();
+                });
+            }
+            
+            window.addEventListener('resize', () => {
+                // Recalculate visibleItems and itemWidth on resize
+                itemWidth = items[0].getBoundingClientRect().width;
+                const newVisibleItems = Math.floor(track.parentElement.offsetWidth / itemWidth);
+                if (newVisibleItems !== visibleItems) {
+                    // Potentially adjust currentIndex if it becomes invalid
+                    if (currentIndex > items.length - newVisibleItems) {
+                        currentIndex = Math.max(0, items.length - newVisibleItems);
+                    }
+                }
+                updateCarousel();
+            });
+            updateCarousel(); // Initial setup
+        });
+
+        // Modal Logic
+        const memberDetails = {
+            salatiso: {
+                title: "Salatiso L. Mdeni - CSOO",
+                details: `<p><strong>Role:</strong> The visionary and strategic architect behind the enterprise. Responsible for overall operational excellence, product development, risk management, compliance, legal & administrative oversight, and mentoring the next generation. He will ensure the company's activities align with his core principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli, guiding the family's legacy.</p>
+                          <p class="mt-2"><strong>Profile:</strong> A highly experienced OHS and Risk Management expert with over 20 years in diverse sectors. A proven entrepreneur (SafetyHelp, Sazi, Flamea), published author, and dedicated father. Salatiso brings deep industry knowledge, a strategic mindset, technological acumen, and a passion for self-sufficiency and education. His resilience, shaped by his upbringing and commitment to lifelong learning, makes him the foundational pillar for the company's operational integrity and innovation. He is the "business behind the business," ensuring robust systems and nurturing growth.</p>
+                          <p class="mt-2"><strong>Career Path Start:</strong> Expert.</p>
+                          <p><strong>Focus:</strong> Mentorship, strategic scaling, new venture incubation, overseeing training programs, identifying advanced learning opportunities for the team. Continue own learning in emerging tech relevant to ventures.</p>
+                          <h4 class="font-semibold mt-4 mb-2 text-amber-700">Key Training & Resources:</h4>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li>Mentoring team members through their specific training paths.</li>
+                            <li>Advanced courses in AI, Business Strategy, and International Business (self-led).</li>
+                            <li>Industry journals and conferences on OHS, Risk Management, and Technology.</li>
+                          </ul>`,
+            },
+            visa: {
+                title: "Visa Mdeni - CEO",
+                details: `<p><strong>Role:</strong> The public face and leader of the Mdeni Family Enterprise. Responsible for overall company direction, stakeholder management, business development, brand ambassadorship, and leading the company registration process. She will drive the company's growth and ensure its values are upheld in all external dealings. Product Champion for SafetyHelp.</p>
+                          <p class="mt-2"><strong>Profile:</strong> Visa is a natural leader with strong interpersonal and communication skills, making her ideal for representing the company. She possesses the drive and vision to steer the enterprise forward. Her commitment to the family and understanding of the founder's vision will be crucial in building a cohesive and successful business.</p>
+                          <p class="mt-2"><strong>Career Path Start:</strong> Emerging Leader.</p>
+                          <p><strong>Focus:</strong> Develop executive leadership, financial acumen, strategic negotiation. Complete company setup tasks.</p>
+                          <h4 class="font-semibold mt-4 mb-2 text-amber-700">Initial Training Focus (First 3 Months):</h4>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>CIPC & Business Registration:</strong> Hands-on company registration via CIPC portal. Resource: CIPC Website Guides, YouTube tutorials.</li>
+                            <li><strong>SARS eFiling & Basic Tax Compliance:</strong> Company registration on SARS eFiling. Resource: SARS Website Guides for SMMEs.</li>
+                            <li><strong>Intro to Business Banking & FICA:</strong> Research and open company bank account. Resource: Bank websites, FICA Act summaries.</li>
+                            <li><strong>NPO Registration Basics (Flamea):</strong> Understand DSD NPO registration. Resource: DSD Website.</li>
+                            <li><strong>Intro to Business Management:</strong> Alison.com - Diploma in Business Management & Entrepreneurship (free) or Coursera (audit "Business Foundations Specialization").</li>
+                            <li><strong>SafetyHelp Product Champion:</strong> In-depth understanding of platform, OHS basics (mentored by Salatiso).</li>
+                          </ul>`,
+            },
+            tina: {
+                title: "Tina Mdeni - Head of Marketing & Communications",
+                details: `<p><strong>Role:</strong> Responsible for developing and executing marketing strategies, managing social media presence, public relations, brand promotion for all ventures, and creating engaging content that tells the family enterprise's story. Works from home.</p>
+                          <p class="mt-2"><strong>Profile:</strong> Tina has a creative flair and a keen understanding of modern communication channels. She is adept at connecting with diverse audiences and can translate the company's offerings into compelling narratives. Her intuitive understanding of market trends and her passion for the family's success will drive brand visibility and customer engagement.</p>
+                          <p class="mt-2"><strong>Career Path Start:</strong> Enthusiast Learner.</p>
+                          <p><strong>Focus:</strong> Master digital marketing tools, content strategy, analytics, brand storytelling.</p>
+                          <h4 class="font-semibold mt-4 mb-2 text-amber-700">Initial Training Focus (First 3 Months):</h4>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Fundamentals of Digital Marketing:</strong> Google Digital Garage (free certification).</li>
+                            <li><strong>Social Media Marketing:</strong> HubSpot Academy - "Social Media Marketing Course" (free certification). Meta Blueprint (selected free courses).</li>
+                            <li><strong>Content Creation & Graphic Design:</strong> Canva Design School tutorials.</li>
+                            <li><strong>Introduction to SEO:</strong> Moz - "Beginner's Guide to SEO", Google Search Central basics.</li>
+                            <li><strong>Product Focus:</strong> Learn to market SafetyHelp, Sazi Life, Salatiso's books, properties. Develop content calendars.</li>
+                          </ul>`,
+            },
+             kwakho: {
+                title: "Kwakho Mdeni - Head of Operations Support & Curriculum Dev.",
+                details: `<p><strong>Role:</strong> Responsible for vital background operations including multilingual translations, sourcing suppliers, managing vendor relationships, and providing administrative support across divisions. She will also review and compile curriculums for Sazi Learning and explore opportunities for international outreach. Works from home. Product Champion for Sazi Life.</p>
+                          <p class="mt-2"><strong>Profile:</strong> Kwakho is meticulous, resourceful, and possesses excellent organizational skills. Her ability to manage multiple tasks efficiently and her knack for finding optimal solutions will be key to smooth operations. Her potential linguistic skills and cultural sensitivity will be an asset.</p>
+                          <p class="mt-2"><strong>Career Path Start:</strong> Detail-Oriented Organizer.</p>
+                          <p><strong>Focus:</strong> Develop curriculum design principles, advanced project coordination, supplier negotiation, translation best practices.</p>
+                          <h4 class="font-semibold mt-4 mb-2 text-amber-700">Initial Training Focus (First 3 Months):</h4>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Intro to Curriculum Development:</strong> Explore OER Commons, UNESCO resources. Alison.com - "Diploma in Educational Psychology" (relevant modules). Task: Review Sazi Life materials.</li>
+                            <li><strong>Project Management Fundamentals:</strong> Google Project Management Certificate (Coursera - audit initial courses). Asana/Trello tutorials.</li>
+                            <li><strong>Effective Business Communication & Admin:</strong> Coursera - "Business Writing" (audit). Google Workspace Learning Center.</li>
+                            <li><strong>Translation Tools & Techniques (Basic):</strong> Explore Google Translate functionalities.</li>
+                            <li><strong>Sazi Life Product Champion:</strong> Deep dive into Sazi Life's philosophy, content needs (mentored by Salatiso).</li>
+                          </ul>`,
+            },
+            nozukile: {
+                title: "Nozukile Mdeni - Chairperson of the Family Council",
+                details: `<p><strong>Role:</strong> To provide high-level oversight and guidance, ensuring the company operates in alignment with family values and safeguards the interests of all shareholders, particularly the trusts established for the grandchildren. She will act as a moral compass and a mediator, fostering harmony and long-term vision within the family enterprise, without being involved in day-to-day operations.</p>
+                          <p class="mt-2"><strong>Profile:</strong> As the matriarch, Nozukile embodies wisdom, stability, and a deep understanding of family dynamics. Her life experience and commitment to her family's well-being make her the ideal guardian of the company's ethical foundation. Her role is to ensure that as the business grows, its core purpose of family unity and legacy remains paramount.</p>
+                          <p class="mt-2"><strong>Focus:</strong> Upholding family values, guiding ethical decisions, ensuring long-term vision for the family legacy.</p>`,
+            },
+            solonwabo: {
+                title: "Solonwabo M. Mdeni - Junior Product Designer & Technical Apprentice",
+                details: `<p><strong>Role:</strong> Collaborating closely with Salatiso on backend product design, website development (leveraging his skills showcased on <a href="https://solonwabo.art/" target="_blank" class="text-blue-500 hover:underline">solonwabo.art</a>), and providing technical expertise for the company's digital ventures, under apprenticeship.</p>
+                          <p class="mt-2"><strong>Profile:</strong> Solo is a talented and self-motivated young web developer with a clear aptitude for design and technology. His existing work demonstrates initiative and technical skill. He is eager to learn and contribute, bringing fresh perspectives and modern technical approaches.</p>
+                          <p class="mt-2"><strong>Career Path Start:</strong> Promising Talent.</p>
+                          <p><strong>Focus:</strong> Formalize coding skills, UX/UI principles, database management basics.</p>
+                          <h4 class="font-semibold mt-4 mb-2 text-amber-700">Initial Training Focus (First 3 Months):</h4>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Advanced HTML, CSS, JavaScript:</strong> FreeCodeCamp (Responsive Web Design, JS Algorithms certifications). MDN Web Docs.</li>
+                            <li><strong>Intro to UX/UI Design:</strong> Figma Learn. Google UX Design Certificate (Coursera - audit initial courses).</li>
+                            <li><strong>Version Control (Git & GitHub):</strong> GitHub Learning Lab. Atlassian Git Tutorials. Task: Set up GitHub repo for this internal website.</li>
+                            <li><strong>Project Work:</strong> Lead development of this internal family website (guidance from Salatiso). Assist with SafetyHelp/Sazi Life enhancements.</li>
+                          </ul>`,
+            },
+            journey_phase1: {
+                title: "Journey: Phase 1 Details",
+                details: `<h3>Phase 1: Foundation & Legal (Est. 4-8 Weeks from May 20, 2025)</h3>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Finalize Holding Company Name (Visa):</strong> 1-2 days. Cost: R50 (name reservation). Resource: CIPC Website.</li>
+                            <li><strong>Register Holding Company (Pty) Ltd (Visa):</strong> 3-7 days. Cost: R125 (online reg). Resource: Companies Act, CIPC Guide.</li>
+                            <li><strong>Draft Basic Trust Deeds (Initial Research - Salatiso):</strong> 1 week. Cost: R0 (research). Resource: Online legal templates (caution!), NPO resources. **Professional legal help advised for finalization.**</li>
+                            <li><strong>Open Business Bank Account (Visa):</strong> 3-5 days. Cost: R0-R200 (monthly fees vary). Resource: FICA requirements, bank offerings.</li>
+                            <li><strong>SARS Registrations (Visa/Salatiso):</strong> 1 week. Cost: R0. Resource: SARS eFiling, Income Tax Act.</li>
+                            <li><strong>Register Flamea as NPO (Visa/Salatiso):</strong> 4-8 weeks+. Cost: R0 (DSD) - R450 (Master's Office if Trust). Resource: NPO Act, DSD Website.</li>
+                            <li><strong>Initial Family Council Meeting (All):</strong> 1 day. Cost: R0. Purpose: Ratify structure, roles, plan.</li>
+                            <li><strong>COID Registration (if applicable - Salatiso):</strong> 1-2 weeks. Cost: R0 (assessment varies). Resource: COID Act, Dept. of Labour.</li>
+                          </ul>
+                          <p class="mt-2 text-xs"><i>Refer to the main Mdeni Family Enterprise document for more granular details.</i></p>`
+            },
+            // Add journey_phase2 and journey_phase3 similarly
+            journey_phase2: {
+                title: "Journey: Phase 2 Details",
+                details: `<h3>Phase 2: Operational & Content Setup (Est. 4-6 Weeks following Phase 1)</h3>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Draft Internal Agreements (Service Agreements - Salatiso):</strong> 1 week. Simple templates for roles, responsibilities, profit-sharing.</li>
+                            <li><strong>Consolidate Ventures Info (Salatiso):</strong> 2 weeks. Gather data on existing ventures, assets, IP.</li>
+                            <li><strong>Setup Basic Accounting (Salatiso/Visa):</strong> 1 week. Spreadsheet/Free Software (Wave, Google Sheets).</li>
+                            <li><strong>Develop Initial Operating Budget (Salatiso/Visa):</strong> 3 days. Project income/expenses for first 6-12 months.</li>
+                            <li><strong>Formalize Service Offerings/Pricing (All relevant leads):</strong> 1 week. Document services and pricing for each division.</li>
+                            <li><strong>IP Inventory & Basic Protection (Salatiso):</strong> 1 week. List IP, research copyright notices.</li>
+                            <li><strong>Develop Company Induction Materials (Salatiso/Kwakho):</strong> 2 weeks. Based on strategic plan and roles.</li>
+                          </ul>
+                          <p class="mt-2 text-xs"><i>Refer to the main Mdeni Family Enterprise document for more granular details.</i></p>`
+            },
+            journey_phase3: {
+                title: "Journey: Phase 3 Details",
+                details: `<h3>Phase 3: Internal Launch & Initial Operations (Ongoing from ~Aug 26, 2025 onwards)</h3>
+                          <ul class="list-disc pl-5 text-sm">
+                            <li><strong>Internal Website Launch (Family Intro - Salatiso/Solo):</strong> 2-3 weeks. Develop this internal family website.</li>
+                            <li><strong>Commence Training Plan (All):</strong> Ongoing. Family members start respective learning paths.</li>
+                            <li><strong>Update Existing Public Websites (Salatiso/Solo):</strong> Ongoing. Add "Part of Mdeni Family Enterprise" branding.</li>
+                            <li><strong>Initial Marketing Content Creation (Tina):</strong> Ongoing. Draft social media posts, blog ideas.</li>
+                            <li><strong>Regular Family Council/Management Meetings (All):</strong> Monthly. Review progress, financials, challenges.</li>
+                          </ul>
+                          <p class="mt-2 text-xs"><i>Refer to the main Mdeni Family Enterprise document for more granular details.</i></p>`
+            }
+
+        };
+
+        document.querySelectorAll('.view-details-btn').forEach(button => {
+            button.addEventListener('click', () => {
+                const memberKey = button.dataset.member;
+                const content = memberDetails[memberKey];
+                if (content) {
+                    modalBody.innerHTML = `<h3 class="font-display text-2xl text-amber-700 mb-4">${content.title}</h3><div>${content.details}</div>`;
+                    modal.classList.add('active');
+                }
+            });
+        });
+
+        closeModalButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                modal.classList.remove('active');
+            });
+        });
+        
+        // Close modal if clicking outside the content
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        });
+
+
+        // Initialize first section
+        showSection('home');
+    </script>
+</body>
+</html>
