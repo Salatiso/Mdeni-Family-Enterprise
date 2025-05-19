@@ -9,11 +9,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <style>
+        /* --- Earthy Theme Color Palette --- */
+        :root {
+            --color-primary-dark: #5D4037; /* Deep Brown */
+            --color-primary-medium: #795548; /* Brown */
+            --color-primary-light: #A1887F; /* Light Brown */
+            --color-secondary-dark: #38761D; /* Dark Green */
+            --color-secondary-medium: #689F38; /* Green */
+            --color-secondary-light: #AED581; /* Light Green */
+            --color-accent-orange: #F57C00; /* Burnt Orange (was FD7E14) */
+            --color-accent-gold: #FFB300;   /* Gold/Yellow Ochre */
+            --color-background-light: #F5F5F5; /* Off-white / Very Light Grey (was E8F0FE) */
+            --color-background-cream: #FFF8E1; /* Creamy Beige */
+            --color-text-dark: #3E2723;    /* Dark Brown for text */
+            --color-text-medium: #5D4037;  /* Medium Brown for text */
+            --color-text-light: #8D6E63;   /* Light Brown for text */
+            --color-border: #D7CCC8;       /* Light Brownish Grey for borders */
+            --color-success: #4CAF50;      /* Green for success states */
+            --color-warning: #FFC107;      /* Amber for warnings */
+            --color-danger: #F44336;       /* Red for errors/danger */
+        }
+
         /* Global Styles */
         body {
             font-family: 'Open Sans', sans-serif;
-            background-color: #E8F0FE; /* Light blue-grey background */
-            color: #333;
+            background-color: var(--color-background-cream);
+            color: var(--color-text-dark);
             margin: 0;
             display: flex;
             flex-direction: column;
@@ -23,99 +44,92 @@
 
         h1, h2, h3, h4, h5, h6, .font-display {
             font-family: 'Montserrat', sans-serif;
+            color: var(--color-primary-dark);
         }
 
         /* Header */
         header {
-            background-color: #007BFF; /* Blue from salatiso.com */
-            color: white;
+            background-color: var(--color-primary-medium); /* Brown */
+            color: var(--color-background-cream);
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            width: 100%;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            top: 0; left: 0; right: 0; z-index: 1000;
+            width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         .header-container {
-            max-width: 100%;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 30px;
-            height: 80px;
+            max-width: 100%; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+            padding: 10px 30px; height: 80px;
         }
-        .logo-container img { height: 50px; margin-right: 15px; }
-        .logo-container .company-name { font-size: 1.8em; font-weight: 700; }
-        .main-nav-links { display: flex; flex-wrap: wrap; /* Allow wrapping on smaller screens */ }
+        .logo-container img { height: 50px; margin-right: 15px; filter: brightness(0) invert(1); /* Make logo white if it's dark */ }
+        .logo-container .company-name { font-size: 1.8em; font-weight: 700; color: var(--color-background-cream); }
+        .main-nav-links { display: flex; flex-wrap: wrap; }
         .main-nav-links a {
-            color: white; margin: 0 8px; /* Reduced margin for more links */
-            font-size: 0.9em; /* Slightly smaller for more links */
-            font-weight: 500;
-            text-decoration: none; padding: 8px 10px; border-radius: 6px;
-            transition: background-color 0.3s, color 0.3s;
+            color: var(--color-background-cream); margin: 0 8px; font-size: 0.9em;
+            font-weight: 500; text-decoration: none; padding: 8px 10px;
+            border-radius: 6px; transition: background-color 0.3s, color 0.3s;
         }
         .main-nav-links a:hover, .main-nav-links a.active-main-nav {
-            background-color: #FD7E14; /* Orange accent */
+            background-color: var(--color-accent-orange);
             color: white;
         }
         .user-actions { display: flex; align-items: center; }
         .user-actions .notification-bell, .user-actions .user-profile-menu > button {
-            color: white; margin-left: 20px; font-size: 1.2em; cursor: pointer; position: relative;
+            color: var(--color-background-cream); margin-left: 20px; font-size: 1.2em;
+            cursor: pointer; position: relative;
         }
          .notification-badge {
-            background-color: #FF3B30; /* iOS red for notifications */
-            color: white; font-size: 0.65rem; font-weight: bold;
-            padding: 2px 5px; border-radius: 50%; position: absolute; top: -5px; right: -8px;
+            background-color: var(--color-danger); color: white; font-size: 0.65rem;
+            font-weight: bold; padding: 2px 5px; border-radius: 50%;
+            position: absolute; top: -5px; right: -8px;
         }
-        .user-profile-menu img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid white; }
+        .user-profile-menu img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--color-background-cream); }
         .dropdown-menu {
-            display: none; position: absolute; right: 0; top: 50px;
-            background-color: white; color: #333; border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 200px;
+            display: none; position: absolute; right: 0; top: 55px; /* Adjusted for potential thicker header elements */
+            background-color: white; color: var(--color-text-dark); border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 220px; /* Wider */
+            border: 1px solid var(--color-border);
         }
-        .dropdown-menu a { display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 0.9em; }
-        .dropdown-menu a:hover { background-color: #f0f0f0; }
+        .dropdown-menu a { display: block; padding: 12px 18px; text-decoration: none; color: var(--color-text-medium); font-size: 0.9em; }
+        .dropdown-menu a:hover { background-color: var(--color-background-light); color: var(--color-primary-dark); }
         .user-profile-menu:hover .dropdown-menu { display: block; }
 
 
         /* Main Content Area */
         .main-content-wrapper { display: flex; flex-grow: 1; }
         .content-display-area { flex-grow: 1; padding: 0; overflow: hidden; }
-        .content-section { /* For non-dashboard pages */
-            background-color: #FFFFFF; padding: 25px 30px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07); margin: 25px;
-            display: none; opacity: 0; transition: opacity 0.4s ease-in-out;
-            max-height: calc(100vh - 80px - 50px); /* Header and margin */
-            overflow-y: auto;
+        .content-section {
+            background-color: #FFFFFF; padding: 30px 35px; /* Increased padding */
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(93,64,55,0.1); /* Brownish shadow */
+            margin: 25px; display: none; opacity: 0;
+            transition: opacity 0.4s ease-in-out;
+            max-height: calc(100vh - 80px - 50px);
+            overflow-y: auto; border: 1px solid var(--color-border);
         }
         .content-section.active { display: block; opacity: 1; }
         .content-section h2.section-title {
-            font-size: 2.2em; color: #0056b3; margin-bottom: 30px;
-            padding-bottom: 12px; border-bottom: 3px solid #FD7E14;
+            font-size: 2.2em; color: var(--color-primary-dark); margin-bottom: 30px;
+            padding-bottom: 12px; border-bottom: 3px solid var(--color-accent-orange);
         }
-        /* Special handling for dashboard section to be full page */
-        #dashboard.content-section { margin: 0; border-radius: 0; max-height: none; padding:0; background:transparent; box-shadow:none; }
+        #dashboard.content-section { margin: 0; border-radius: 0; max-height: none; padding:0; background:transparent; box-shadow:none; border: none;}
 
 
         /* Dashboard Carousel & Widgets */
-        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); }
+        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); background-color: var(--color-background-light); }
         .dashboard-carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); height: 100%; }
         .dashboard-carousel-slide {
             min-width: 100%; padding: 30px 40px; box-sizing: border-box;
             display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
             height: 100%; overflow-y: auto;
         }
-        .dashboard-carousel-slide h2.slide-title { font-size: 2.5em; color: #0056b3; margin-bottom: 25px; text-align: center; }
+        .dashboard-carousel-slide h2.slide-title { font-size: 2.5em; color: var(--color-primary-dark); margin-bottom: 25px; text-align: center; }
         .dashboard-carousel-button {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(0,123,255,0.6); color: white; opacity: 0.8;
-            border: none; width: 45px; height: 45px; border-radius: 50%;
-            cursor: pointer; z-index:10; transition: all 0.3s; font-size: 1.5em;
-            display: flex; align-items: center; justify-content: center;
+            background-color: rgba(93,64,55,0.6); /* Brownish transparent */
+            color: white; opacity: 0.8; border: none; width: 45px; height: 45px;
+            border-radius: 50%; cursor: pointer; z-index:10; transition: all 0.3s;
+            font-size: 1.5em; display: flex; align-items: center; justify-content: center;
         }
-        .dashboard-carousel-button:hover { background-color: #007BFF; opacity: 1; }
+        .dashboard-carousel-button:hover { background-color: var(--color-primary-medium); opacity: 1; }
         .dashboard-carousel-button.prev-btn { left: 30px; }
         .dashboard-carousel-button.next-btn { right: 30px; }
         .dashboard-carousel-dots {
@@ -123,59 +137,59 @@
             display: flex; gap: 12px; z-index: 10;
         }
         .dashboard-carousel-dot {
-            width:12px; height:12px; background:#999; border-radius:50%; cursor:pointer;
+            width:12px; height:12px; background: var(--color-primary-light); border-radius:50%; cursor:pointer;
             transition: background-color 0.3s, transform 0.3s;
         }
-        .dashboard-carousel-dot.active { background: #007BFF; transform: scale(1.3); }
+        .dashboard-carousel-dot.active { background: var(--color-primary-dark); transform: scale(1.3); }
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width:100%; max-width: 1600px;}
         .dashboard-widget {
-            background-color: #F8F9FA; padding: 25px; border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.06); border-left: 5px solid #007BFF;
+            background-color: #FFFFFF; padding: 25px; border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(93,64,55,0.1); border-left: 5px solid var(--color-secondary-medium); /* Green accent */
         }
-        .dashboard-widget h3 { font-size: 1.4em; color: #007BFF; margin-bottom: 18px; display: flex; align-items: center; }
-        .dashboard-widget h3 i { margin-right: 10px; }
+        .dashboard-widget h3 { font-size: 1.4em; color: var(--color-primary-dark); margin-bottom: 18px; display: flex; align-items: center; }
+        .dashboard-widget h3 i { margin-right: 10px; color: var(--color-secondary-dark); }
         .dashboard-widget ul { list-style: none; padding: 0; }
-        .dashboard-widget li { margin-bottom: 10px; font-size: 0.95em; display: flex; align-items: center; }
-        .dashboard-widget li i { margin-right: 8px; color: #555; }
-        .progress-bar-container { background-color: #E9ECEF; border-radius: 6px; height: 12px; margin-top: 6px; overflow: hidden; }
-        .progress-bar { background-color: #28A745; height: 100%; border-radius: 6px; transition: width 0.6s ease-in-out; }
-        .task-list input[type="checkbox"] { margin-right: 10px; accent-color: #007BFF; }
-        .task-list label { font-size: 0.9em; }
+        .dashboard-widget li { margin-bottom: 10px; font-size: 0.95em; display: flex; align-items: center; color: var(--color-text-medium); }
+        .dashboard-widget li i { margin-right: 8px; color: var(--color-secondary-medium); }
+        .progress-bar-container { background-color: #E0E0E0; /* Lighter grey */ border-radius: 6px; height: 12px; margin-top: 6px; overflow: hidden; }
+        .progress-bar { background-color: var(--color-secondary-medium); height: 100%; border-radius: 6px; transition: width 0.6s ease-in-out; }
+        .task-list input[type="checkbox"] { margin-right: 10px; accent-color: var(--color-primary-medium); }
+        .task-list label { font-size: 0.9em; color: var(--color-text-medium); }
 
         /* Organogram Styles */
         .organogram { text-align: center; padding: 20px 0; overflow-x: auto; }
         .org-level { display: flex; justify-content: center; align-items: flex-start; margin-top: 30px; position: relative; min-width: fit-content; }
         .org-node-container { display: flex; flex-direction: column; align-items: center; margin: 0 10px; }
         .org-node {
-            padding: 12px 18px; border: 1px solid #007BFF; background-color: #E8F0FE;
+            padding: 12px 18px; border: 1px solid var(--color-primary-light); background-color: var(--color-background-cream);
             border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); min-width: 220px; text-align: center;
+            box-shadow: 0 2px 4px rgba(93,64,55,0.1); min-width: 220px; text-align: center;
         }
-        .org-node:hover { background-color: #D0E0F8; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .org-node .name { font-weight: 600; color: #0056b3; font-size: 1em; }
-        .org-node .role { font-size: 0.8em; color: #555; margin-top: 4px; }
-        .org-node .reporting-line { font-size: 0.7em; color: #777; margin-top: 3px; font-style: italic; }
+        .org-node:hover { background-color: #EFEBE9; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(93,64,55,0.15); }
+        .org-node .name { font-weight: 600; color: var(--color-primary-dark); font-size: 1em; }
+        .org-node .role { font-size: 0.8em; color: var(--color-text-medium); margin-top: 4px; }
+        .org-node .reporting-line { font-size: 0.7em; color: var(--color-text-light); margin-top: 3px; font-style: italic; }
         .org-children-container { display: flex; justify-content: center; margin-top: 20px; position: relative; }
         .org-children-container::before {
-            content: ''; position: absolute; top: -10px; left: 10%; right: 10%; height: 1px; background-color: #ccc;
+            content: ''; position: absolute; top: -10px; left: 10%; right: 10%; height: 1px; background-color: var(--color-border);
         }
         .org-node-container > .org-connector-down {
-            width: 1px; height: 20px; background-color: #ccc; margin: 0 auto;
+            width: 1px; height: 20px; background-color: var(--color-border); margin: 0 auto;
         }
 
         /* Team Carousel (mfe-carousel) */
-        .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: #f0f4f8; border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);}
+        .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: var(--color-background-light); border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(93,64,55,0.05);}
         .mfe-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         .mfe-carousel-item { min-width: 100%; padding: 10px; box-sizing: border-box; }
         .mfe-carousel-item .card-content {
             background:white; padding:25px; border-radius:8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 10px rgba(93,64,55,0.1);
             min-height: 220px; display: flex; flex-direction: column; justify-content: space-between;
         }
-        .mfe-carousel-item .card-content img { border: 3px solid #007BFF; }
+        .mfe-carousel-item .card-content img { border: 3px solid var(--color-primary-medium); }
         .mfe-carousel-button {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: #007BFF; color: white; opacity: 0.8;
+            background-color: var(--color-primary-medium); color: white; opacity: 0.8;
             border: none; width: 40px; height: 40px; border-radius: 50%;
             cursor: pointer; z-index:10; transition: opacity 0.3s;
             display: flex; align-items: center; justify-content: center; font-size: 1.2em;
@@ -184,13 +198,13 @@
         .mfe-carousel-button.prev-btn { left: 20px; }
         .mfe-carousel-button.next-btn { right: 20px; }
         .carousel-dots { text-align: center; margin-top: 15px; }
-        .carousel-dot { display: inline-block; width:12px; height:12px; background:#ccc; border-radius:50%; margin: 0 6px; cursor:pointer; transition: background-color 0.3s; }
-        .carousel-dot.active { background: #007BFF; }
+        .carousel-dot { display: inline-block; width:12px; height:12px; background: var(--color-primary-light); border-radius:50%; margin: 0 6px; cursor:pointer; transition: background-color 0.3s; }
+        .carousel-dot.active { background: var(--color-primary-dark); }
 
         /* Modal Styles */
         .modal {
             display: none; position: fixed; inset: 0;
-            background-color: rgba(0,0,0,0.65);
+            background-color: rgba(62,39,35,0.7); /* Darker brown overlay */
             display: flex; justify-content: center; align-items: center;
             padding: 20px; z-index: 1001;
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;
@@ -201,120 +215,121 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
             max-width: 950px; width: 100%;
             max-height: 90vh; overflow-y: auto;
-            position: relative;
+            position: relative; border-top: 5px solid var(--color-accent-orange);
         }
-        .modal-content h3.modal-title { color: #007BFF; margin-bottom:10px; font-size:1.8em; border-bottom: 2px solid #FD7E14; padding-bottom: 10px;}
-        .modal-content .role-subtitle { font-size: 1.1em; color: #555; margin-bottom: 20px; }
+        .modal-content h3.modal-title { color: var(--color-primary-dark); margin-bottom:10px; font-size:1.8em; border-bottom: 2px solid var(--color-accent-orange); padding-bottom: 10px;}
+        .modal-content .role-subtitle { font-size: 1.1em; color: var(--color-text-medium); margin-bottom: 20px; }
         .close-modal-btn {
             position: absolute; top: 18px; right: 25px;
-            font-size: 2em; color: #aaa;
+            font-size: 2em; color: var(--color-text-light);
             background:none; border:none; cursor:pointer; line-height: 1;
         }
-        .close-modal-btn:hover { color: #333; }
-        .modal-section h4 { font-size: 1.25em; color: #0056b3; margin-top: 25px; margin-bottom: 10px; display:flex; align-items:center;}
-        .modal-section h4 i { margin-right: 8px; }
-        .modal-tabs { display: flex; border-bottom: 1px solid #ccc; margin-bottom: 15px; }
-        .modal-tab-button { padding: 10px 15px; cursor: pointer; background: #f0f0f0; border: 1px solid #ccc; border-bottom: none; margin-right: 5px; border-radius: 5px 5px 0 0; font-size: 0.9em;}
-        .modal-tab-button.active { background: white; border-bottom: 1px solid white; font-weight: bold; color: #007BFF;}
+        .close-modal-btn:hover { color: var(--color-primary-dark); }
+        .modal-section h4 { font-size: 1.25em; color: var(--color-primary-medium); margin-top: 25px; margin-bottom: 10px; display:flex; align-items:center;}
+        .modal-section h4 i { margin-right: 8px; color: var(--color-secondary-medium); }
+        .modal-tabs { display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: 15px; }
+        .modal-tab-button { padding: 10px 15px; cursor: pointer; background: var(--color-background-light); border: 1px solid var(--color-border); border-bottom: none; margin-right: 5px; border-radius: 5px 5px 0 0; font-size: 0.9em; color: var(--color-text-medium);}
+        .modal-tab-button.active { background: white; border-bottom: 1px solid white; font-weight: bold; color: var(--color-primary-dark);}
         .modal-tab-pane { display: none; }
         .modal-tab-pane.active { display: block; }
 
         /* Action Plan Table & Performance Sections */
         .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85em; }
-        .action-plan-table th, .action-plan-table td { border: 1px solid #DEE2E6; padding: 8px 10px; text-align: left; vertical-align: middle;}
-        .action-plan-table th { background-color: #E8F0FE; color: #0056b3; font-weight: 600; }
+        .action-plan-table th, .action-plan-table td { border: 1px solid var(--color-border); padding: 8px 10px; text-align: left; vertical-align: middle;}
+        .action-plan-table th { background-color: var(--color-background-light); color: var(--color-primary-dark); font-weight: 600; }
         .action-plan-table input, .action-plan-table select, .action-plan-table textarea {
-            width: 100%; padding: 7px; border: 1px solid #CED4DA; border-radius: 4px; box-sizing: border-box; font-size:0.95em;
+            width: 100%; padding: 7px; border: 1px solid var(--color-border); border-radius: 4px; box-sizing: border-box; font-size:0.95em; background-color: #fff; color: var(--color-text-dark);
         }
         .action-plan-table textarea { min-height: 40px; resize: vertical; }
         .action-plan-table .status-select { padding: 7px 5px; }
-        .status-completed { background-color: #D4EDDA !important; color: #155724; }
-        .status-in-progress { background-color: #FFF3CD !important; color: #856404; }
-        .status-not-started { background-color: #F8D7DA !important; color: #721C24; }
+        .status-completed { background-color: #E8F5E9 !important; color: var(--color-secondary-dark); } /* Light Green */
+        .status-in-progress { background-color: #FFFDE7 !important; color: #795548; } /* Light Yellow/Cream */
+        .status-not-started { background-color: #FFEBEE !important; color: #C62828; } /* Light Red */
         .action-btn {
-            background-color: #28A745; color:white; font-size:0.8em;
+            background-color: var(--color-secondary-medium); color:white; font-size:0.8em;
             padding: 6px 10px; border-radius:4px; border:none; cursor:pointer;
         }
-        .action-btn:hover { background-color: #218838; }
-        .signature-area { border: 1px dashed #ccc; padding: 10px; margin-top:15px; text-align: center; }
-        .signature-area button { background-color: #007BFF; color:white; padding: 8px 15px; border-radius: 5px; border:none; cursor:pointer;}
-        .signature-area button:disabled { background-color: #aaa; }
-        .signed-confirmation { color: green; font-weight: bold; font-size: 0.9em; }
+        .action-btn:hover { background-color: var(--color-secondary-dark); }
+        .signature-area { border: 1px dashed var(--color-border); padding: 10px; margin-top:15px; text-align: center; }
+        .signature-area button { background-color: var(--color-primary-medium); color:white; padding: 8px 15px; border-radius: 5px; border:none; cursor:pointer;}
+        .signature-area button:disabled { background-color: #BDBDBD; } /* Greyed out */
+        .signed-confirmation { color: var(--color-success); font-weight: bold; font-size: 0.9em; }
 
         /* Ventures & Documents Section Cards */
         .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
         .resource-card {
             background-color: #fff; border-radius: 8px; padding: 20px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.07);
-            border-left: 4px solid #FD7E14;
+            box-shadow: 0 3px 8px rgba(93,64,55,0.1);
+            border-left: 4px solid var(--color-accent-orange);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .resource-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(0,0,0,0.1); }
-        .resource-card h4 { font-size: 1.2em; color: #007BFF; margin-bottom: 10px; }
-        .resource-card p { font-size: 0.9em; color: #555; margin-bottom: 15px; }
+        .resource-card:hover { transform: translateY(-5px); box-shadow: 0 6px 12px rgba(93,64,55,0.15); }
+        .resource-card h4 { font-size: 1.2em; color: var(--color-primary-dark); margin-bottom: 10px; }
+        .resource-card p { font-size: 0.9em; color: var(--color-text-medium); margin-bottom: 15px; }
         .resource-card a.learn-more-btn {
-            display: inline-block; background-color: #007BFF; color: white;
+            display: inline-block; background-color: var(--color-primary-medium); color: white;
             padding: 8px 15px; border-radius: 5px; text-decoration: none; font-size: 0.85em;
         }
-        .resource-card a.learn-more-btn:hover { background-color: #0056b3; }
+        .resource-card a.learn-more-btn:hover { background-color: var(--color-primary-dark); }
 
         /* Footer */
         footer {
-            background-color: #343A40; color: #F8F9FA; padding: 25px 0;
+            background-color: var(--color-primary-dark); color: var(--color-background-cream); padding: 25px 0;
             text-align: center; font-size: 0.9em; margin-top: auto;
         }
-        footer a { color: #00A2FF; text-decoration: none; }
+        footer a { color: var(--color-accent-gold); text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
         /* Tabs for Governance & Welcome Section */
-        .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid #ccc; border-bottom: none; background-color: #f0f0f0; cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500;}
-        .tabs button.active { background-color: white; border-bottom: 1px solid white; font-weight: bold; color: #007BFF;}
-        .tab-content { border: 1px solid #ccc; padding: 20px; border-top: none; border-radius: 0 0 6px 6px; background-color: white;}
+        .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid var(--color-border); border-bottom: none; background-color: var(--color-background-light); cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500; color: var(--color-text-medium);}
+        .tabs button.active { background-color: white; border-bottom: 1px solid white; font-weight: bold; color: var(--color-primary-dark);}
+        .tab-content { border: 1px solid var(--color-border); padding: 20px; border-top: none; border-radius: 0 0 6px 6px; background-color: white;}
 
         /* Timeline styles */
-        .timeline { position: relative; max-width: 900px; margin: 30px auto; padding: 20px 0; }
+        .timeline { position: relative; max-width: 1000px; margin: 30px auto; padding: 20px 0; }
         .timeline::before {
             content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-            width: 4px; background-color: #007BFF; margin-left: -2px;
+            width: 4px; background-color: var(--color-primary-medium); margin-left: -2px;
             border-radius: 2px;
         }
         .timeline-item { position: relative; margin-bottom: 50px; width: 50%; padding: 10px 40px; box-sizing: border-box; }
         .timeline-item:nth-child(odd) { left: 0; text-align: right; }
         .timeline-item:nth-child(even) { left: 50%; text-align: left; }
-        .timeline-item:nth-child(odd)::after { /* Arrow pointing right */
+        .timeline-item:nth-child(odd)::after {
             content: ''; position: absolute; width: 0; height: 0;
             border-top: 10px solid transparent; border-bottom: 10px solid transparent;
-            border-left: 10px solid #fff; top: 20px; right: 30px;
+            border-left: 10px solid #fff; top: 20px; right: 30px; z-index: 1;
         }
-        .timeline-item:nth-child(even)::after { /* Arrow pointing left */
+        .timeline-item:nth-child(even)::after {
             content: ''; position: absolute; width: 0; height: 0;
             border-top: 10px solid transparent; border-bottom: 10px solid transparent;
-            border-right: 10px solid #fff; top: 20px; left: 30px;
+            border-right: 10px solid #fff; top: 20px; left: 30px; z-index: 1;
         }
-        .timeline-content-wrapper { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); position: relative; }
+        .timeline-content-wrapper { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(93,64,55,0.15); position: relative; border: 1px solid var(--color-border); }
         .timeline-date {
-            position: absolute; top: 20px; width: 50px; height: 50px;
-            background-color: #FD7E14; color: white; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5em; font-weight: bold;
-            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.3);
+            position: absolute; top: 15px; width: 60px; height: 60px;
+            background-color: var(--color-accent-orange); color: white; border-radius: 50%;
+            display: flex; flex-direction:column; align-items: center; justify-content: center;
+            font-size: 1em; font-weight: bold; text-align:center; line-height:1.1;
+            box-shadow: 0 0 0 4px rgba(245,124,0, 0.2); z-index: 2;
         }
-        .timeline-item:nth-child(odd) .timeline-date { right: -25px; }
-        .timeline-item:nth-child(even) .timeline-date { left: -25px; }
-        .timeline-title { font-size: 1.4em; color: #0056b3; margin-bottom: 8px; font-weight: 600; }
-        .timeline-text { font-size: 0.9em; color: #444; line-height: 1.6; }
-        .timeline-details-btn {
-            display: inline-block; margin-top: 10px; font-size: 0.8em;
-            color: #007BFF; text-decoration: underline; cursor: pointer;
-        }
+        .timeline-date span { font-size: 0.7em; display:block; }
+        .timeline-item:nth-child(odd) .timeline-date { right: -30px; }
+        .timeline-item:nth-child(even) .timeline-date { left: -30px; }
+        .timeline-title { font-size: 1.4em; color: var(--color-primary-dark); margin-bottom: 8px; font-weight: 600; }
+        .timeline-text { font-size: 0.9em; color: var(--color-text-medium); line-height: 1.6; }
+        .timeline-status { font-size: 0.8em; font-weight: bold; margin-top:10px; display:inline-block; padding: 3px 8px; border-radius:4px;}
+        .status-timeline-completed { background-color: var(--color-secondary-light); color: var(--color-secondary-dark); }
+        .status-timeline-inprogress { background-color: var(--color-accent-gold); color: var(--color-primary-dark); }
+        .status-timeline-pending { background-color: #E0E0E0; color: var(--color-text-medium); }
+
         @media screen and (max-width: 768px) { /* Responsive timeline */
             .timeline::before { left: 30px; }
-            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; text-align: left !important; margin-bottom: 30px; }
             .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
-            .timeline-item::after { border-right: 10px solid #fff; border-left: 0; left: 20px; } /* All arrows point left */
-            .timeline-date { left: 5px; }
+            .timeline-item::after { border-right: 10px solid #fff; border-left: 0; left: 20px; }
+            .timeline-date { left: 0px; }
         }
-
 
     </style>
 </head>
@@ -322,12 +337,10 @@
     <header>
         <div class="header-container">
             <div class="logo-container flex items-center">
-                <img src="salatiso/assets/photos/mfe_logo_placeholder.png" alt="Mdeni Family Enterprise Logo">
-                <span class="company-name text-white">Mdeni Family Intranet</span>
+                <img src="salatiso/assets/photos/mfe_logo_earthy_placeholder.png" alt="Mdeni Family Enterprise Logo"> <span class="company-name">Mdeni Family Intranet</span>
             </div>
             <nav class="main-nav-links">
-                <a href="#" data-target="welcome">Welcome</a>
-                <a href="#" class="active-main-nav" data-target="dashboard">Dashboard</a>
+                <a href="#" data-target="dashboard" class="active-main-nav">Dashboard</a>
                 <a href="#" data-target="ourVision">Our Vision</a>
                 <a href="#" data-target="team">Our Team</a>
                 <a href="#" data-target="ourJourney">Our Journey</a>
@@ -335,7 +348,6 @@
                 <a href="#" data-target="trainingHub">Training Hub</a>
                 <a href="#" data-target="documents">Docs</a>
                 <a href="#" data-target="governance">Governance</a>
-                <a href="#" data-target="flameaInfo">Flamea</a>
             </nav>
             <div class="user-actions">
                 <div class="notification-bell">
@@ -358,89 +370,147 @@
 
     <div class="main-content-wrapper">
         <main class="content-display-area w-full">
-            <section id="welcome" class="content-section">
-                <h2 class="section-title">Siyanamukela! Welcome to the Mdeni Family Enterprise Intranet!</h2>
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="md:w-1/2">
-                        <img src="salatiso/assets/photos/heritage_transkei_placeholder.jpg" alt="Transkei Landscape - Our Heritage" class="rounded-lg shadow-xl w-full">
+            <section id="dashboard" class="content-section active">
+                <div class="dashboard-carousel-container">
+                    <div class="dashboard-carousel-track">
+                        <div class="dashboard-carousel-slide bg-gradient-to-br from-green-100 via-yellow-50 to-orange-100">
+                            <img src="salatiso/assets/photos/mfe_logo_large_earthy.png" alt="Mdeni Family Enterprise" class="h-24 mx-auto mb-6">
+                            <h2 class="slide-title text-4xl">Siyanamukela! Welcome, Mdeni Family!</h2>
+                            <p class="text-center text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+                                This Intranet is our central hub for collaboration, growth, and building our shared legacy.
+                                Let's track our progress, support each other, and achieve our collective goals.
+                            </p>
+                            <div class="dashboard-grid">
+                                <div class="dashboard-widget border-l-green-600">
+                                    <h3 class="text-green-700"><i class="fas fa-rocket text-green-600"></i>Company Launch Roadmap</h3>
+                                    <ul id="companyLaunchRoadmapWidget"></ul>
+                                </div>
+                                <div class="dashboard-widget border-l-orange-600">
+                                    <h3 class="text-orange-700"><i class="fas fa-dollar-sign text-orange-600"></i>Visa's Income Target (Dec 2025)</h3>
+                                    <p class="text-lg">Target: R15,000 / month</p>
+                                    <p class="text-lg">Current Projected: <span id="visaIncomeProjected" class="font-bold text-xl text-orange-700">R4,200</span></p>
+                                    <div class="progress-bar-container mt-2"><div class="progress-bar bg-orange-500" style="width: 28%;"></div></div>
+                                </div>
+                                 <div class="dashboard-widget border-l-yellow-600">
+                                    <h3 class="text-yellow-700"><i class="fas fa-calendar-check text-yellow-600"></i>Key Upcoming Deadlines</h3>
+                                    <ul class="text-sm">
+                                        <li class="text-red-700 font-semibold">Integrate Chatbot (Salatiso): May 24</li>
+                                        <li class="text-red-700 font-semibold">SafetyHelp Launch: June 1</li>
+                                        <li>Q3 Budget Approval (Salatiso): June 15</li>
+                                    </ul>
+                                </div>
+                                <div class="dashboard-widget border-l-purple-600">
+                                    <h3 class="text-purple-700"><i class="fas fa-users text-purple-600"></i>Next Family Council Meeting</h3>
+                                    <p class="text-lg font-semibold">June 10, 2025 - 6 PM</p>
+                                    <p class="text-sm">Agenda: Q2 Review, SafetyHelp Post-Launch Analysis</p>
+                                </div>
+                            </div>
+                            <p class="mt-10 text-sm text-center text-gray-600">Use the arrows or dots below to navigate other dashboard views.</p>
+                        </div>
+                        <div class="dashboard-carousel-slide">
+                            <h2 class="slide-title">Dashboard: Performance Overview</h2>
+                            <div class="dashboard-grid">
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-tasks text-purple-500"></i>Overall Training Progress</h3>
+                                    <div id="trainingProgressWidget"></div>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-chart-pie text-indigo-500"></i>Quick Stats</h3>
+                                    <p class="text-lg">Active Ventures: <span class="font-bold text-2xl text-indigo-600">5</span></p>
+                                    <p class="text-lg">Team Members Logged In Today: <span id="activeLogins" class="font-bold text-2xl text-indigo-600">3</span></p>
+                                    <p class="text-lg">Next Performance Review Cycle: <span class="font-bold text-indigo-600">Q3 (July)</span></p>
+                                </div>
+                                <div class="dashboard-widget col-span-full md:col-span-2"> <h3><i class="fas fa-stream text-gray-500"></i>Recent Company Activity</h3>
+                                    <div id="recentActivityWidget" class="bg-white p-3 rounded-md max-h-60 overflow-y-auto text-xs space-y-1.5 border">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="dashboard-carousel-slide">
+                             <h2 class="slide-title">Dashboard: My Focus & Team Sync</h2>
+                            <div class="dashboard-grid">
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-user-clock text-teal-500"></i>My Pending Actions (<span id="currentUserNamePendingActions">User</span>)</h3>
+                                    <ul class="task-list" id="myPendingActionsWidget"></ul>
+                                    <button class="mt-4 text-sm bg-teal-500 hover:bg-teal-600 text-white py-1.5 px-4 rounded-md">View All My Tasks</button>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-calendar-alt text-cyan-500"></i>Meeting Tracker</h3>
+                                    <p><strong>Last Meeting:</strong> May 17, 2025 - Weekly Sync</p>
+                                    <p class="text-xs text-gray-500">Attendees: Salatiso, Visa, Tina, Kwakho, Solonwabo (5/6)</p>
+                                    <p class="text-xs mt-1">Key Action: Finalize Intranet User Roles - <span class="font-semibold">Visa</span> (Due: May 20)</p>
+                                    <p class="mt-2"><strong>Next Meeting:</strong> May 24, 2025 - SafetyHelp Launch Prep</p>
+                                    <button class="mt-3 text-sm bg-cyan-500 hover:bg-cyan-600 text-white py-1.5 px-4 rounded-md">View Meeting Logs & Actions</button>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-comments text-orange-500"></i>Quick Communication</h3>
+                                    <textarea placeholder="Post a quick update or question for the team..." class="w-full p-2 border rounded-md text-sm h-20 bg-white"></textarea>
+                                    <button class="mt-2 text-sm bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-4 rounded-md">Post Update</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="md:w-1/2">
-                        <p class="text-lg text-gray-700 mb-4">
-                            This platform is the heart of our family's collective ambition – a space to collaborate, learn, grow, and build a lasting legacy together. Here, we will manage our ventures, track our progress, support each other's development, and uphold the values that define us.
-                        </p>
-                        <p class="text-gray-600 mb-6">
-                            From the lessons learned "under a tree" in rural Transkei to the digital landscape we navigate today, our journey is one of resilience, unity, and a deep commitment to empowering ourselves and our community. As Salatiso often says, "Everything I do is to be the best dad for my son," and this enterprise extends that spirit to our entire family.
-                        </p>
-                        <blockquote class="border-l-4 border-orange-500 pl-4 py-2 italic text-gray-700">
-                            "Umntu ngumntu ngabantu." (A person is a person through other people.) <br>
-                            <span class="text-sm block mt-1">- Xhosa Proverb</span>
-                        </blockquote>
-                         <p class="mt-6 text-sm text-gray-500">
-                            Your first step: Please navigate through all sections of this Intranet to familiarize yourself. Then, visit "My Profile & Plan" (via the top-right user icon) to review and accept your role.
-                        </p>
-                    </div>
+                    <button class="dashboard-carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="dashboard-carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="dashboard-carousel-dots"></div>
                 </div>
             </section>
-
-            <section id="dashboard" class="content-section active">
-                </section>
 
             <section id="ourVision" class="content-section">
-                <h2 class="section-title">Our Guiding Light: Vision & Mission</h2>
-                <div class="grid md:grid-cols-2 gap-8 items-start">
-                    <div class="bg-blue-50 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
-                        <h3 class="font-display text-3xl text-blue-700 mb-4 flex items-center"><i class="fas fa-eye mr-3 text-blue-500"></i>Our Vision</h3>
-                        <p class="text-gray-700 leading-relaxed">To be a leading family-owned enterprise recognized for its innovation, integrity, and commitment to empowering its members and the community, building a lasting legacy for generations to come, rooted in our Xhosa heritage and South African identity.</p>
-                    </div>
-                    <div class="bg-orange-50 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
-                        <h3 class="font-display text-3xl text-orange-700 mb-4 flex items-center"><i class="fas fa-bullseye mr-3 text-orange-500"></i>Our Mission</h3>
-                        <p class="text-gray-700 leading-relaxed">To strategically manage and grow a diversified portfolio of ventures in OHS consulting, property management, digital solutions, education, and publishing, while fostering the professional development of family members and contributing positively to society through its non-profit activities.</p>
-                    </div>
-                </div>
-                <div class="mt-10 text-center">
-                    <img src="salatiso/assets/photos/african_unity_symbol_placeholder.png" alt="African Symbol of Unity and Strength" class="mx-auto h-40 rounded-lg">
-                    <p class="mt-3 text-gray-600 text-sm">"Indlovu ithwala umboko wayo." (An elephant carries its own trunk - We are self-reliant and carry our own responsibilities.)</p>
-                </div>
-            </section>
+                </section>
 
             <section id="team" class="content-section">
                 </section>
 
             <section id="ourJourney" class="content-section">
-                <h2 class="section-title">Our Journey: From Vision to Operation</h2>
+                <h2 class="section-title">Our Journey: MFE Launch & Growth Timeline (Year 1)</h2>
+                <p class="text-sm text-gray-600 mb-6">This timeline tracks our key phases and major deliverables for the first year, starting May 19, 2025. Completed items will be marked. Click on items for more details or to see linked PADP actions.</p>
                 <div class="timeline">
                     <div class="timeline-item">
-                        <div class="timeline-date">P1</div>
+                        <div class="timeline-date">MAY <span>2025</span></div>
                         <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Phase 1: Foundation & Legal (Est. 4-8 Weeks from May 20, 2025)</h3>
-                            <p class="timeline-text">Key activities: Finalizing Company Name, CIPC Registration, Initial Trust Research, Opening Business Bank Account, SARS Registrations, NPO Registration for Flamea, COID (if applicable).</p>
-                            <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase1">View Detailed Actions & Costs</button>
+                            <h3 class="timeline-title">Month 1: Foundation & Initial Setup</h3>
+                            <p class="timeline-text">Focus: Legal registration, bank accounts, Intranet V1, initial PADP acceptance, SafetyHelp Chatbot integration.</p>
+                            <ul class="text-xs list-disc pl-5 mt-2 space-y-1">
+                                <li>Wk 1 (May 19-25): Company Name Finalized, CIPC Reg. Started (Visa). Chatbot Integration (Salatiso). Intranet Familiarization (All).</li>
+                                <li>Wk 2 (May 26-Jun 1): Bank Account Opened (Visa). SafetyHelp Launch! (All support). Role Acceptance (All).</li>
+                                </ul>
+                            <span class="timeline-status status-timeline-inprogress">In Progress</span>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">P2</div>
+                        <div class="timeline-date">JUN <span>2025</span></div>
                         <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Phase 2: Operational & Content Setup (Est. 4-6 Weeks following P1)</h3>
-                            <p class="timeline-text">Drafting Internal Agreements, Consolidating Venture Info, Setting up Basic Accounting, Developing Initial Budgets, Formalizing Service Offerings, IP Inventory, Creating Company Induction Materials.</p>
-                            <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase2">View Detailed Actions</button>
+                            <h3 class="timeline-title">Month 2: Operational Kickstart & Marketing Launch</h3>
+                            <p class="timeline-text">Focus: Finalize internal agreements, supplier database, social media launch, Sazi Life curriculum framework.</p>
+                             <span class="timeline-status status-timeline-pending">Pending</span>
                         </div>
                     </div>
                     <div class="timeline-item">
-                        <div class="timeline-date">P3</div>
+                        <div class="timeline-date">JUL <span>2025</span></div>
                         <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Phase 3: Internal Launch & Initial Operations (Ongoing from ~Aug 26, 2025)</h3>
-                            <p class="timeline-text">Launching this Intranet, Commencing Individual Training Plans, Initial Marketing Content Creation, Establishing Regular Family Council/Management Meetings, SafetyHelp Public Launch (June 1, 2025).</p>
-                             <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase3">View Detailed Actions</button>
+                            <h3 class="timeline-title">Month 3: First Performance Cycle & Content Dev.</h3>
+                            <p class="timeline-text">Focus: First PADP check-ins, SafetyHelp marketing push, Sazi Life module 1 development, document management system.</p>
+                            <span class="timeline-status status-timeline-pending">Pending</span>
                         </div>
                     </div>
-                     <div class="timeline-item">
-                        <div class="timeline-date"><i class="fas fa-flag-checkered"></i></div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Q3 <span>2025</span></div>
                         <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Future Milestones (Q4 2025 & Beyond)</h3>
-                            <p class="timeline-text">Full operational capacity, first performance reviews, potential profitability allowing Visa's income replacement, expansion of Sazi Life curriculum, Flamea community projects initiated.</p>
+                            <h3 class="timeline-title">Quarter 3: Growth & Refinement</h3>
+                            <p class="timeline-text">Focus: Expanding SafetyHelp client base, Sazi Life pilot, NPO Flamea formalization, first quarterly performance reviews.</p>
+                             <span class="timeline-status status-timeline-pending">Pending</span>
                         </div>
                     </div>
-                </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">Q4 <span>25/26</span></div>
+                        <div class="timeline-content-wrapper">
+                            <h3 class="timeline-title">Quarter 4: Consolidation & Year-End Review</h3>
+                            <p class="timeline-text">Focus: Assessing Visa's income replacement target, planning for Year 2, celebrating successes, Flamea initial outreach.</p>
+                            <span class="timeline-status status-timeline-pending">Pending</span>
+                        </div>
+                    </div>
+                     </div>
             </section>
 
             <section id="ventures" class="content-section">
@@ -455,37 +525,15 @@
             <section id="governance" class="content-section">
                 </section>
             
-            <section id="flameaInfo" class="content-section">
-                <h2 class="section-title">Flamea: Our Commitment to Community</h2>
-                <div class="flex flex-col md:flex-row items-center gap-8">
-                    <div class="md:w-2/5">
-                         <img src="salatiso/assets/photos/flamea_logo_large_placeholder.png" alt="Flamea Logo" class="rounded-lg shadow-lg w-full max-w-xs mx-auto">
-                    </div>
-                    <div class="md:w-3/5">
-                        <p class="text-lg text-gray-700 mb-4">
-                            Flamea (Fathers & Family Legal Advocacy Movement for Equality and Accountability) is the non-profit arm of the Mdeni Family Enterprise. It is dedicated to promoting equality through education, advocating for fathers' and family rights, and undertaking community upliftment initiatives.
-                        </p>
-                        <p class="text-gray-600 mb-3">
-                            Rooted in the belief that every child deserves the support of their entire family and that education is a key enabler of equality, Flamea aims to:
-                        </p>
-                        <ul class="list-disc pl-6 text-gray-600 space-y-1 mb-6">
-                            <li>Challenge discriminatory practices affecting family unity.</li>
-                            <li>Provide access to learning opportunities for underserved communities.</li>
-                            <li>Conduct research and advocate for policy reform.</li>
-                            <li>Collaborate with like-minded organizations to maximize impact.</li>
-                        </ul>
-                        <a href="https://flamea.org/" target="_blank" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
-                            Learn More at Flamea.org <i class="fas fa-external-link-alt ml-2"></i>
-                        </a>
-                         <p class="mt-4 text-xs text-gray-500">Flamea is in the process of NPO registration. Its activities will be supported by the Mdeni Family Enterprise.</p>
-                    </div>
-                </div>
-            </section>
-        </main>
+            </main>
     </div>
 
     <footer>
-        </footer>
+        <div class="container mx-auto px-6">
+            <p>&copy; 2025 Mdeni Family Enterprise (Pty) Ltd. All Rights Reserved.</p>
+            <p>Internal Portal - Confidential. Built with <i class="fas fa-heart text-red-400"></i> by the Mdeni Family, for the Mdeni Family.</p>
+        </div>
+    </footer>
 
     <div id="memberDetailsModal" class="modal">
         <div class="modal-content">
@@ -529,10 +577,10 @@
             if (targetSection) {
                 if (targetId === 'dashboard') {
                     contentDisplayArea.style.padding = '0';
-                    contentDisplayArea.style.overflow = 'hidden'; // Dashboard carousel handles its own scroll
+                    contentDisplayArea.style.overflow = 'hidden'; 
                 } else {
-                    contentDisplayArea.style.padding = '0'; // Let section margin handle spacing
-                    contentDisplayArea.style.overflow = 'auto'; // Other sections scroll if needed
+                    contentDisplayArea.style.padding = '0'; 
+                    contentDisplayArea.style.overflow = 'auto'; 
                 }
                 contentDisplayArea.scrollTop = 0;
                 targetSection.classList.add('active');
@@ -543,7 +591,6 @@
                 if (targetId === 'team' && !teamCarouselPopulated) {
                     populateAndInitTeamCarousel();
                 }
-                 // Initialize timeline specific JS if journey section is active
                 if (targetId === 'ourJourney') {
                     // Any specific JS for timeline animations or interactions can go here
                 }
@@ -595,12 +642,13 @@
                 }
 
                 function DupdateCarousel() {
-                    if (slides.length > 0) {
+                    if (slides.length > 0 && slides[0]) { // Check if slides[0] exists
                         const slideWidth = slides[0].offsetWidth;
                         track.style.transform = `translateX(-${DcurrentIndex * slideWidth}px)`;
                         DupdateActiveDot();
                     }
                 }
+
 
                 if (nextButton) nextButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex + 1) % slides.length; DupdateCarousel(); });
                 if (prevButton) prevButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex - 1 + slides.length) % slides.length; DupdateCarousel(); });
@@ -613,7 +661,7 @@
                 });
 
                 window.addEventListener('resize', DupdateCarousel);
-                DupdateCarousel();
+                DupdateCarousel(); // Initial call
             }
         }
 
@@ -652,8 +700,7 @@
             }
 
             function updateCarouselDisplay() {
-                // Ensure itemWidth is calculated correctly, especially if carousel is initially hidden
-                if (items[0].offsetWidth > 0) { // Check if element is visible
+                if (items.length > 0 && items[0].offsetWidth > 0) { 
                     itemWidth = items[0].getBoundingClientRect().width / itemsPerView;
                     track.style.transform = `translateX(-${currentIndex * itemWidth * itemsPerView}px)`;
                     updateActiveDot();
@@ -670,7 +717,6 @@
                  autoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 7000);
             });
 
-            // Use ResizeObserver for more reliable width calculation on visibility change
             const resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
                     if (entry.target.offsetWidth > 0) {
@@ -679,8 +725,6 @@
                 }
             });
             if(items.length > 0) resizeObserver.observe(items[0]);
-
-
             updateCarouselDisplay();
         }
 
@@ -693,7 +737,7 @@
         const teamMemberData = {
             salatiso: {
                 name: "Salatiso L. Mdeni", role: "Chief Strategic & Operations Officer (CSOO)",
-                profileImage: "salatiso/assets/photos/team/salatiso_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/salatiso_profile_thumb.jpg", // Use consistent thumb or large
                 profile: `A highly experienced OHS and Risk Management expert... His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli. Key Deadline: Integrate Salatiso Chatbot on safetyfirst.help staging by May 24, 2025.`,
                 responsibilities: ["Overall operational excellence", "Product development", "Risk management & Compliance", "Mentoring next generation", "Appoints Chairperson & CEO (initial)"],
                 padp: {
@@ -723,7 +767,7 @@
             },
             visa: {
                 name: "Visa Mdeni", role: "Chief Executive Officer (CEO)",
-                profileImage: "salatiso/assets/photos/team/visa_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/visa_profile_thumb.jpg",
                 profile: `Natural leader... Product Champion for SafetyHelp. Current job at Meril SA (D&B) from 7am-4pm daily. Target: Replace R15,000/month income by Dec 2025. Accountable for overall company performance and appointments of Tina & Kwakho.`,
                 responsibilities: ["Leading company registration", "Overall company direction", "Stakeholder management", "Driving growth for SafetyHelp", "Appointing team members (Tina, Kwakho) with Chairperson support", "Quarterly performance reviews for direct reports"],
                  padp: {
@@ -741,7 +785,7 @@
                         { task: "Finalize Company Name & CIPC Name Reservation", deadline: "Month 1, Week 1", weight: 5, score: 0, status: "not-started", estimatedTime: "4h", optOut: false },
                         { task: "Achieve SafetyHelp Launch (Construction Module & Chatbot)", deadline: "June 1, 2025", weight: 20, score: 0, status: "not-started", estimatedTime: "Dedicated Focus", optOut: false },
                         { task: "Onboard Tina & Kwakho, finalize their PADPs", deadline: "Month 1, Week 3", weight: 10, score: 0, status: "not-started", estimatedTime: "6h", optOut: false },
-                        { task: "Secure first paying client for SafetyHelp", deadline: "Month 3", weight: 15, score: 0, status: "not-started", estimatedTime: "Ongoing", optOut: true }, // Example opt-outable
+                        { task: "Secure first paying client for SafetyHelp", deadline: "Month 3", weight: 15, score: 0, status: "not-started", estimatedTime: "Ongoing", optOut: true },
                     ],
                     userDefinedDeliverables: [ { task: "Explore partnership with 2 local construction firms", weight: 10, score: 0, estimatedTime: "10h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
                     trainingPlan: [
@@ -755,7 +799,7 @@
             },
             tina: {
                 name: "Tina Mdeni", role: "Head of Marketing & Communications, Tenant/Supplier Mgt.",
-                profileImage: "salatiso/assets/photos/team/tina_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/tina_profile_thumb.jpg",
                 profile: `Creative flair... Responsible for marketing, social media, and tenant/supplier management (accountable to CEO). Initial responsibilities slightly broader to leverage existing skills. Starts with no shares, earns based on performance (6-24m for 5%, then next 36m for further 5% from Nozukile's trust).`,
                 responsibilities: ["Marketing strategies for all ventures", "Social media management", "Tenant & Supplier liaison/management", "Brand promotion & content creation"],
                 padp: {
@@ -787,7 +831,7 @@
             },
              kwakho: {
                 name: "Kwakho Mdeni", role: "Head of Operations Support & Curriculum Development",
-                profileImage: "salatiso/assets/photos/team/kwakho_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/kwakho_profile_thumb.jpg",
                 profile: `Meticulous, resourceful... Product Champion for Sazi Life. Starts with no shares, earns based on performance (6-24m for 5%, then next 36m for further 5% from Nozukile's trust). Works from her own home, leveraging online tools for collaboration.`,
                 responsibilities: ["Ops support for all ventures", "Multilingual translations (isiXhosa focus)", "Sazi Life Curriculum Dev.", "Admin & Document Mgt.", "Meeting minutes and action tracking"],
                  padp: {
@@ -818,7 +862,7 @@
             },
             nozukile: {
                 name: "Nozukile Mdeni", role: "Chairperson of the Family Council (Non-Executive Director - Advisory)",
-                profileImage: "salatiso/assets/photos/team/nozukile_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/nozukile_profile_thumb.jpg",
                 profile: `As the matriarch, Nozukile embodies wisdom, stability, and a deep understanding of family dynamics and Xhosa traditions... Her role is to ensure that as the business grows, its core purpose of family unity, legacy, and community upliftment remains paramount. She holds 20% of company shares in The Mdeni Grandchildren's Legacy Trust, from which Tina and Kwakho's performance-based shares will be allocated.`,
                 responsibilities: ["Providing high-level oversight at Family Council meetings", "Ensuring alignment with family values and ethics", "Safeguarding shareholder interests (trusts)", "Moral compass & mediator", "Championing Xhosa culture integration"],
                  padp: {
@@ -845,7 +889,7 @@
             },
             solonwabo: {
                 name: "Solonwabo Milile Mdeni", role: "Jr. Product Designer & Technical Apprentice",
-                profileImage: "salatiso/assets/photos/team/solonwabo_profile_large.jpg",
+                profileImage: "salatiso/assets/photos/team/solonwabo_profile_thumb.jpg",
                 profile: `A talented and self-motivated young web developer... Accountable to CSOO (Salatiso) for technical mentorship and quality; responsible to CEO (Visa) for project deliverables and operational alignment.`,
                 responsibilities: ["Assisting with product design", "Website development (Intranet, ventures)", "Technical support for digital ventures", "Learning new technologies"],
                 padp: {
@@ -880,7 +924,7 @@
             const member = teamMemberData[memberKey];
             if (!member) { console.error("Member data not found for key:", memberKey); return; }
 
-            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-300 shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-blue-300 shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
+            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-green-600 shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-green-600 shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
 
             // --- Tabs HTML ---
             let tabsHtml = `<div class="modal-tabs">
@@ -893,7 +937,7 @@
             let padpPaneHtml = `<div id="${memberKey}-padp" class="modal-tab-pane active">`;
             padpPaneHtml += commonActionsHtml(member, memberKey);
             padpPaneHtml += responsibilitiesHtml(member);
-            padpPaneHtml += profileSummaryHtml(member); // Short profile for this tab
+            padpPaneHtml += profileSummaryHtml(member);
             padpPaneHtml += padpDeliverablesHtml(member, memberKey);
             padpPaneHtml += `</div>`;
 
@@ -906,9 +950,9 @@
             let performancePaneHtml = `<div id="${memberKey}-performance" class="modal-tab-pane">`;
             performancePaneHtml += performanceKPIsHtml(member);
             performancePaneHtml += nextLevelEligibilityHtml(member);
-            performancePaneHtml += assignedTasksHtml(memberKey); // Conceptual
+            performancePaneHtml += assignedTasksHtml(memberKey);
             performancePaneHtml += `<div class="mt-8 text-right border-t pt-4">
-                                        <button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-5 rounded-md text-sm font-medium"><i class="fas fa-comment-dots mr-2"></i>Request PADP Review</button>
+                                        <button class="bg-accent-orange hover:bg-orange-700 text-white py-2 px-5 rounded-md text-sm font-medium"><i class="fas fa-comment-dots mr-2"></i>Request PADP Review</button>
                                     </div>`;
             performancePaneHtml += `</div>`;
 
@@ -923,26 +967,26 @@
                 ${performancePaneHtml}
             `;
             memberDetailModal.classList.add('active');
-            attachModalEventListeners(memberKey); // Attach event listeners for the newly created content
+            attachModalEventListeners(memberKey);
         }
 
         function commonActionsHtml(member, memberKey) {
-            let html = '<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-check-square mr-2"></i>Initial Actions & Role Acceptance</h4><ul class="list-none p-0 space-y-3">';
+            let html = '<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-primary-dark"><i class="fas fa-check-square mr-2 text-secondary-medium"></i>Initial Actions & Role Acceptance</h4><ul class="list-none p-0 space-y-3">';
             member.padp.commonActions.forEach((action, index) => {
                 const signedOffText = action.signedOff ? ` (Accepted: ${action.signedOff})` : "";
                 const isChecked = action.status === 'completed' ? 'checked' : '';
                 const isDisabled = action.status === 'completed' ? 'disabled' : '';
                 let actionButtonHtml = '';
                 if (action.id === 'acceptRole' && action.status !== 'completed') {
-                     actionButtonHtml = `<button class="ml-auto text-xs bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded sign-action-btn" data-action-id="${action.id}" ${isDisabled}>Accept Role</button>`;
+                     actionButtonHtml = `<button class="ml-auto text-xs bg-green-600 hover:bg-green-700 text-white px-2 py-1 rounded sign-action-btn" data-action-id="${action.id}" ${isDisabled}>Accept Role</button>`;
                 } else if (action.status !== 'completed') {
-                     actionButtonHtml = `<button class="ml-auto text-xs bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded complete-action-btn" data-action-id="${action.id}" ${isDisabled}>Mark Complete</button>`;
+                     actionButtonHtml = `<button class="ml-auto text-xs bg-primary-medium hover:bg-primary-dark text-white px-2 py-1 rounded complete-action-btn" data-action-id="${action.id}" ${isDisabled}>Mark Complete</button>`;
                 }
 
                 html += `
-                    <li class="flex items-center p-2 border rounded-md ${isChecked ? 'bg-green-50' : 'bg-gray-50'}">
-                        <input type="checkbox" id="commonAction_${memberKey}_${index}" data-member="${memberKey}" data-action-type="common" data-action-id="${action.id}" class="mr-3 common-action-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" ${isChecked} ${isDisabled}>
-                        <label for="commonAction_${memberKey}_${index}" class="text-sm flex-grow ${isChecked ? 'line-through text-gray-500' : ''}">${action.task} <span class="text-xs text-gray-400 ml-1">(Est. ${action.estimatedTime})</span><span class="text-xs text-green-600 ml-1 signed-off-text">${signedOffText}</span></label>
+                    <li class="flex items-center p-2 border border-border rounded-md ${isChecked ? 'bg-green-50' : 'bg-gray-50'}">
+                        <input type="checkbox" id="commonAction_${memberKey}_${index}" data-member="${memberKey}" data-action-type="common" data-action-id="${action.id}" class="mr-3 common-action-checkbox h-5 w-5 text-primary-medium border-gray-300 rounded focus:ring-primary-medium" ${isChecked} ${isDisabled}>
+                        <label for="commonAction_${memberKey}_${index}" class="text-sm flex-grow ${isChecked ? 'line-through text-text-light' : 'text-text-medium'}">${action.task} <span class="text-xs text-text-light ml-1">(Est. ${action.estimatedTime})</span><span class="text-xs text-green-700 ml-1 signed-off-text">${signedOffText}</span></label>
                         ${actionButtonHtml}
                     </li>`;
             });
@@ -951,18 +995,17 @@
         }
 
         function responsibilitiesHtml(member) {
-            return `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-user-tie mr-2"></i>Key Responsibilities:</h4><ul class="list-disc pl-6 text-sm space-y-1">${member.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
+            return `<div class="modal-section"><h4 class="text-lg font-semibold text-primary-dark"><i class="fas fa-user-tie mr-2 text-secondary-medium"></i>Key Responsibilities:</h4><ul class="list-disc pl-6 text-sm space-y-1 text-text-medium">${member.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
         }
-        function profileSummaryHtml(member) { // A shorter profile for the PADP tab
-            return `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-id-card mr-2"></i>Profile Summary:</h4><p class="text-sm text-gray-700 leading-relaxed">${member.profile.substring(0,250)}...</p></div>`;
+        function profileSummaryHtml(member) {
+            return `<div class="modal-section"><h4 class="text-lg font-semibold text-primary-dark"><i class="fas fa-id-card mr-2 text-secondary-medium"></i>Profile Summary:</h4><p class="text-sm text-text-medium leading-relaxed">${member.profile.substring(0,250)}...</p></div>`;
         }
 
         function padpDeliverablesHtml(member, memberKey) {
-            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-bullseye mr-2"></i>PADP Deliverables</h4>`;
-            html += `<p class="text-xs text-gray-500 mb-3">Core deliverables are fixed. Role-specific have initial weights; propose changes and add up to 5 user-defined goals. Total weight of Role-Specific + User-Defined should ideally be 100 - sum of Core weights.</p>`;
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-primary-dark"><i class="fas fa-bullseye mr-2 text-secondary-medium"></i>PADP Deliverables</h4>`;
+            html += `<p class="text-xs text-text-light mb-3">Core deliverables are fixed. Role-specific have initial weights; propose changes and add up to 5 user-defined goals. Total weight of Role-Specific + User-Defined should ideally be 100 - sum of Core weights.</p>`;
             html += `<div class="overflow-x-auto"><table class="action-plan-table">
                             <thead><tr><th>Type</th><th>Task / Objective (Est. Time)</th><th>Weight (%)</th><th>Score (1-5)</th><th>Notes / Opt-Out</th><th>Status</th><th>Save</th></tr></thead><tbody>`;
-            // Core Deliverables
             member.padp.coreDeliverables.forEach((item, index) => {
                 html += `<tr>
                     <td class="font-medium bg-gray-100">Core</td>
@@ -974,15 +1017,14 @@
                     <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="core" data-index="${index}"><i class="fas fa-save"></i></button></td>
                 </tr>`;
             });
-            // Role-Specific Deliverables
             member.padp.roleSpecificDeliverables.forEach((item, index) => {
                  html += `<tr>
-                    <td class="font-medium bg-sky-50">Role-Specific</td>
+                    <td class="font-medium bg-secondary-light bg-opacity-20">Role-Specific</td>
                     <td><textarea rows="2" data-field="task" data-type="roleSpecific" data-index="${index}">${item.task} (Est. ${item.estimatedTime || 'N/A'})</textarea></td>
                     <td><input type="number" value="${item.weight}" data-field="weight" data-type="roleSpecific" data-index="${index}" class="text-center"></td>
                     <td><input type="number" value="${item.score}" min="0" max="5" data-field="score" data-type="roleSpecific" data-index="${index}" class="text-center"></td>
                     <td><label class="text-xs block"><input type="checkbox" class="mr-1" data-field="optOut" data-type="roleSpecific" data-index="${index}" ${item.optOut ? 'checked' : ''}> Opt-Out Req.</label><textarea rows="1" data-field="notes" data-type="roleSpecific" data-index="${index}" placeholder="Reason if opting out...">${item.notes || ''}</textarea></td>
-                    <td><select class="status-select text-xs ${item.status === 'completed' ? 'status-completed' : item.status === 'in-progress' ? 'status-in-progress' : 'status-not-started'}" data-field="status" data-type="roleSpecific" data-index="${index}">
+                    <td><select class="status-select text-xs" data-field="status" data-type="roleSpecific" data-index="${index}">
                         <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
                         <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
                         <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
@@ -990,13 +1032,12 @@
                     <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="roleSpecific" data-index="${index}"><i class="fas fa-save"></i></button></td>
                 </tr>`;
             });
-            // User-Defined Deliverables
              member.padp.userDefinedDeliverables.forEach((item, index) => {
                 html += `<tr>
-                    <td class="font-medium bg-green-50">User-Defined</td>
+                    <td class="font-medium bg-green-100">User-Defined</td>
                     <td><textarea rows="2" placeholder="Define objective..." data-field="task" data-type="userDefined" data-index="${index}">${item.task}</textarea>
                         <input type="text" placeholder="Est. Time (e.g., 10h)" value="${item.estimatedTime || ''}" data-field="estimatedTime" data-type="userDefined" data-index="${index}" class="text-xs mt-1"></td>
-                    <td><input type="number" placeholder="0-100" value="${item.weight}" data-field="weight" data-type="userDefined" data-index="${index}" class="text-center"></td>
+                    <td><input type="number" placeholder="Weight" value="${item.weight}" data-field="weight" data-type="userDefined" data-index="${index}" class="text-center"></td>
                     <td><input type="number" value="${item.score}" min="0" max="5" data-field="score" data-type="userDefined" data-index="${index}" class="text-center"></td>
                     <td><textarea rows="1" data-field="notes" data-type="userDefined" data-index="${index}" placeholder="Details...">${item.notes || ''}</textarea></td>
                      <td><select class="status-select text-xs" data-field="status" data-type="userDefined" data-index="${index}">
@@ -1007,13 +1048,13 @@
                     <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="userDefined" data-index="${index}"><i class="fas fa-save"></i></button></td>
                 </tr>`;
             });
-            html += `</tbody></table></div><p class="text-xs text-gray-500 mt-2">Total PADP Weight: <span id="totalPadpWeight_${memberKey}" class="font-bold">0</span>% (Aim for 100% across Core, Role-Specific, User-Defined)</p></div>`;
+            html += `</tbody></table></div><p class="text-xs text-text-light mt-2">Total PADP Weight: <span id="totalPadpWeight_${memberKey}" class="font-bold">0</span>% (Aim for 100% across Core, Role-Specific, User-Defined)</p></div>`;
             return html;
         }
 
         function formalTrainingPlanHtml(member, memberKey) {
-            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-graduation-cap mr-2"></i>Formal Training Plan</h4>
-                        <p class="text-xs text-gray-500 mb-3">Track progress on formal courses and workshops. You can confirm completion of training done elsewhere.</p>
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-primary-dark"><i class="fas fa-graduation-cap mr-2 text-secondary-medium"></i>Formal Training Plan</h4>
+                        <p class="text-xs text-text-light mb-3">Track progress on formal courses and workshops. You can confirm completion of training done elsewhere.</p>
                         <div class="overflow-x-auto">
                         <table class="action-plan-table">
                             <thead><tr><th>Task/Course</th><th>Month</th><th>Week Ref</th><th>Est. Cost (ZAR)</th><th>Deliverable/Link</th><th>Status</th><th>Confirm/Save</th></tr></thead><tbody>`;
@@ -1025,7 +1066,7 @@
                     <td><input type="number" value="${item.cost}" data-field="cost" data-type="training" data-index="${index}" class="text-sm"></td>
                     <td><textarea rows="2" data-field="deliverable" data-type="training" data-index="${index}" placeholder="Certificate URL, notes...">${item.deliverable || ''}</textarea></td>
                     <td>
-                        <select class="status-select text-sm ${item.status === 'completed' ? 'status-completed' : item.status === 'in-progress' ? 'status-in-progress' : 'status-not-started'}" data-field="status" data-type="training" data-index="${index}">
+                        <select class="status-select text-sm" data-field="status" data-type="training" data-index="${index}">
                             <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
                             <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
                             <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
@@ -1039,77 +1080,71 @@
         }
 
         function performanceKPIsHtml(member) {
-            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-chart-line mr-2"></i>Performance KPIs</h4><ul class="list-disc pl-6 text-sm space-y-1">`;
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-primary-dark"><i class="fas fa-chart-line mr-2 text-secondary-medium"></i>Performance KPIs</h4><ul class="list-disc pl-6 text-sm space-y-1 text-text-medium">`;
             member.performanceKPIs.forEach(kpi => html += `<li>${kpi}</li>`);
-            html += `</ul><p class="text-xs text-gray-500 mt-2">Performance against PADP deliverables and these KPIs will be reviewed quarterly by the CEO (or CSOO for CEO).</p></div>`;
+            html += `</ul><p class="text-xs text-text-light mt-2">Performance against PADP deliverables and these KPIs will be reviewed quarterly by the CEO (or CSOO for CEO).</p></div>`;
             return html;
         }
 
         function nextLevelEligibilityHtml(member) {
-            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-layer-group mr-2"></i>Next Level Eligibility & Growth Path</h4><p class="text-sm text-gray-700">${member.nextLevelEligibility || "To be defined based on PADP completion and company needs."}</p>`;
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-primary-dark"><i class="fas fa-layer-group mr-2 text-secondary-medium"></i>Next Level Eligibility & Growth Path</h4><p class="text-sm text-text-medium">${member.nextLevelEligibility || "To be defined based on PADP completion and company needs."}</p>`;
             if (member.name === "Tina Mdeni" || member.name === "Kwakho Mdeni") {
-                html += `<p class="text-xs text-blue-600 mt-2">Performance-based share vesting: Up to 5% (6-24 months), further 5% (next 36 months) from Nozukile Mdeni's Trust, based on PADP and KPI achievement.</p>`;
+                html += `<p class="text-xs text-primary-medium mt-2">Performance-based share vesting: Up to 5% (6-24 months), further 5% (next 36 months) from Nozukile Mdeni's Trust, based on PADP and KPI achievement.</p>`;
             }
             html += `</div>`;
             return html;
         }
         
-        function assignedTasksHtml(memberKey) { // Conceptual
-             let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-clipboard-check mr-2"></i>My Assigned Tasks (from others)</h4>`;
-            html += `<ul class="list-disc pl-6 text-sm space-y-2">
-                        <li class="p-2 border rounded-md bg-yellow-50">Task: Review Marketing Budget Q3 (Assigned by: Visa, Due: May 28) 
+        function assignedTasksHtml(memberKey) {
+             let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-primary-dark"><i class="fas fa-clipboard-check mr-2 text-secondary-medium"></i>My Assigned Tasks (from others)</h4>`;
+            html += `<ul class="list-disc pl-6 text-sm space-y-2 text-text-medium">
+                        <li class="p-2 border border-border rounded-md bg-yellow-50">Task: Review Marketing Budget Q3 (Assigned by: Visa, Due: May 28) 
                             <div class="mt-1">
-                                <button class="text-xs bg-green-500 text-white px-1.5 py-0.5 rounded ml-1">Accept</button> 
-                                <button class="text-xs bg-orange-500 text-white px-1.5 py-0.5 rounded ml-1">Request Assist</button> 
-                                <button class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded ml-1">Request Transfer</button>
+                                <button class="text-xs bg-green-600 text-white px-1.5 py-0.5 rounded ml-1">Accept</button> 
+                                <button class="text-xs bg-accent-orange text-white px-1.5 py-0.5 rounded ml-1">Request Assist</button> 
+                                <button class="text-xs bg-danger text-white px-1.5 py-0.5 rounded ml-1">Request Transfer</button>
                             </div>
                         </li>
-                        <li class="p-2 border rounded-md">Task: Provide Feedback on Sazi Life Module 1 (Assigned by: Kwakho, Due: June 5)</li>
+                        <li class="p-2 border border-border rounded-md">Task: Provide Feedback on Sazi Life Module 1 (Assigned by: Kwakho, Due: June 5)</li>
                      </ul></div>`;
             return html;
         }
 
         function attachModalEventListeners(memberKey) {
             const currentMemberData = teamMemberData[memberKey];
-            // Common Action Checkboxes / Buttons
             modalBody.querySelectorAll('.common-action-checkbox').forEach(checkbox => {
                 checkbox.addEventListener('change', function() { handleCommonActionChange(this, memberKey); });
             });
             modalBody.querySelectorAll('.sign-action-btn, .complete-action-btn').forEach(button => {
                 button.addEventListener('click', function() { handleCommonActionButtonClick(this, memberKey); });
             });
-
-            // PADP Item Saves
             modalBody.querySelectorAll('.save-padp-item').forEach(button => {
                 button.addEventListener('click', function() { handlePadpItemSave(this, memberKey); });
             });
-
-            // Status Select visual update
              modalBody.querySelectorAll('.status-select').forEach(selectEl => {
                 selectEl.addEventListener('change', function() {
-                    this.className = 'status-select text-xs'; // Reset classes
+                    this.className = 'status-select text-xs';
                     if (this.value === 'completed') this.classList.add('status-completed');
                     else if (this.value === 'in-progress') this.classList.add('status-in-progress');
                     else this.classList.add('status-not-started');
                 });
-                // Trigger initial style
-                selectEl.dispatchEvent(new Event('change'));
+                selectEl.dispatchEvent(new Event('change')); // Trigger initial style
             });
-            calculateTotalPadpWeight(memberKey); // Initial calculation
+            calculateTotalPadpWeight(memberKey);
         }
         
         function calculateTotalPadpWeight(memberKey) {
             const member = teamMemberData[memberKey];
-            if (!member || !member.padp) return; // Ensure member and padp exist
+            if (!member || !member.padp) return;
             let totalWeight = 0;
             ['coreDeliverables', 'roleSpecificDeliverables', 'userDefinedDeliverables'].forEach(type => {
-                if (member.padp[type]) { // Check if the deliverable type array exists
+                if (member.padp[type]) {
                     member.padp[type].forEach(item => {
                         totalWeight += (parseInt(item.weight) || 0);
                     });
                 }
             });
-            const weightDisplay = document.getElementById(`totalPadpWeight_${memberKey}`);
+            const weightDisplay = modalBody.querySelector(`#totalPadpWeight_${memberKey}`); // Search within modalBody
             if(weightDisplay) weightDisplay.textContent = totalWeight;
         }
 
@@ -1121,7 +1156,7 @@
                 if (checkbox.checked && actionItem.status !== 'completed') {
                     console.warn("Common action checkbox manually changed. Prefer using action buttons.");
                 } else if (!checkbox.checked && actionItem.status === 'completed') {
-                    checkbox.checked = true; // Prevent unchecking completed/signed
+                    checkbox.checked = true;
                     alert("This action has already been completed and signed off. It cannot be reverted here.");
                 }
             }
@@ -1129,8 +1164,8 @@
         function handleCommonActionButtonClick(button, memberKey) {
             const actionId = button.dataset.actionId;
             const actionItem = teamMemberData[memberKey].padp.commonActions.find(a => a.id === actionId);
-            // Find the corresponding checkbox based on actionId more reliably
-            const checkbox = modalBody.querySelector(`.common-action-checkbox[data-action-id="${actionId}"][data-member="${memberKey}"]`);
+            const listItem = button.closest('li');
+            const checkbox = listItem.querySelector(`.common-action-checkbox[data-action-id="${actionId}"]`);
 
 
             if (actionItem && actionItem.status !== 'completed') {
@@ -1141,22 +1176,19 @@
                     checkbox.disabled = true;
                     const label = checkbox.closest('li').querySelector('label');
                     if (label) {
-                        label.classList.add('line-through', 'text-gray-500');
+                        label.classList.add('line-through', 'text-text-light');
                         const signedOffSpan = label.querySelector('.signed-off-text');
                         if (signedOffSpan) signedOffSpan.textContent = ` (Accepted: ${actionItem.signedOff})`;
                     }
                 }
                 button.textContent = 'Completed';
                 button.disabled = true;
-                button.classList.remove('bg-green-500', 'hover:bg-green-600', 'bg-blue-500', 'hover:bg-blue-600');
+                button.classList.remove('bg-green-600', 'hover:bg-green-700', 'bg-primary-medium', 'hover:bg-primary-dark');
                 button.classList.add('bg-gray-400', 'cursor-not-allowed');
 
                 alert(`Action '${actionItem.task}' has been electronically signed off and marked complete by ${memberKey}.`);
-                // In a real app, send this update to the backend.
-                // For now, log it and update any relevant dashboard widgets.
                 console.log("Action Signed Off:", memberKey, actionItem);
-                populateTrainingProgress(); // Update dashboard
-                // Potentially update My Pending Actions widget if this task was listed there
+                populateTrainingProgress();
                 populateMyPendingActions();
             }
         }
@@ -1170,7 +1202,6 @@
             if (itemTypeKey === 'training') {
                 targetArray = teamMemberData[memberKey].padp.trainingPlan;
             } else {
-                // Adjust for 'Deliverables' suffix if not present
                 const deliverableKey = itemTypeKey.endsWith('s') ? itemTypeKey : itemTypeKey + 'Deliverables';
                 targetArray = teamMemberData[memberKey].padp[deliverableKey];
             }
@@ -1199,12 +1230,11 @@
         }
 
 
-        // Populate Team Carousel on #team section activation
         let teamCarouselPopulated = false;
         function populateAndInitTeamCarousel() {
-            if (teamCarouselPopulated) { // If already populated, just ensure carousel is initialized/updated
+            if (teamCarouselPopulated) {
                  const teamCarouselEl = document.querySelector('#team .mfe-carousel-container');
-                 if(teamCarouselEl) setupCarousel(teamCarouselEl);
+                 if(teamCarouselEl) setupCarousel(teamCarouselEl); // Re-init in case DOM changed
                 return;
             }
             const teamCarouselTrack = document.querySelector('#team .mfe-carousel-track');
@@ -1218,10 +1248,10 @@
                 itemDiv.innerHTML = `
                     <div class="card-content">
                         <img src="${member.profileImage || 'salatiso/assets/photos/team_placeholder_carousel.png'}" alt="${member.name}" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                        <h4 class="text-xl font-semibold text-blue-700 text-center">${member.name}</h4>
-                        <p class="text-gray-500 text-sm text-center mb-3">${member.role}</p>
-                        <p class="text-gray-600 text-xs mb-4 flex-grow text-center">${member.profile.substring(0,70)}...</p>
-                        <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="${key}">View PADP & Details</button>
+                        <h4 class="text-xl font-semibold text-primary-dark text-center">${member.name}</h4>
+                        <p class="text-text-medium text-sm text-center mb-3">${member.role}</p>
+                        <p class="text-text-light text-xs mb-4 flex-grow text-center">${member.profile.substring(0,70)}...</p>
+                        <button class="mt-auto w-full bg-primary-medium text-white py-2.5 px-4 rounded-md hover:bg-primary-dark transition-colors text-sm font-medium view-member-details-btn" data-member="${key}">View PADP & Details</button>
                     </div>`;
                 teamCarouselTrack.appendChild(itemDiv);
             });
@@ -1232,8 +1262,6 @@
             teamCarouselPopulated = true;
         }
 
-
-        // Populate Dashboard Training Progress
         function populateTrainingProgress() {
             const widget = document.getElementById('trainingProgressWidget');
             if (!widget) return;
@@ -1246,14 +1274,14 @@
                     const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
                     
                     const p = document.createElement('p');
-                    p.className = "text-sm mb-0.5";
+                    p.className = "text-sm mb-0.5 text-text-medium";
                     p.innerHTML = `${member.name.split(' ')[0]} ${member.name.includes('.') ? member.name.split(' ')[1] : ''}: <span class="font-semibold">${progress}%</span>`;
                     widget.appendChild(p);
                     
                     const barContainer = document.createElement('div');
                     barContainer.className = 'progress-bar-container mb-2';
                     const bar = document.createElement('div');
-                    bar.className = 'progress-bar';
+                    bar.className = 'progress-bar bg-secondary-medium'; // Use theme color
                     bar.style.width = `${progress}%`;
                     barContainer.appendChild(bar);
                     widget.appendChild(barContainer);
@@ -1263,7 +1291,11 @@
         
         function populateMyPendingActions() {
             const widget = document.getElementById('myPendingActionsWidget');
+            const userNameSpan = document.getElementById('currentUserNamePendingActions');
             if (!widget || !teamMemberData[currentLoggedInUser] || !teamMemberData[currentLoggedInUser].padp) return;
+            
+            if(userNameSpan) userNameSpan.textContent = teamMemberData[currentLoggedInUser].name.split(' ')[0];
+
             widget.innerHTML = '';
             const userPADP = teamMemberData[currentLoggedInUser].padp;
             let actionCount = 0;
@@ -1282,7 +1314,7 @@
             });
             if (currentLoggedInUser === 'salatiso' && userPADP.roleSpecificDeliverables.find(d=>d.task.includes("Chatbot") && d.status !== 'completed')) {
                  const li = document.createElement('li');
-                li.innerHTML = `<input type="checkbox" id="dash_chatbot_salatiso" class="mr-2"><label for="dash_chatbot_salatiso" class="font-bold text-red-600">Integrate Chatbot on SafetyHelp Staging (Due: May 24)</label>`;
+                li.innerHTML = `<input type="checkbox" id="dash_chatbot_salatiso" class="mr-2"><label for="dash_chatbot_salatiso" class="font-bold text-danger">Integrate Chatbot on SafetyHelp Staging (Due: May 24)</label>`;
                 widget.appendChild(li);
             }
         }
@@ -1291,7 +1323,7 @@
             const widget = document.getElementById('companyLaunchRoadmapWidget');
             if (!widget) return;
             const roadmap = [
-                { name: "Phase 1: Legal Foundation", status: "completed", progress: 100, icon: "fas fa-check-circle text-green-500" },
+                { name: "Phase 1: Legal Foundation", status: "completed", progress: 100, icon: "fas fa-check-circle text-green-600" },
                 { name: "Phase 2: Operational Setup", status: "in-progress", progress: 70, icon: "fas fa-cogs text-blue-500" },
                 { name: "Phase 3: Intranet & Internal Launch", status: "in-progress", progress: 40, icon: "fas fa-users text-purple-500" },
                 { name: "Phase 4: SafetyHelp Public Launch (June 1)", status: "not-started", progress: 10, icon: "far fa-clock text-orange-500" }
@@ -1301,7 +1333,7 @@
                 const li = document.createElement('li');
                 li.className = "mb-2";
                 li.innerHTML = `<i class="${phase.icon} mr-2"></i>${phase.name} (${phase.progress}%)
-                                <div class="progress-bar-container"><div class="progress-bar ${phase.status === 'not-started' ? 'bg-orange-500' : phase.status === 'in-progress' ? 'bg-blue-500' : 'bg-green-500'}" style="width: ${phase.progress}%;"></div></div>`;
+                                <div class="progress-bar-container"><div class="progress-bar ${phase.status === 'not-started' ? 'bg-accent-orange' : phase.status === 'in-progress' ? 'bg-blue-500' : 'bg-secondary-medium'}" style="width: ${phase.progress}%;"></div></div>`;
                 widget.appendChild(li);
             });
         }
@@ -1310,7 +1342,7 @@
             const widget = document.getElementById('recentActivityWidget');
             if (!widget) return;
             const activities = [
-                { type: "COMPLETED", user: "Visa M.", text: "submitted CIPC company registration.", time: "1h ago", color: "text-green-600" },
+                { type: "COMPLETED", user: "Visa M.", text: "submitted CIPC company registration.", time: "1h ago", color: "text-green-700" },
                 { type: "UPDATED", user: "Tina M.", text: "added 'Brand Voice Guide' to Marketing Content Calendar.", time: "3h ago", color: "text-blue-600" },
                 { type: "ASSIGNED", user: "Salatiso M.", text: "to review Phase 2 budget by EOD May 23rd.", time: "Yesterday", color: "text-orange-600" },
                 { type: "COMMENT", user: "Kwakho M.", text: "on Sazi Life Curriculum: 'Need input on Grade 2 isiXhosa module.'", time: "Yesterday", color: "text-purple-600"},
@@ -1332,19 +1364,19 @@
         const journeyPhaseDetails = {
             phase1: {
                 title: "Phase 1: Foundation & Legal Details",
-                content: `<ul>
-                            <li>Finalize Holding Company Name (Lead: Visa, Cost: R50)</li>
-                            <li>Register Holding Company (Pty) Ltd (Lead: Visa, Cost: R125)</li>
-                            <li>Draft Basic Trust Deeds (Research - Salatiso)</li>
-                            <li>Open Business Bank Account (Lead: Visa)</li>
-                            <li>SARS Registrations (Lead: Visa/Salatiso)</li>
-                            <li>Register Flamea as NPO (Lead: Visa/Salatiso)</li>
-                            <li>COID Registration (if applicable - Salatiso)</li>
+                content: `<ul class="list-disc pl-5 space-y-1">
+                            <li>Finalize Holding Company Name (Lead: Visa, Cost: R50, Due: May 22)</li>
+                            <li>Register Holding Company (Pty) Ltd (Lead: Visa, Cost: R125, Due: May 28)</li>
+                            <li>Draft Basic Trust Deeds (Research - Salatiso, Due: June 5)</li>
+                            <li>Open Business Bank Account (Lead: Visa, Due: June 10)</li>
+                            <li>SARS Registrations (Lead: Visa/Salatiso, Due: June 20)</li>
+                            <li>Register Flamea as NPO (Lead: Visa/Salatiso, Target Start: June, Duration: 4-8 wks)</li>
+                            <li>COID Registration (if applicable - Salatiso, Due: June 25)</li>
                          </ul>
-                         <p class="mt-3 text-xs">Refer to Strategic Roadmap v4 for full details.</p>`
+                         <p class="mt-3 text-xs">Refer to Strategic Roadmap v4 for full details and responsible parties.</p>`
             },
-            phase2: { title: "Phase 2: Operational & Content Setup Details", content: `<p>Key tasks: Internal Agreements, Venture Info Consolidation, Basic Accounting Setup, Initial Operating Budget, Formalize Service Offerings, IP Inventory, Company Induction Materials Development. Full details in Strategic Roadmap v4.</p>`},
-            phase3: { title: "Phase 3: Internal Launch & Initial Operations Details", content: `<p>Key tasks: Intranet Launch, Training Plan Commencement, Initial Marketing Content, Regular Council Meetings, Critical: SafetyHelp Public Launch (June 1, 2025). Full details in Strategic Roadmap v4.</p>`}
+            phase2: { title: "Phase 2: Operational & Content Setup Details", content: `<p>Key tasks: Internal Agreements (Salatiso), Venture Info Consolidation (Salatiso), Basic Accounting Setup (Visa/Salatiso), Initial Operating Budget (Visa/Salatiso), Formalize Service Offerings (All Leads), IP Inventory (Salatiso), Company Induction Materials Development (Kwakho/Salatiso). Target Completion: Mid-August 2025. Full details in Strategic Roadmap v4.</p>`},
+            phase3: { title: "Phase 3: Internal Launch & Initial Operations Details", content: `<p>Key tasks: Intranet Launch (Salatiso/Solo), Training Plan Commencement (All), Initial Marketing Content (Tina), Regular Council Meetings (All), Critical: SafetyHelp Public Launch (June 1, 2025 - All Support). Ongoing from late August 2025. Full details in Strategic Roadmap v4.</p>`}
         };
 
         document.querySelectorAll('.view-journey-details-btn').forEach(button => {
@@ -1361,7 +1393,6 @@
         function closeJourneyModal() {
             journeyDetailsModal.classList.remove('active');
         }
-        // Close journey modal if clicking outside content
          journeyDetailsModal.addEventListener('click', (event) => {
             if (event.target === journeyDetailsModal) {
                 closeJourneyModal();
@@ -1403,7 +1434,7 @@
 
         // --- INITIALIZE ---
         document.addEventListener('DOMContentLoaded', () => {
-            const initialSection = 'dashboard'; // Default to dashboard
+            const initialSection = 'dashboard'; 
             showMainSection(initialSection, true);
 
             populateTrainingProgress();
@@ -1434,7 +1465,7 @@
                                 const tabsContainer = governanceSection.querySelector('.tabs');
                                 if (tabsContainer && !tabsContainer.querySelector('button.active')) {
                                      const firstTabButton = tabsContainer.querySelector('button');
-                                     if(firstTabButton) firstTabButton.click(); // Click to also trigger openTab
+                                     if(firstTabButton) firstTabButton.click();
                                 }
                             }
                         }
@@ -1442,6 +1473,219 @@
                 });
                 governanceSectionObserver.observe(governanceSection, { attributes: true });
             }
+             // Fill in any missing sections that were previously removed
+            const venturesSection = document.getElementById('ventures');
+            if (venturesSection && venturesSection.innerHTML.trim() === "") {
+                venturesSection.innerHTML = `<h2 class="section-title">Our Family Ventures</h2>
+                <div class="resource-grid">
+                    <div class="resource-card">
+                        <img src="salatiso/assets/photos/ventures/safetyhelp_logo_earthy.png" alt="SafetyHelp Logo" class="h-16 mb-3 mx-auto">
+                        <h4>SafetyHelp OHS Platform</h4>
+                        <p>AI-enhanced tools for OHS compliance, risk assessments, and safety management. Led by Visa Mdeni.</p>
+                        <a href="#" class="learn-more-btn">Explore SafetyHelp Details</a>
+                    </div>
+                    <div class="resource-card">
+                         <img src="salatiso/assets/photos/ventures/sazilife_logo_earthy.png" alt="Sazi Life Logo" class="h-16 mb-3 mx-auto">
+                        <h4>Sazi Life Education</h4>
+                        <p>Personalized learning resources and homeschooling support, fostering lifelong learning. Led by Kwakho Mdeni.</p>
+                        <a href="#" class="learn-more-btn">Discover Sazi Life</a>
+                    </div>
+                    <div class="resource-card">
+                        <img src="salatiso/assets/photos/ventures/consulting_icon_earthy.png" alt="Consulting Icon" class="h-16 mb-3 mx-auto">
+                        <h4>Salatiso Mdeni Ventures</h4>
+                        <p>Expert OHS, Risk Management, Compliance, and Business Continuity consulting services.</p>
+                        <a href="#" class="learn-more-btn">Consulting Services</a>
+                    </div>
+                    <div class="resource-card">
+                        <img src="salatiso/assets/photos/ventures/digital_icon_earthy.png" alt="Digital Icon" class="h-16 mb-3 mx-auto">
+                        <h4>Digital Creations & Publishing</h4>
+                        <p>Website design, e-learning content, and book publishing services. Showcasing our family's creative and tech skills.</p>
+                        <a href="#" class="learn-more-btn">Our Digital Portfolio</a>
+                    </div>
+                    <div class="resource-card">
+                        <img src="salatiso/assets/photos/ventures/property_icon_earthy.png" alt="Property Icon" class="h-16 mb-3 mx-auto">
+                        <h4>Property Management</h4>
+                        <p>Management of family rental properties and Airbnb units, ensuring optimal returns and guest satisfaction.</p>
+                        <a href="#" class="learn-more-btn">View Properties</a>
+                    </div>
+                    <div class="resource-card">
+                        <h4><i class="fas fa-hands-helping mr-2 text-secondary-medium"></i>Flamea (Non-Profit Arm)</h4>
+                        <p>Promoting equality through education, fathers' & family rights advocacy, and community upliftment. <a href="https://flamea.org/" target="_blank" class="text-primary-medium hover:underline">Visit Flamea.org</a></p>
+                    </div>
+                </div>`;
+            }
+
+            const trainingHubSection = document.getElementById('trainingHub');
+             if (trainingHubSection && trainingHubSection.innerHTML.trim() === "") {
+                trainingHubSection.innerHTML = `<h2 class="section-title">Training & Development Hub</h2>
+                <p class="mb-6 text-text-medium">Welcome to the central hub for all Mdeni Family Enterprise training and development. Here you can find links to individual training plans, shared resources, and upcoming workshop schedules. Our goal is to empower every family member with the skills and knowledge to excel in their roles and contribute to our collective success.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="dashboard-widget">
+                        <h3><i class="fas fa-user-graduate text-secondary-medium"></i>My Training Plan</h3>
+                        <p class="text-sm mb-3 text-text-light">Access your personalized training action plan, update your progress, and find relevant resources.</p>
+                        <button class="bg-primary-medium hover:bg-primary-dark text-white py-2 px-4 rounded text-sm" onclick="openMyTrainingPlan()">Go to My Plan</button>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3><i class="fas fa-chalkboard-teacher text-secondary-medium"></i>Master Training Overview</h3>
+                        <p class="text-sm mb-3 text-text-light">View the aggregated training progress for the entire team and identify upcoming group sessions.</p>
+                        <a href="#" class="learn-more-btn">View Master Plan</a>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3><i class="fas fa-book text-secondary-medium"></i>Shared Learning Resources</h3>
+                        <ul class="text-sm space-y-1">
+                            <li><a href="#" class="text-primary-medium hover:underline">MFE Onboarding Guide V1.pdf</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Link to Free Digital Marketing Courses</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">OHS Act Summary Document</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Guide to Using Asana/Trello for PM</a></li>
+                        </ul>
+                    </div>
+                    <div class="dashboard-widget">
+                        <h3><i class="fas fa-calendar-alt text-secondary-medium"></i>Upcoming Workshops</h3>
+                        <p class="text-sm text-text-medium"><strong>June 15:</strong> Introduction to Financial Literacy for Small Business (All invited)</p>
+                        <p class="text-sm mt-1 text-text-medium"><strong>July 5:</strong> Advanced Canva Techniques for Marketing (Tina, Solo)</p>
+                    </div>
+                </div>`;
+            }
+            const documentsSection = document.getElementById('documents');
+            if(documentsSection && documentsSection.innerHTML.trim() === "") {
+                 documentsSection.innerHTML = `<h2 class="section-title">Company Documents & Resources</h2>
+                <p class="mb-6 text-text-medium">This is the central repository for all official Mdeni Family Enterprise documents. Please ensure you are familiar with relevant policies and procedures.</p>
+                 <div class="resource-grid">
+                    <div class="resource-card">
+                        <h4><i class="fas fa-file-alt mr-2 text-secondary-medium"></i>Foundational Documents</h4>
+                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
+                            <li><a href="#" class="text-primary-medium hover:underline">Strategic Roadmap & Foundational Plan v4.0.pdf</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Company Registration Certificate (CoR 14.3).pdf</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Draft Trust Deed - Sazi Mdeni Family Trust.docx</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Flamea NPO Registration Application.pdf</a></li>
+                        </ul>
+                    </div>
+                     <div class="resource-card">
+                        <h4><i class="fas fa-briefcase mr-2 text-secondary-medium"></i>Operational Documents</h4>
+                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
+                            <li><a href="#" class="text-primary-medium hover:underline">Q3 Operating Budget.xlsx</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Service Agreement Template.docx</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Marketing & Brand Guidelines V1.pdf</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Supplier Vetting Checklist.pdf</a></li>
+                        </ul>
+                    </div>
+                     <div class="resource-card">
+                        <h4><i class="fas fa-users mr-2 text-secondary-medium"></i>HR & Team Documents</h4>
+                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
+                            <li><a href="#" class="text-primary-medium hover:underline">Family Council Meeting Minutes (May 2025).pdf</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Performance Review Template.docx</a></li>
+                            <li><a href="#" class="text-primary-medium hover:underline">Work From Home Policy Guide.pdf</a></li>
+                        </ul>
+                    </div>
+                 </div>`;
+            }
+             const governanceSectionContent = document.getElementById('governance');
+             if(governanceSectionContent && governanceSectionContent.innerHTML.trim() === "") {
+                governanceSectionContent.innerHTML = ` <h2 class="section-title">Governance & Compliance</h2>
+                <div class="tabs mb-6">
+                    <button class="active" onclick="openTab(event, 'doaTab')">Delegation of Authority</button>
+                    <button onclick="openTab(event, 'legalResourcesTab')">Key Legal Resources</button>
+                    <button onclick="openTab(event, 'policyTab')">Company Policies</button>
+                </div>
+                <div id="doaTab" class="tab-content">
+                    <h3 class="text-xl font-semibold mb-3 text-primary-dark">Delegation of Authority (DoA) Overview</h3>
+                    <p class="text-sm text-text-medium mb-4">The DoA outlines decision-making powers and responsibilities within the Mdeni Family Enterprise. This ensures clarity, efficiency, and accountability. The full DoA document will be linked here once finalized.</p>
+                    <ul class="list-disc pl-5 text-sm space-y-2 text-text-medium">
+                        <li><strong>CSOO (Salatiso L. Mdeni):</strong> Strategic oversight, major unbudgeted CapEx, core compliance frameworks, appointment of Chairperson & CEO (initial).</li>
+                        <li><strong>Chairperson (Nozukile Mdeni):</strong> Convening Family Council, ethical guidance, support CEO appointments.</li>
+                        <li><strong>CEO (Visa Mdeni):</strong> Operational decisions, budgeted expenditure, team management, performance reviews, client contracts (defined limits), team appointments. Accountable for supplier/tenant management (delegated to Tina).</li>
+                        <li><strong>Heads of Dept. (Tina, Kwakho):</strong> Functional area management, assigned budgets, task delegation.</li>
+                    </ul>
+                    <p class="mt-4 text-xs text-text-light"><em>Awaiting formal DoA document upload.</em></p>
+                </div>
+                <div id="legalResourcesTab" class="tab-content" style="display:none;">
+                    <h3 class="text-xl font-semibold mb-3 text-primary-dark">Key Legal & Compliance Resources</h3>
+                    <ul class="list-disc pl-5 text-sm space-y-2">
+                        <li><a href="https://www.cipc.co.za/" target="_blank" class="text-primary-medium hover:underline">CIPC (Companies and Intellectual Property Commission)</a></li>
+                        <li><a href="https://www.gov.za/documents/constitution-republic-south-africa-1996" target="_blank" class="text-primary-medium hover:underline">The Constitution of South Africa</a></li>
+                        <li><a href="https://www.gov.za/documents/occupational-health-and-safety-act" target="_blank" class="text-primary-medium hover:underline">Occupational Health and Safety Act (OHSA)</a></li>
+                        <li><a href="https://www.gov.za/documents/companies-act" target="_blank" class="text-primary-medium hover:underline">Companies Act</a></li>
+                    </ul>
+                </div>
+                 <div id="policyTab" class="tab-content" style="display:none;">
+                    <h3 class="text-xl font-semibold mb-3 text-primary-dark">Company Policies (Drafts / To Be Developed)</h3>
+                     <ul class="list-disc pl-5 text-sm space-y-2 text-text-medium">
+                        <li>Work From Home Policy</li>
+                        <li>Data Protection & Privacy Policy (POPIA Compliance)</li>
+                        <li>Code of Conduct & Ethics</li>
+                    </ul>
+                     <p class="mt-4 text-xs text-text-light"><em>Policy documents will be uploaded here as they are finalized.</em></p>
+                </div>`;
+                 // Ensure the first tab is active by default if governance section is shown
+                const tabsContainer = governanceSectionContent.querySelector('.tabs');
+                if (tabsContainer && !tabsContainer.querySelector('button.active')) {
+                        const firstTabButton = tabsContainer.querySelector('button');
+                        if(firstTabButton) firstTabButton.click();
+                }
+            }
+            // Ensure footer is present
+            const footerElement = document.querySelector('footer');
+            if (footerElement && footerElement.innerHTML.trim() === "") {
+                footerElement.innerHTML = `<div class="container mx-auto px-6">
+                    <p>&copy; ${new Date().getFullYear()} Mdeni Family Enterprise (Pty) Ltd. All Rights Reserved.</p>
+                    <p>Internal Portal - Confidential. Built with <i class="fas fa-heart text-red-400"></i> by the Mdeni Family, for the Mdeni Family.</p>
+                </div>`;
+            }
+             // Ensure header is present
+            const headerElement = document.querySelector('header');
+            if (headerElement && headerElement.innerHTML.trim() === "") {
+                 headerElement.innerHTML = `<div class="header-container">
+                    <div class="logo-container flex items-center">
+                        <img src="salatiso/assets/photos/mfe_logo_earthy_placeholder.png" alt="Mdeni Family Enterprise Logo">
+                        <span class="company-name">Mdeni Family Intranet</span>
+                    </div>
+                    <nav class="main-nav-links">
+                        <a href="#" data-target="welcome">Welcome</a>
+                        <a href="#" class="active-main-nav" data-target="dashboard">Dashboard</a>
+                        <a href="#" data-target="ourVision">Our Vision</a>
+                        <a href="#" data-target="team">Our Team</a>
+                        <a href="#" data-target="ourJourney">Our Journey</a>
+                        <a href="#" data-target="ventures">Ventures</a>
+                        <a href="#" data-target="trainingHub">Training Hub</a>
+                        <a href="#" data-target="documents">Docs</a>
+                        <a href="#" data-target="governance">Governance</a>
+                    </nav>
+                    <div class="user-actions">
+                        <div class="notification-bell">
+                            <i class="fas fa-bell"></i>
+                            <span class="notification-badge">4</span>
+                        </div>
+                        <div class="user-profile-menu ml-5 relative">
+                            <button>
+                                <img src="salatiso/assets/photos/team/profile_salatiso_thumb.jpg" alt="Salatiso Mdeni Profile">
+                            </button>
+                            <div class="dropdown-menu">
+                                <a href="#" id="myProfileLinkRecheck">My Profile & Plan</a>
+                                <a href="#">Settings</a>
+                                <a href="#">Logout (Conceptual)</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+                // Re-attach event listeners for header if it was re-created
+                document.querySelectorAll('.main-nav-links a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const targetId = link.dataset.target;
+                        showMainSection(targetId, false);
+                    });
+                });
+                const myProfileLinkRecheck = document.getElementById('myProfileLinkRecheck');
+                if (myProfileLinkRecheck) {
+                     myProfileLinkRecheck.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        showMainSection('team', false);
+                        setTimeout(() => populateModal(currentLoggedInUser), 50);
+                    });
+                }
+            }
+
+
         });
 
     </script>
