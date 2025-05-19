@@ -46,198 +46,130 @@
             padding: 10px 30px;
             height: 80px;
         }
-        .logo-container img {
-            height: 50px;
-            margin-right: 15px;
-        }
-        .logo-container .company-name {
-            font-size: 1.8em;
-            font-weight: 700;
-        }
+        .logo-container img { height: 50px; margin-right: 15px; }
+        .logo-container .company-name { font-size: 1.8em; font-weight: 700; }
         .main-nav-links a {
-            color: white;
-            margin: 0 12px;
-            font-size: 0.95em;
-            font-weight: 500;
-            text-decoration: none;
-            padding: 8px 12px;
-            border-radius: 6px;
+            color: white; margin: 0 12px; font-size: 0.95em; font-weight: 500;
+            text-decoration: none; padding: 8px 12px; border-radius: 6px;
             transition: background-color 0.3s, color 0.3s;
         }
         .main-nav-links a:hover, .main-nav-links a.active-main-nav {
             background-color: #FD7E14; /* Orange accent */
             color: white;
         }
-        .user-actions {
-            display: flex;
-            align-items: center;
-        }
+        .user-actions { display: flex; align-items: center; }
         .user-actions .notification-bell, .user-actions .user-profile-menu > button {
-            color: white;
-            margin-left: 20px;
-            font-size: 1.2em;
-            cursor: pointer;
-            position: relative; /* For notification badge */
+            color: white; margin-left: 20px; font-size: 1.2em; cursor: pointer; position: relative;
         }
          .notification-badge {
             background-color: #FF3B30; /* iOS red for notifications */
-            color: white;
-            font-size: 0.65rem;
-            font-weight: bold;
-            padding: 2px 5px;
-            border-radius: 50%;
-            position: absolute;
-            top: -5px;
-            right: -8px;
+            color: white; font-size: 0.65rem; font-weight: bold;
+            padding: 2px 5px; border-radius: 50%; position: absolute; top: -5px; right: -8px;
         }
-        .user-profile-menu img {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 2px solid white;
-        }
+        .user-profile-menu img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid white; }
         .dropdown-menu {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 50px; /* Adjust as needed */
-            background-color: white;
-            color: #333;
-            border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            z-index: 1001;
-            width: 180px;
+            display: none; position: absolute; right: 0; top: 50px; /* Adjust as needed */
+            background-color: white; color: #333; border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 200px; /* Wider dropdown */
         }
-        .dropdown-menu a {
-            display: block;
-            padding: 10px 15px;
-            text-decoration: none;
-            color: #333;
-            font-size: 0.9em;
-        }
-        .dropdown-menu a:hover {
-            background-color: #f0f0f0;
-        }
-        .user-profile-menu:hover .dropdown-menu {
-            display: block;
-        }
+        .dropdown-menu a { display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 0.9em; }
+        .dropdown-menu a:hover { background-color: #f0f0f0; }
+        .user-profile-menu:hover .dropdown-menu { display: block; }
 
 
         /* Main Content Area */
-        .main-content-wrapper {
-            display: flex;
-            flex-grow: 1;
-        }
-
-        /* Primary Content Display Area */
-        .content-display-area {
-            flex-grow: 1;
-            padding: 25px;
+        .main-content-wrapper { display: flex; flex-grow: 1; }
+        .content-display-area { flex-grow: 1; padding: 0; /* Remove padding for full-page carousel dashboard */ overflow: hidden; /* Prevent double scrollbars */ }
+        .content-section { /* For non-dashboard pages */
+            background-color: #FFFFFF; padding: 25px 30px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07); margin: 25px; /* Add margin if not full page */
+            display: none; opacity: 0; transition: opacity 0.4s ease-in-out;
+            max-height: calc(100vh - 80px - 50px); /* Header and margin */
             overflow-y: auto;
         }
-
-        .content-section {
-            background-color: #FFFFFF;
-            padding: 25px 30px;
-            border-radius: 10px; /* Softer radius */
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07); /* Softer shadow */
-            margin-bottom: 30px;
-            min-height: calc(100vh - 80px - 50px - 60px); /* Header, top/bottom padding, footer margin */
-            display: none;
-            opacity: 0;
-            transition: opacity 0.4s ease-in-out;
-        }
-        .content-section.active {
-            display: block;
-            opacity: 1;
-        }
+        .content-section.active { display: block; opacity: 1; }
         .content-section h2.section-title {
-            font-size: 2.2em; /* Slightly larger */
-            color: #0056b3;
-            margin-bottom: 30px;
-            padding-bottom: 12px;
-            border-bottom: 3px solid #FD7E14; /* Thicker accent border */
+            font-size: 2.2em; color: #0056b3; margin-bottom: 30px;
+            padding-bottom: 12px; border-bottom: 3px solid #FD7E14;
         }
 
-        /* Dashboard Specific */
-        .dashboard-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); /* Slightly larger minmax */
-            gap: 25px;
+        /* Dashboard Carousel & Widgets */
+        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); /* Full viewport minus header */ }
+        .dashboard-carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); height: 100%; }
+        .dashboard-carousel-slide {
+            min-width: 100%; padding: 30px 40px; box-sizing: border-box;
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; /* Start from top */
+            height: 100%;
+            overflow-y: auto; /* Allow individual slides to scroll if content is too tall */
         }
+        .dashboard-carousel-slide h2.slide-title { font-size: 2.5em; color: #0056b3; margin-bottom: 25px; text-align: center; }
+
+        .dashboard-carousel-button {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background-color: rgba(0,123,255,0.6); color: white; opacity: 0.8;
+            border: none; width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; z-index:10; transition: all 0.3s; font-size: 1.5em;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .dashboard-carousel-button:hover { background-color: #007BFF; opacity: 1; }
+        .dashboard-carousel-button.prev-btn { left: 30px; }
+        .dashboard-carousel-button.next-btn { right: 30px; }
+        .dashboard-carousel-dots {
+            position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 12px; z-index: 10;
+        }
+        .dashboard-carousel-dot {
+            width:12px; height:12px; background:#999; border-radius:50%; cursor:pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .dashboard-carousel-dot.active { background: #007BFF; transform: scale(1.3); }
+
+        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width:100%; max-width: 1600px;}
         .dashboard-widget {
-            background-color: #F8F9FA;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(0,0,0,0.06);
-            border-left: 5px solid #007BFF; /* Accent border */
+            background-color: #F8F9FA; padding: 25px; border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0,0,0,0.06); border-left: 5px solid #007BFF;
         }
-        .dashboard-widget h3 {
-            font-size: 1.4em;
-            color: #007BFF;
-            margin-bottom: 18px;
-            display: flex;
-            align-items: center;
-        }
-         .dashboard-widget h3 i { margin-right: 10px; }
+        .dashboard-widget h3 { font-size: 1.4em; color: #007BFF; margin-bottom: 18px; display: flex; align-items: center; }
+        .dashboard-widget h3 i { margin-right: 10px; }
         .dashboard-widget ul { list-style: none; padding: 0; }
         .dashboard-widget li { margin-bottom: 10px; font-size: 0.95em; display: flex; align-items: center; }
         .dashboard-widget li i { margin-right: 8px; color: #555; }
-        .progress-bar-container {
-            background-color: #E9ECEF;
-            border-radius: 6px; /* Rounded progress bar */
-            height: 12px; /* Thicker bar */
-            margin-top: 6px;
-            overflow: hidden; /* Ensure inner bar also rounded */
-        }
-        .progress-bar {
-            background-color: #28A745;
-            height: 100%;
-            border-radius: 6px;
-            transition: width 0.6s ease-in-out;
-            text-align: right;
-            padding-right: 5px;
-            color: white;
-            font-size: 0.7em;
-            line-height: 12px;
-        }
+        .progress-bar-container { background-color: #E9ECEF; border-radius: 6px; height: 12px; margin-top: 6px; overflow: hidden; }
+        .progress-bar { background-color: #28A745; height: 100%; border-radius: 6px; transition: width 0.6s ease-in-out; }
         .task-list input[type="checkbox"] { margin-right: 10px; accent-color: #007BFF; }
         .task-list label { font-size: 0.9em; }
 
         /* Organogram Styles */
-        .organogram { text-align: center; padding: 20px 0; }
+        .organogram { text-align: center; padding: 20px 0; overflow-x: auto; /* Allow horizontal scroll for wide org charts */ }
+        .org-level { display: flex; justify-content: center; align-items: flex-start; margin-top: 30px; position: relative; min-width: fit-content; /* For scrolling */ }
+        .org-node-container { display: flex; flex-direction: column; align-items: center; margin: 0 10px; /* Spacing between sibling containers */ }
         .org-node {
-            display: inline-block;
-            padding: 12px 18px;
-            border: 1px solid #007BFF;
-            background-color: #E8F0FE;
-            border-radius: 8px;
-            margin: 10px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
-            min-width: 180px; /* Ensure some width */
+            padding: 12px 18px; border: 1px solid #007BFF; background-color: #E8F0FE;
+            border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); min-width: 220px; text-align: center; /* Wider nodes */
         }
         .org-node:hover { background-color: #D0E0F8; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-        .org-node .name { font-weight: 600; color: #0056b3; }
-        .org-node .role { font-size: 0.85em; color: #555; margin-top: 4px; }
-        .org-level { margin-top: 20px; }
-        .org-level .org-node { margin: 0 15px; } /* Horizontal spacing for same level */
-        .org-connector { /* Basic connector idea, complex lines need SVG/Canvas */
-            height: 20px;
-            width: 1px;
-            background-color: #ccc;
-            margin: 0 auto;
+        .org-node .name { font-weight: 600; color: #0056b3; font-size: 1em; }
+        .org-node .role { font-size: 0.8em; color: #555; margin-top: 4px; }
+        .org-node .reporting-line { font-size: 0.7em; color: #777; margin-top: 3px; font-style: italic; }
+        /* Basic connectors - more complex ones need SVG/Canvas or a library */
+        .org-children-container { display: flex; justify-content: center; margin-top: 20px; position: relative; }
+        .org-children-container::before { /* Horizontal line above children */
+            content: ''; position: absolute; top: -10px; left: 10%; right: 10%; height: 1px; background-color: #ccc;
+        }
+        .org-node-container > .org-connector-down { /* Vertical line from parent */
+            width: 1px; height: 20px; background-color: #ccc; margin: 0 auto;
         }
 
-        /* Carousel Styles */
+
+        /* Team Carousel (mfe-carousel) - styling mostly retained */
         .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: #f0f4f8; border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);}
-        .mfe-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); /* Smoother transition */ }
+        .mfe-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         .mfe-carousel-item { min-width: 100%; padding: 10px; box-sizing: border-box; }
         .mfe-carousel-item .card-content {
             background:white; padding:25px; border-radius:8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            min-height: 200px; /* Increased height */
+            min-height: 220px;
             display: flex; flex-direction: column; justify-content: space-between;
         }
         .mfe-carousel-item .card-content img { border: 3px solid #007BFF; }
@@ -246,8 +178,7 @@
             background-color: #007BFF; color: white; opacity: 0.8;
             border: none; width: 40px; height: 40px; border-radius: 50%;
             cursor: pointer; z-index:10; transition: opacity 0.3s;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.2em;
+            display: flex; align-items: center; justify-content: center; font-size: 1.2em;
         }
         .mfe-carousel-button:hover { opacity: 1; }
         .mfe-carousel-button.prev-btn { left: 20px; }
@@ -256,10 +187,11 @@
         .carousel-dot { display: inline-block; width:12px; height:12px; background:#ccc; border-radius:50%; margin: 0 6px; cursor:pointer; transition: background-color 0.3s; }
         .carousel-dot.active { background: #007BFF; }
 
+
         /* Modal Styles */
         .modal {
             display: none; position: fixed; inset: 0;
-            background-color: rgba(0,0,0,0.65); /* Darker overlay */
+            background-color: rgba(0,0,0,0.65);
             display: flex; justify-content: center; align-items: center;
             padding: 20px; z-index: 1001;
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;
@@ -268,7 +200,7 @@
         .modal-content {
             background-color: white; padding: 30px 35px; border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            max-width: 800px; width: 100%; /* Wider modal */
+            max-width: 950px; width: 100%; /* Wider modal for detailed plans */
             max-height: 90vh; overflow-y: auto;
             position: relative;
         }
@@ -280,17 +212,24 @@
             background:none; border:none; cursor:pointer; line-height: 1;
         }
         .close-modal-btn:hover { color: #333; }
-        .modal-section h4 { font-size: 1.25em; color: #0056b3; margin-top: 25px; margin-bottom: 10px; }
+        .modal-section h4 { font-size: 1.25em; color: #0056b3; margin-top: 25px; margin-bottom: 10px; display:flex; align-items:center;}
+        .modal-section h4 i { margin-right: 8px; }
+        .modal-tabs { display: flex; border-bottom: 1px solid #ccc; margin-bottom: 15px; }
+        .modal-tab-button { padding: 10px 15px; cursor: pointer; background: #f0f0f0; border: 1px solid #ccc; border-bottom: none; margin-right: 5px; border-radius: 5px 5px 0 0; font-size: 0.9em;}
+        .modal-tab-button.active { background: white; border-bottom: 1px solid white; font-weight: bold; color: #007BFF;}
+        .modal-tab-pane { display: none; }
+        .modal-tab-pane.active { display: block; }
 
-        /* Action Plan Table */
-        .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.9em; }
-        .action-plan-table th, .action-plan-table td { border: 1px solid #DEE2E6; padding: 10px 12px; text-align: left; vertical-align: middle;}
+
+        /* Action Plan Table & Performance Sections */
+        .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85em; /* Smaller font for more info */ }
+        .action-plan-table th, .action-plan-table td { border: 1px solid #DEE2E6; padding: 8px 10px; text-align: left; vertical-align: middle;}
         .action-plan-table th { background-color: #E8F0FE; color: #0056b3; font-weight: 600; }
         .action-plan-table input, .action-plan-table select, .action-plan-table textarea {
-            width: 100%; padding: 8px; border: 1px solid #CED4DA; border-radius: 4px; box-sizing: border-box; font-size:0.95em;
+            width: 100%; padding: 7px; border: 1px solid #CED4DA; border-radius: 4px; box-sizing: border-box; font-size:0.95em;
         }
-        .action-plan-table textarea { min-height: 40px; }
-        .action-plan-table .status-select { padding: 8px 6px; } /* Adjust select padding */
+        .action-plan-table textarea { min-height: 40px; resize: vertical; }
+        .action-plan-table .status-select { padding: 7px 5px; }
         .status-completed { background-color: #D4EDDA !important; color: #155724; }
         .status-in-progress { background-color: #FFF3CD !important; color: #856404; }
         .status-not-started { background-color: #F8D7DA !important; color: #721C24; }
@@ -299,6 +238,13 @@
             padding: 6px 10px; border-radius:4px; border:none; cursor:pointer;
         }
         .action-btn:hover { background-color: #218838; }
+        .deliverable-section label { font-weight: 500; margin-top: 5px; display: block; }
+        .deliverable-section input[type="checkbox"] { margin-right: 5px; }
+        .signature-area { border: 1px dashed #ccc; padding: 10px; margin-top:15px; text-align: center; }
+        .signature-area button { background-color: #007BFF; color:white; padding: 8px 15px; border-radius: 5px; border:none; cursor:pointer;}
+        .signature-area button:disabled { background-color: #aaa; }
+        .signed-confirmation { color: green; font-weight: bold; font-size: 0.9em; }
+
 
         /* Ventures & Documents Section Cards */
         .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -317,311 +263,114 @@
         }
         .resource-card a.learn-more-btn:hover { background-color: #0056b3; }
 
-
         /* Footer */
         footer {
-            background-color: #343A40;
-            color: #F8F9FA;
-            padding: 25px 0;
-            text-align: center;
-            font-size: 0.9em;
-            margin-top: auto;
+            background-color: #343A40; color: #F8F9FA; padding: 25px 0;
+            text-align: center; font-size: 0.9em; margin-top: auto;
         }
         footer a { color: #00A2FF; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
+
+        /* Tabs for Governance */
+        .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid #ccc; border-bottom: none; background-color: #f0f0f0; cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500;}
+        .tabs button.active { background-color: white; border-bottom: 1px solid white; font-weight: bold; color: #007BFF;}
+        .tab-content { border: 1px solid #ccc; padding: 20px; border-top: none; border-radius: 0 0 6px 6px; background-color: white;}
 
     </style>
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo-container flex items-center">
-                <img src="salatiso/assets/photos/mfe_logo_placeholder.png" alt="Mdeni Family Enterprise Logo">
-                <span class="company-name text-white">Mdeni Family Intranet</span>
-            </div>
-            <nav class="main-nav-links">
-                <a href="#" class="active-main-nav" data-target="dashboard">Dashboard</a>
-                <a href="#" data-target="team">Our Team</a>
-                <a href="#" data-target="ventures">Ventures</a>
-                <a href="#" data-target="trainingHub">Training Hub</a>
-                <a href="#" data-target="documents">Documents</a>
-            </nav>
-            <div class="user-actions">
-                <div class="notification-bell">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">3</span>
-                </div>
-                <div class="user-profile-menu ml-5 relative">
-                     <button>
-                        <img src="salatiso/assets/photos/team/profile_salatiso_thumb.jpg" alt="User Profile">
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="#">My Profile</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Logout</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+        </header>
 
     <div class="main-content-wrapper">
         <main class="content-display-area w-full">
-            <section id="dashboard" class="content-section active">
-                <h2 class="section-title">Family Enterprise Dashboard</h2>
-                <div class="dashboard-grid">
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-tasks"></i>Overall Training Progress</h3>
-                        <div id="trainingProgressWidget">
+            <section id="dashboard" class="content-section active" style="padding:0; background:transparent; box-shadow:none; margin:0;">
+                <div class="dashboard-carousel-container">
+                    <div class="dashboard-carousel-track">
+                        <div class="dashboard-carousel-slide">
+                            <h2 class="slide-title">Dashboard: Performance Overview</h2>
+                            <div class="dashboard-grid">
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-tasks text-purple-500"></i>Overall Training Progress</h3>
+                                    <div id="trainingProgressWidget">
+                                        </div>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-rocket text-red-500"></i>Company Launch Roadmap</h3>
+                                    <ul id="companyLaunchRoadmapWidget">
+                                        </ul>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-dollar-sign text-green-500"></i>Visa's Income Replacement Target (Dec 2025)</h3>
+                                    <p class="text-lg">Target: R15,000 / month</p>
+                                    <p class="text-lg">Current Projected: <span id="visaIncomeProjected" class="font-bold text-xl text-blue-600">R4,200</span></p>
+                                    <div class="progress-bar-container mt-2"><div class="progress-bar bg-blue-500" style="width: 28%;"></div></div>
+                                    <p class="text-xs text-gray-500 mt-1">Tracked monthly based on SafetyHelp & early venture profitability.</p>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-chart-pie text-indigo-500"></i>Quick Stats</h3>
+                                    <p class="text-lg">Active Ventures: <span class="font-bold text-2xl text-blue-600">5</span></p>
+                                    <p class="text-lg">Team Members Logged In Today: <span id="activeLogins" class="font-bold text-2xl text-blue-600">3</span></p>
+                                    <p class="text-lg">SafetyHelp Launch: <span class="font-bold text-red-600">June 1, 2025!</span></p>
+                                    <p class="text-lg">Next Performance Review Cycle: <span class="font-bold text-blue-600">Q3 (July)</span></p>
+                                </div>
                             </div>
+                        </div>
+                        <div class="dashboard-carousel-slide">
+                             <h2 class="slide-title">Dashboard: My Focus & Team Sync</h2>
+                            <div class="dashboard-grid">
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-user-clock text-teal-500"></i>My Pending Actions (Salatiso)</h3>
+                                    <ul class="task-list" id="myPendingActionsWidget">
+                                        </ul>
+                                    <button class="mt-4 text-sm bg-blue-500 hover:bg-blue-600 text-white py-1.5 px-4 rounded-md">View All My Tasks</button>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-calendar-alt text-cyan-500"></i>Meeting Tracker</h3>
+                                    <p><strong>Last Meeting:</strong> May 17, 2025 - Weekly Sync</p>
+                                    <p class="text-xs text-gray-500">Attendees: Salatiso, Visa, Tina, Kwakho, Solonwabo (5/6 - Nozukile apologies)</p>
+                                    <p class="text-xs mt-1">Key Action: Finalize Intranet User Roles - <span class="font-semibold">Visa</span> (Due: May 20)</p>
+                                    <p class="mt-2"><strong>Next Meeting:</strong> May 24, 2025 - SafetyHelp Launch Prep</p>
+                                    <button class="mt-3 text-sm bg-cyan-500 hover:bg-cyan-600 text-white py-1.5 px-4 rounded-md">View Meeting Logs & Actions</button>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-stream text-gray-500"></i>Recent Company Activity</h3>
+                                    <div id="recentActivityWidget" class="bg-white p-3 rounded-md max-h-48 overflow-y-auto text-xs space-y-1.5 border">
+                                        </div>
+                                </div>
+                                <div class="dashboard-widget">
+                                    <h3><i class="fas fa-comments text-orange-500"></i>Quick Communication</h3>
+                                    <textarea placeholder="Post a quick update or question for the team..." class="w-full p-2 border rounded-md text-sm h-20"></textarea>
+                                    <button class="mt-2 text-sm bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-4 rounded-md">Post Update</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-flag-checkered"></i>Key Project Milestones (Next 30 Days)</h3>
-                        <ul>
-                            <li><i class="fas fa-file-signature text-blue-500"></i>Company Registration Finalized - <span class="text-gray-500 text-xs font-semibold">Visa</span></li>
-                            <li><i class="fas fa-bullhorn text-orange-500"></i>Initial Marketing Plan Draft V1 - <span class="text-gray-500 text-xs font-semibold">Tina</span></li>
-                            <li><i class="fas fa-book-open text-green-500"></i>Sazi Life Curriculum Framework V1 Due - <span class="text-gray-500 text-xs font-semibold">Kwakho</span></li>
-                            <li><i class="fas fa-code text-purple-500"></i>Intranet V1.1 Enhancements - <span class="text-gray-500 text-xs font-semibold">Solonwabo</span></li>
-                        </ul>
-                    </div>
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-user-clock"></i>My Pending Actions (Salatiso)</h3>
-                        <ul class="task-list">
-                            <li><input type="checkbox" id="task1_salatiso" class="mr-2"><label for="task1_salatiso">Review Trust Deed Drafts (High)</label></li>
-                            <li><input type="checkbox" id="task2_salatiso" class="mr-2" checked><label for="task2_salatiso" class="line-through text-gray-400">Mentor Solo on Intranet V1 Styling</label></li>
-                            <li><input type="checkbox" id="task3_salatiso" class="mr-2"><label for="task3_salatiso">Approve Initial Operating Budget (Medium)</label></li>
-                            <li><input type="checkbox" id="task4_salatiso" class="mr-2"><label for="task4_salatiso">Schedule Q3 Family Council Meeting</label></li>
-                        </ul>
-                        <button class="mt-4 text-sm bg-blue-500 hover:bg-blue-600 text-white py-1.5 px-4 rounded-md">View All My Tasks</button>
-                    </div>
-                     <div class="dashboard-widget">
-                        <h3><i class="fas fa-chart-pie"></i>Quick Stats</h3>
-                        <p class="text-lg">Active Ventures: <span class="font-bold text-2xl text-blue-600">5</span></p>
-                        <p class="text-lg">Team Members: <span class="font-bold text-2xl text-blue-600">6</span></p>
-                        <p class="text-lg">Next Council Meeting: <span class="font-bold text-blue-600">June 10, 2025</span></p>
-                        <p class="text-lg">Total Training Modules: <span class="font-bold text-2xl text-blue-600">25</span></p>
-                    </div>
-                </div>
-
-                <div class="mt-10">
-                    <h3 class="text-xl font-semibold text-gray-700 mb-4"><i class="fas fa-stream"></i>Recent Activity Feed (Conceptual)</h3>
-                    <div class="bg-gray-50 p-5 rounded-lg max-h-64 overflow-y-auto text-sm space-y-2 border">
-                        <p><span class="font-semibold text-green-600">COMPLETED:</span> Visa M. submitted CIPC company registration. (1h ago)</p>
-                        <p><span class="font-semibold text-blue-600">UPDATED:</span> Tina M. added 'Brand Voice Guide' to Marketing Content Calendar. (3h ago)</p>
-                        <p><span class="font-semibold text-orange-600">ASSIGNED:</span> Salatiso M. to review Phase 2 budget by EOD May 23rd. (Yesterday)</p>
-                        <p><span class="font-semibold text-purple-600">COMMENT:</span> Kwakho M. on Sazi Life Curriculum: "Need input on Grade 2 isiXhosa module." (Yesterday)</p>
-                        <p><span class="font-semibold text-green-600">COMPLETED:</span> Solonwabo M. pushed Intranet styling updates to dev branch. (2 days ago)</p>
-                    </div>
+                    <button class="dashboard-carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="dashboard-carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="dashboard-carousel-dots"></div>
                 </div>
             </section>
 
             <section id="team" class="content-section">
-                <h2 class="section-title">Our Family Team & Structure</h2>
-                <div class="organogram mb-10">
-                    <div class="org-level">
-                        <div class="org-node" data-member="nozukile_org">
-                            <div class="name">Nozukile Mdeni</div> <div class="role">Chairperson, Family Council</div>
-                        </div>
-                    </div>
-                    <div class="org-connector"></div>
-                    <div class="org-level">
-                        <div class="org-node" data-member="salatiso_org">
-                           <div class="name">Salatiso L. Mdeni</div> <div class="role">CSOO</div>
-                        </div>
-                        <div class="org-node" data-member="visa_org">
-                            <div class="name">Visa Mdeni</div> <div class="role">CEO</div>
-                        </div>
-                    </div>
-                    <div class="org-level"> <div class="org-node ml-10" data-member="solonwabo_org"> <div class="name">Solonwabo M. Mdeni</div> <div class="role">Jr. Product Designer</div>
-                        </div>
-                    </div>
-                     <div class="org-level"> <div class="org-node ml-10" data-member="tina_org">
-                            <div class="name">Tina Mdeni</div> <div class="role">Head of Marketing</div>
-                        </div>
-                        <div class="org-node" data-member="kwakho_org">
-                            <div class="name">Kwakho Mdeni</div> <div class="role">Head of Ops & Curriculum</div>
-                        </div>
-                    </div>
-                </div>
-                <p class="text-center text-sm text-gray-600 mb-8">Click on a team member in the organogram or the carousel below for detailed profiles, training plans, and performance metrics.</p>
-
-                <div class="mfe-carousel-container">
-                    <div class="mfe-carousel-track">
-                        <div class="mfe-carousel-item">
-                            <div class="card-content">
-                                <img src="salatiso/assets/photos/team/salatiso_profile_carousel.jpg" alt="Salatiso Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Salatiso L. Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Chief Strategic & Operations Officer</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">The visionary architect, ensuring operational excellence and guiding our legacy.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="salatiso">View Details & Plan</button>
-                            </div>
-                        </div>
-                        <div class="mfe-carousel-item">
-                             <div class="card-content">
-                                <img src="salatiso/assets/photos/team/visa_profile_carousel.jpg" alt="Visa Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Visa Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Chief Executive Officer</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">Leading growth and company direction. Product Champion for SafetyHelp.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="visa">View Details & Plan</button>
-                            </div>
-                        </div>
-                        <div class="mfe-carousel-item">
-                             <div class="card-content">
-                                <img src="salatiso/assets/photos/team/tina_profile_carousel.jpg" alt="Tina Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Tina Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Head of Marketing & Comm.</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">Crafting our story and connecting with the world through engaging marketing.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="tina">View Details & Plan</button>
-                            </div>
-                        </div>
-                        <div class="mfe-carousel-item">
-                             <div class="card-content">
-                                <img src="salatiso/assets/photos/team/kwakho_profile_carousel.jpg" alt="Kwakho Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Kwakho Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Head of Ops & Curriculum</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">Ensuring smooth operations and developing impactful learning for Sazi Life.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="kwakho">View Details & Plan</button>
-                            </div>
-                        </div>
-                        <div class="mfe-carousel-item">
-                             <div class="card-content">
-                                <img src="salatiso/assets/photos/team/nozukile_profile_carousel.jpg" alt="Nozukile Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Nozukile Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Chairperson, Family Council</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">Our respected matriarch, guiding us with wisdom and upholding family values.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="nozukile">View Details & Plan</button>
-                            </div>
-                        </div>
-                        <div class="mfe-carousel-item">
-                             <div class="card-content">
-                                <img src="salatiso/assets/photos/team/solonwabo_profile_carousel.jpg" alt="Solonwabo Mdeni" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
-                                <h4 class="text-xl font-semibold text-blue-700 text-center">Solonwabo M. Mdeni</h4>
-                                <p class="text-gray-500 text-sm text-center mb-3">Jr. Product Designer & Tech Apprentice</p>
-                                <p class="text-gray-600 text-xs mb-4 flex-grow text-center">Innovating with technology and bringing fresh perspectives to our digital ventures.</p>
-                                <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="solonwabo">View Details & Plan</button>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="mfe-carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="mfe-carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
-                    <div class="carousel-dots mt-4"></div>
-                </div>
-            </section>
+                </section>
 
             <section id="ventures" class="content-section">
-                <h2 class="section-title">Our Family Ventures</h2>
-                <div class="resource-grid">
-                    <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/safetyhelp_logo.png" alt="SafetyHelp Logo" class="h-16 mb-3 mx-auto">
-                        <h4>SafetyHelp OHS Platform</h4>
-                        <p>AI-enhanced tools for OHS compliance, risk assessments, and safety management. Led by Visa Mdeni.</p>
-                        <a href="#" class="learn-more-btn">Explore SafetyHelp Details</a>
-                    </div>
-                    <div class="resource-card">
-                         <img src="salatiso/assets/photos/ventures/sazilife_logo.png" alt="Sazi Life Logo" class="h-16 mb-3 mx-auto">
-                        <h4>Sazi Life Education</h4>
-                        <p>Personalized learning resources and homeschooling support, fostering lifelong learning. Led by Kwakho Mdeni.</p>
-                        <a href="#" class="learn-more-btn">Discover Sazi Life</a>
-                    </div>
-                    <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/consulting_icon.png" alt="Consulting Icon" class="h-16 mb-3 mx-auto">
-                        <h4>Salatiso Mdeni Ventures</h4>
-                        <p>Expert OHS, Risk Management, Compliance, and Business Continuity consulting services.</p>
-                        <a href="#" class="learn-more-btn">Consulting Services</a>
-                    </div>
-                    <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/digital_icon.png" alt="Digital Icon" class="h-16 mb-3 mx-auto">
-                        <h4>Digital Creations & Publishing</h4>
-                        <p>Website design, e-learning content, and book publishing services. Showcasing our family's creative and tech skills.</p>
-                        <a href="#" class="learn-more-btn">Our Digital Portfolio</a>
-                    </div>
-                    <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/property_icon.png" alt="Property Icon" class="h-16 mb-3 mx-auto">
-                        <h4>Property Management</h4>
-                        <p>Management of family rental properties and Airbnb units, ensuring optimal returns and guest satisfaction.</p>
-                        <a href="#" class="learn-more-btn">View Properties</a>
-                    </div>
-                    <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/flamea_logo_icon.png" alt="Flamea Icon" class="h-16 mb-3 mx-auto">
-                        <h4>Flamea (Non-Profit Arm)</h4>
-                        <p>Promoting equality through education, fathers' & family rights advocacy, and community upliftment.</p>
-                        <a href="https://flamea.org/" target="_blank" class="learn-more-btn">Visit Flamea.org</a>
-                    </div>
-                </div>
-            </section>
+                </section>
 
             <section id="trainingHub" class="content-section">
-                <h2 class="section-title">Training & Development Hub</h2>
-                <p class="mb-6 text-gray-700">Welcome to the central hub for all Mdeni Family Enterprise training and development. Here you can find links to individual training plans, shared resources, and upcoming workshop schedules. Our goal is to empower every family member with the skills and knowledge to excel in their roles and contribute to our collective success.</p>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-user-graduate"></i>My Training Plan</h3>
-                        <p class="text-sm mb-3">Access your personalized training action plan, update your progress, and find relevant resources.</p>
-                        <button class="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded text-sm" onclick="openMyTrainingPlan()">Go to My Plan</button>
-                        </div>
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-chalkboard-teacher"></i>Master Training Overview</h3>
-                        <p class="text-sm mb-3">View the aggregated training progress for the entire team and identify upcoming group sessions.</p>
-                        <a href="#" class="learn-more-btn">View Master Plan</a>
-                    </div>
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-book"></i>Shared Learning Resources</h3>
-                        <ul class="text-sm space-y-1">
-                            <li><a href="#" class="text-blue-600 hover:underline">MFE Onboarding Guide V1.pdf</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Link to Free Digital Marketing Courses</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">OHS Act Summary Document</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Guide to Using Asana/Trello for PM</a></li>
-                        </ul>
-                    </div>
-                    <div class="dashboard-widget">
-                        <h3><i class="fas fa-calendar-alt"></i>Upcoming Workshops</h3>
-                        <p class="text-sm"><strong>June 15:</strong> Introduction to Financial Literacy for Small Business (All invited)</p>
-                        <p class="text-sm mt-1"><strong>July 5:</strong> Advanced Canva Techniques for Marketing (Tina, Solo)</p>
-                    </div>
-                </div>
-            </section>
+                </section>
 
             <section id="documents" class="content-section">
-                <h2 class="section-title">Company Documents & Resources</h2>
-                <p class="mb-6 text-gray-700">This is the central repository for all official Mdeni Family Enterprise documents. Please ensure you are familiar with relevant policies and procedures.</p>
-                 <div class="resource-grid">
-                    <div class="resource-card">
-                        <h4><i class="fas fa-file-alt mr-2"></i>Foundational Documents</h4>
-                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
-                            <li><a href="#" class="text-blue-600 hover:underline">Strategic Roadmap & Foundational Plan v3.0.pdf</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Company Registration Certificate (CoR 14.3).pdf</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Draft Trust Deed - Sazi Mdeni Family Trust.docx</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Flamea NPO Registration Application.pdf</a></li>
-                        </ul>
-                    </div>
-                     <div class="resource-card">
-                        <h4><i class="fas fa-briefcase mr-2"></i>Operational Documents</h4>
-                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
-                            <li><a href="#" class="text-blue-600 hover:underline">Q3 Operating Budget.xlsx</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Service Agreement Template.docx</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Marketing & Brand Guidelines V1.pdf</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Supplier Vetting Checklist.pdf</a></li>
-                        </ul>
-                    </div>
-                     <div class="resource-card">
-                        <h4><i class="fas fa-users mr-2"></i>HR & Team Documents</h4>
-                        <ul class="list-disc pl-5 text-sm mt-2 space-y-1">
-                            <li><a href="#" class="text-blue-600 hover:underline">Family Council Meeting Minutes (May 2025).pdf</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Performance Review Template.docx</a></li>
-                            <li><a href="#" class="text-blue-600 hover:underline">Work From Home Policy Guide.pdf</a></li>
-                        </ul>
-                    </div>
-                 </div>
-            </section>
+                </section>
+
+            <section id="governance" class="content-section">
+                </section>
         </main>
     </div>
 
     <footer>
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Mdeni Family Enterprise (Pty) Ltd. All Rights Reserved.</p>
-            <p>Internal Portal - Confidential. Built with <i class="fas fa-heart text-red-500"></i> by the Mdeni Family, for the Mdeni Family.</p>
-        </div>
-    </footer>
+        </footer>
 
     <div id="memberDetailsModal" class="modal">
         <div class="modal-content">
@@ -632,14 +381,16 @@
     </div>
 
     <script>
-        // Main Navigation Logic
-        const mainNavLinks = document.querySelectorAll('.main-nav-links a');
-        const contentSections = document.querySelectorAll('.content-display-area .content-section');
-        const memberDetailModal = document.getElementById('memberDetailsModal');
-        const modalBody = document.getElementById('modalBodyContent');
-        const closeModalButtons = memberDetailModal.querySelectorAll('.close-modal-btn');
+        // --- GLOBAL APP STATE (Conceptual - would be server-driven) ---
+        let currentLoggedInUser = 'salatiso'; // Assume Salatiso is logged in for now
+        const MFE_Data = { /* This would hold all dynamic data if not using a backend */ };
 
-        function showMainSection(targetId) {
+        // --- NAVIGATION & SECTION DISPLAY ---
+        const mainNavLinks = document.querySelectorAll('.main-nav-links a');
+        const contentSections = document.querySelectorAll('.content-display-area > .content-section'); // Direct children
+        const myProfileLink = document.getElementById('myProfileLink');
+
+        function showMainSection(targetId, skipHistoryPush) {
             contentSections.forEach(section => section.classList.remove('active'));
             mainNavLinks.forEach(link => {
                 link.classList.remove('active-main-nav');
@@ -649,23 +400,98 @@
             });
             const targetSection = document.getElementById(targetId);
             if (targetSection) {
-                // Scroll to top of content area before showing new section
+                if (targetId === 'dashboard') { // Special handling for full-page dashboard
+                    document.querySelector('.content-display-area').style.padding = '0';
+                    document.querySelector('.content-display-area').style.overflow = 'hidden';
+                } else {
+                    document.querySelector('.content-display-area').style.padding = '25px';
+                     document.querySelector('.content-display-area').style.overflow = 'auto';
+                }
                 document.querySelector('.content-display-area').scrollTop = 0;
                 targetSection.classList.add('active');
+
+                if (!skipHistoryPush) {
+                    // window.location.hash = targetId; // Consider implications for single-page app state
+                }
+                 // If team section is activated, ensure carousel is populated and initialized
+                if (targetId === 'team') {
+                    populateAndInitTeamCarousel();
+                }
             }
         }
 
         mainNavLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
-                showMainSection(link.dataset.target);
+                const targetId = link.dataset.target;
+                showMainSection(targetId, false);
             });
         });
 
-        // MFE Carousel Logic (Team Section)
+        if (myProfileLink) {
+            myProfileLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                showMainSection('team', false);
+                setTimeout(() => populateModal(currentLoggedInUser), 50);
+            });
+        }
+
+        // --- DASHBOARD CAROUSEL ---
+        const dashboardCarouselContainer = document.querySelector('.dashboard-carousel-container');
+        if (dashboardCarouselContainer) {
+            const track = dashboardCarouselContainer.querySelector('.dashboard-carousel-track');
+            const slides = Array.from(track.children);
+            const nextButton = dashboardCarouselContainer.querySelector('.next-btn');
+            const prevButton = dashboardCarouselContainer.querySelector('.prev-btn');
+            const dotsContainer = dashboardCarouselContainer.querySelector('.dashboard-carousel-dots');
+            let DcurrentIndex = 0;
+
+            if (slides.length > 0) {
+                if (dotsContainer) {
+                    dotsContainer.innerHTML = '';
+                    slides.forEach((_, i) => {
+                        const dot = document.createElement('button');
+                        dot.classList.add('dashboard-carousel-dot');
+                        dot.addEventListener('click', () => { DcurrentIndex = i; DupdateCarousel(); });
+                        dotsContainer.appendChild(dot);
+                    });
+                }
+            }
+
+            function DupdateActiveDot() {
+                if (dotsContainer && slides.length > 0) {
+                    Array.from(dotsContainer.children).forEach((dot, i) => {
+                        dot.classList.toggle('active', i === DcurrentIndex);
+                    });
+                }
+            }
+
+            function DupdateCarousel() {
+                if (slides.length > 0) {
+                    const slideWidth = slides[0].offsetWidth; // Use offsetWidth for accurate width including padding/border
+                    track.style.transform = `translateX(-${DcurrentIndex * slideWidth}px)`;
+                    DupdateActiveDot();
+                }
+            }
+
+            if (nextButton) nextButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex + 1) % slides.length; DupdateCarousel(); });
+            if (prevButton) prevButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex - 1 + slides.length) % slides.length; DupdateCarousel(); });
+            
+            let DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000); // Slower for dashboard
+            dashboardCarouselContainer.addEventListener('mouseenter', () => clearInterval(DautoSlideInterval));
+            dashboardCarouselContainer.addEventListener('mouseleave', () => {
+                clearInterval(DautoSlideInterval);
+                DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000);
+            });
+
+            window.addEventListener('resize', DupdateCarousel);
+            if (slides.length > 0) DupdateCarousel(); // Initial call
+        }
+
+        // --- TEAM CAROUSEL (MFE) ---
         function setupCarousel(carouselElement) {
             const track = carouselElement.querySelector('.mfe-carousel-track');
-            if (!track) return; // Exit if track not found
+            if (!track) return;
             const items = Array.from(track.children);
             const nextButton = carouselElement.querySelector('.next-btn');
             const prevButton = carouselElement.querySelector('.prev-btn');
@@ -675,18 +501,14 @@
 
             let itemWidth = items[0].getBoundingClientRect().width;
             let currentIndex = 0;
-            const itemsPerView = 1; // For "no scroll" feel within carousel view
+            const itemsPerView = 1;
 
-            // Create dots
             if (dotsContainer) {
-                dotsContainer.innerHTML = ''; // Clear existing dots
+                dotsContainer.innerHTML = '';
                 items.forEach((_, i) => {
                     const dot = document.createElement('button');
                     dot.classList.add('carousel-dot');
-                    dot.addEventListener('click', () => {
-                        currentIndex = i;
-                        updateCarousel();
-                    });
+                    dot.addEventListener('click', () => { currentIndex = i; updateCarouselDisplay(); });
                     dotsContainer.appendChild(dot);
                 });
             }
@@ -699,178 +521,553 @@
                 }
             }
 
-            function updateCarousel() {
+            function updateCarouselDisplay() {
                 itemWidth = items[0].getBoundingClientRect().width / itemsPerView;
                 track.style.transform = `translateX(-${currentIndex * itemWidth * itemsPerView}px)`;
                 updateActiveDot();
             }
 
-            if (nextButton) {
-                nextButton.addEventListener('click', () => {
-                    currentIndex = (currentIndex + 1) % items.length;
-                    updateCarousel();
-                });
-            }
-            if (prevButton) {
-                prevButton.addEventListener('click', () => {
-                    currentIndex = (currentIndex - 1 + items.length) % items.length;
-                    updateCarousel();
-                });
-            }
+            if (nextButton) nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % items.length; updateCarouselDisplay(); });
+            if (prevButton) prevButton.addEventListener('click', () => { currentIndex = (currentIndex - 1 + items.length) % items.length; updateCarouselDisplay(); });
             
-            let autoSlideInterval = setInterval(() => {
-                if (nextButton) nextButton.click();
-            }, 7000);
-
+            let autoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 7000);
             carouselElement.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
             carouselElement.addEventListener('mouseleave', () => {
                  clearInterval(autoSlideInterval);
-                 autoSlideInterval = setInterval(() => {
-                    if (nextButton) nextButton.click();
-                }, 7000);
+                 autoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 7000);
             });
 
-            window.addEventListener('resize', updateCarousel);
-            updateCarousel(); // Initial setup
+            window.addEventListener('resize', updateCarouselDisplay);
+            updateCarouselDisplay();
         }
 
-        // Setup for the team carousel specifically
-        const teamCarouselElement = document.querySelector('#team .mfe-carousel-container');
-        if (teamCarouselElement) {
-            setupCarousel(teamCarouselElement);
-        }
+        // --- TEAM MEMBER DATA & MODAL ---
+        const memberDetailModal = document.getElementById('memberDetailsModal');
+        const modalBody = document.getElementById('modalBodyContent');
+        const closeModalButtons = memberDetailModal.querySelectorAll('.close-modal-btn');
 
-
-        // Team Member Data (Fully Populated)
         const teamMemberData = {
             salatiso: {
                 name: "Salatiso L. Mdeni", role: "Chief Strategic & Operations Officer (CSOO)",
                 profileImage: "salatiso/assets/photos/team/salatiso_profile_large.jpg",
-                profile: `A highly experienced OHS and Risk Management expert with over 20 years in diverse sectors. A proven entrepreneur (SafetyHelp, Sazi, Flamea), published author, and dedicated father. Salatiso brings deep industry knowledge, a strategic mindset, technological acumen, and a passion for self-sufficiency and education. His resilience, shaped by his Xhosa upbringing in Transkei and commitment to lifelong learning, makes him the foundational pillar for the company's operational integrity and innovation. He is the "business behind the business," ensuring robust systems and nurturing growth. His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli.`,
-                responsibilities: [
-                    "Overall operational excellence and strategic direction",
-                    "Product development and innovation across all ventures",
-                    "Risk management, compliance, and legal/administrative oversight",
-                    "Mentoring family members and the next generation",
-                    "Incubating new ventures and ensuring alignment with family values"
-                ],
-                trainingPlan: [
-                    { task: "Mentor Team Leads (Visa, Tina, Kwakho, Solo)", month: "Ongoing", week: "Weekly Check-ins", cost: 0, status: "in-progress", deliverable: "Mentorship Logs/Feedback" },
-                    { task: "Advanced Course: AI in Business Strategy & Automation", month: 4, week: "Self-paced", cost: 5000, status: "not-started", deliverable: "Course Certificate & Implementation Plan" },
-                    { task: "Workshop: Intergenerational Wealth & Trust Management", month: 6, week: "2-day Workshop", cost: 3500, status: "not-started", deliverable: "Workshop Certificate & Notes" },
-                    { task: "Research: Emerging Technologies for OHS & EdTech", month: "Ongoing", week: "5 hrs/week", cost: 0, status: "in-progress", deliverable: "Quarterly Tech Brief" }
-                ],
-                performanceKPIs: ["Strategic Goal Achievement Rate", "Successful New Product/Service Launches", "Team Skill Development & Performance", "Operational Efficiency Gains", "Profitability of Ventures"]
+                profile: `A highly experienced OHS and Risk Management expert with over 20 years in diverse sectors... His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli. Key Deadline: Integrate Salatiso Chatbot on safetyfirst.help staging by May 24, 2025.`,
+                responsibilities: ["Overall operational excellence", "Product development", "Risk management & Compliance", "Mentoring next generation", "Appoints Chairperson & CEO (initial)"],
+                padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Fully navigate Intranet and familiarize with MFE vision, structure, policies.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Role Profile & Performance Plan.", status: "not-started", signedOff: null, estimatedTime: "1h" },
+                        { id: "induction", task: "Complete General Company Induction module.", status: "not-started", signedOff: null, estimatedTime: "3h" }
+                    ],
+                    coreDeliverables: [
+                        { task: "Uphold MFE Family Values & Ethical Conduct", weight: 20, score: 0, notes: "Non-negotiable.", optOut: false },
+                        { task: "Strategic oversight and guidance for all ventures", weight: 30, score: 0, notes: "Ensure alignment with long-term vision.", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Integrate Salatiso Chatbot on SafetyHelp Staging", deadline: "May 24, 2025", weight: 15, score: 0, status: "not-started", estimatedTime: "8h", optOut: false },
+                        { task: "Finalize Trust Deed research and brief legal counsel", deadline: "May 30, 2025", weight: 10, score: 0, status: "not-started", estimatedTime: "10h", optOut: false },
+                        { task: "Approve Q3 Operating Budget and Resource Allocation Plan", deadline: "June 15, 2025", weight: 10, score: 0, status: "not-started", estimatedTime: "5h", optOut: false },
+                        { task: "Mentor CEO and Solonwabo weekly", deadline: "Ongoing", weight: 10, score: 0, status: "in-progress", estimatedTime: "2h/week", optOut: false },
+                    ],
+                    userDefinedDeliverables: [ { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
+                    trainingPlan: [
+                        { task: "Mentor Team Leads (Visa, Tina, Kwakho, Solo)", month: "Ongoing", week: "Weekly Check-ins", cost: 0, status: "in-progress", deliverable: "Mentorship Logs/Feedback", estimatedTime: "2h/week" },
+                        { task: "Advanced Course: AI in Business Strategy & Automation", month: 4, week: "Self-paced", cost: 5000, status: "not-started", deliverable: "Course Certificate & Implementation Plan", estimatedTime: "40h" },
+                    ]
+                },
+                performanceKPIs: ["Strategic Goal Achievement Rate", "Successful New Product/Service Launches (SafetyHelp Chatbot)", "Team Skill Development & Performance", "Operational Efficiency Gains", "Profitability of Ventures"],
+                nextLevelEligibility: "N/A (Founder, CSOO)"
             },
             visa: {
                 name: "Visa Mdeni", role: "Chief Executive Officer (CEO)",
                 profileImage: "salatiso/assets/photos/team/visa_profile_large.jpg",
-                profile: `A natural leader with strong interpersonal and communication skills, making her ideal for representing the Mdeni Family Enterprise. Visa possesses the drive and vision to steer the enterprise forward. Her commitment to the family and understanding of the founder's vision is crucial in building a cohesive and successful business. As CEO, she is the public face and responsible for overall company direction. Product Champion for SafetyHelp.`,
-                responsibilities: [
-                    "Leading company registration and initial setup",
-                    "Overall company direction and strategic execution",
-                    "Stakeholder management and business development",
-                    "Brand ambassadorship and public relations",
-                    "Overseeing performance of all operational divisions",
-                    "Driving growth for SafetyHelp"
-                ],
-                trainingPlan: [
-                    { task: "Finalize Company Name & CIPC Name Reservation", month: 1, week: 1, cost: 50, status: "not-started", deliverable: "Name Reservation Certificate" },
-                    { task: "CIPC Company Registration (Pty) Ltd", month: 1, week: 2, cost: 125, status: "not-started", deliverable: "Company Registration Docs (CoR 14.3)" },
-                    { task: "Research Business Bank Accounts & FICA", month: 1, week: 3, cost: 0, status: "not-started", deliverable: "Comparison sheet of 3 banks" },
-                    { task: "Open Business Bank Account", month: 1, week: 4, cost: 100, status: "not-started", deliverable: "Account Open Confirmation" },
-                    { task: "SARS eFiling Registration (Company Income Tax, Public Officer Appt.)", month: 2, week: "1-2", cost: 0, status: "not-started", deliverable: "SARS Registration Numbers" },
-                    { task: "NPO Registration Process Research for Flamea", month: 2, week: "3-4", cost: 0, status: "not-started", deliverable: "Summary of NPO Reg. options & steps" },
-                    { task: "Alison.com: Diploma in Business Management & Entrepreneurship (Module 1-2)", month: 3, week: "1-2", cost: 0, status: "not-started", deliverable: "Module 1 & 2 Completion Notes/Quiz Results" },
-                    { task: "SafetyHelp Platform Deep Dive & Basic OHS Principles (with Salatiso)", month: 3, week: "3-4", cost: 0, status: "not-started", deliverable: "Presentation of SafetyHelp strategy to Salatiso" },
-                    { task: "Coursera: Financial Acumen for Non-Financial Managers (Audit)", month: 4, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Course Notes & Key Learnings Summary" }
-                ],
-                performanceKPIs: ["Successful Company & NPO Registration", "SafetyHelp User Growth & Revenue", "Positive Stakeholder Feedback", "Effective Team Leadership & Motivation", "Achievement of Q1/Q2 Financial Targets"]
+                profile: `Natural leader... Product Champion for SafetyHelp. Current job at Meril SA (D&B) from 7am-4pm daily. Target: Replace R15,000/month income by Dec 2025. Accountable for overall company performance and appointments of Tina & Kwakho.`,
+                responsibilities: ["Leading company registration", "Overall company direction", "Stakeholder management", "Driving growth for SafetyHelp", "Appointing team members (Tina, Kwakho) with Chairperson support", "Quarterly performance reviews for direct reports"],
+                 padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Fully navigate Intranet and familiarize with MFE vision, structure, policies.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Role Profile & Performance Plan.", status: "not-started", signedOff: null, estimatedTime: "1h" },
+                        { id: "induction", task: "Complete General Company Induction module.", status: "not-started", signedOff: null, estimatedTime: "3h" }
+                    ],
+                    coreDeliverables: [
+                        { task: "Achieve Company Registration & Bank Account Setup by target date", weight: 25, score: 0, notes: "Critical path for operations.", optOut: false },
+                        { task: "Develop and Present Q3 Strategic Plan to CSOO & Council", weight: 20, score: 0, notes: "Includes SafetyHelp launch plan.", optOut: false },
+                        { task: "Uphold MFE Family Values & Ethical Conduct in all dealings", weight: 15, score: 0, notes: "", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Finalize Company Name & CIPC Name Reservation", deadline: "Month 1, Week 1", weight: 5, score: 0, status: "not-started", estimatedTime: "4h", optOut: false },
+                        { task: "Achieve SafetyHelp Launch (Construction Module & Chatbot)", deadline: "June 1, 2025", weight: 20, score: 0, status: "not-started", estimatedTime: "Dedicated Focus", optOut: false },
+                        { task: "Onboard Tina & Kwakho, finalize their PADPs", deadline: "Month 1, Week 3", weight: 10, score: 0, status: "not-started", estimatedTime: "6h", optOut: false },
+                        { task: "Secure first paying client for SafetyHelp", deadline: "Month 3", weight: 15, score: 0, status: "not-started", estimatedTime: "Ongoing", optOut: true }, // Example opt-outable
+                    ],
+                    userDefinedDeliverables: [ { task: "Explore partnership with 2 local construction firms", weight: 10, score: 0, estimatedTime: "10h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
+                    trainingPlan: [
+                        { task: "Alison.com: Diploma in Business Management & Entrepreneurship (Complete)", month: "1-3", week: "Self-paced", cost: 0, status: "not-started", deliverable: "Certificate", estimatedTime: "20h" },
+                        { task: "SafetyHelp Platform Deep Dive & OHS Act Overview (with Salatiso)", month: 1, week: "3-4", cost: 0, status: "not-started", deliverable: "Presentation of SafetyHelp GTM strategy", estimatedTime: "10h" },
+                        { task: "Course: Effective Leadership & Team Management", month: 4, week: "Self-paced", cost: 800, status: "not-started", deliverable: "Certificate", estimatedTime: "15h"}
+                    ]
+                },
+                performanceKPIs: ["Successful Company & NPO Registration", "SafetyHelp User Growth & Revenue by Q4 2025", "Positive Stakeholder Feedback", "Effective Team Leadership & Motivation (Quarterly Review Scores)", "Progress to R15k Income Replacement Target"],
+                nextLevelEligibility: "Increased autonomy, potential for board seat on subsidiary entities, higher profit share."
             },
             tina: {
-                name: "Tina Mdeni", role: "Head of Marketing & Communications",
+                name: "Tina Mdeni", role: "Head of Marketing & Communications, Tenant/Supplier Mgt.",
                 profileImage: "salatiso/assets/photos/team/tina_profile_large.jpg",
-                profile: `Tina has a creative flair and a keen understanding of modern communication channels. She is adept at connecting with diverse audiences and can translate the company's offerings into compelling narratives. Her intuitive understanding of market trends and her passion for the family's success will drive brand visibility and customer engagement. She works from home, managing all promotional activities.`,
-                responsibilities: [
-                    "Developing and executing marketing strategies for all MFE ventures",
-                    "Managing social media presence (content creation, scheduling, engagement)",
-                    "Public relations and media outreach (as needed)",
-                    "Brand promotion and storytelling",
-                    "Analyzing marketing campaign performance"
-                ],
-                trainingPlan: [
-                    { task: "Google Digital Garage: 'Fundamentals of Digital Marketing' (Modules 1-7)", month: 1, week: "1-2", cost: 0, status: "not-started", deliverable: "Notes on Modules 1-7" },
-                    { task: "Canva Design School: Beginners Challenge & Social Media Mastery Course", month: 1, week: "3-4", cost: 0, status: "not-started", deliverable: "5 sample social media graphics for MFE ventures" },
-                    { task: "HubSpot Academy: 'Social Media Marketing Course' (Modules 1-3)", month: 2, week: "1-2", cost: 0, status: "not-started", deliverable: "Notes on Modules 1-3" },
-                    { task: "Develop Content Calendar Template & Draft 1 week of posts for SafetyHelp", month: 2, week: "3-4", cost: 0, status: "not-started", deliverable: "Draft Content Calendar (Google Sheets/Trello)" },
-                    { task: "Moz: 'Beginner's Guide to SEO' (Chapters 1-3)", month: 3, week: "1-2", cost: 0, status: "not-started", deliverable: "Summary of key SEO concepts learned" },
-                    { task: "Analyze social media of 3 competitors/similar family businesses", month: 3, week: "3-4", cost: 0, status: "not-started", deliverable: "Competitor analysis report (1-page summary)" },
-                    { task: "Google Analytics Academy: Google Analytics for Beginners", month: 4, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Course Certificate" }
-                ],
-                performanceKPIs: ["Growth in Social Media Followers & Engagement", "Website Traffic from Marketing Campaigns", "Quality & Consistency of Brand Messaging", "Completion of Marketing Training Milestones", "Positive Feedback on Marketing Materials"]
+                profile: `Creative flair... Responsible for marketing, social media, and tenant/supplier management (accountable to CEO). Initial responsibilities slightly broader to leverage existing skills. Starts with no shares, earns based on performance (6-24m for 5%, then next 36m for further 5% from Nozukile's trust).`,
+                responsibilities: ["Marketing strategies for all ventures", "Social media management", "Tenant & Supplier liaison/management", "Brand promotion & content creation"],
+                padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Fully navigate Intranet and familiarize with MFE vision, structure, policies.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Role Profile & Performance Plan.", status: "not-started", signedOff: null, estimatedTime: "1h" },
+                        { id: "induction", task: "Complete General Company Induction module.", status: "not-started", signedOff: null, estimatedTime: "3h" }
+                    ],
+                    coreDeliverables: [
+                        { task: "Develop & implement marketing calendar for Q3", weight: 20, score: 0, notes: "", optOut: false },
+                        { task: "Maintain positive tenant relations for 2 rental units", weight: 15, score: 0, notes: "", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Establish Supplier Database (min 10 vetted suppliers for key services)", deadline: "Month 2, Week 4", weight: 15, score: 0, status: "not-started", estimatedTime: "12h", optOut: false },
+                        { task: "Launch MFE Social Media Presence (Facebook, LinkedIn) with initial content strategy", deadline: "Month 2, Week 2", weight: 15, score: 0, status: "not-started", estimatedTime: "10h", optOut: false },
+                        { task: "Create marketing brochure for SafetyHelp (Construction Module)", deadline: "Month 1, Week 4", weight: 10, score: 0, status: "not-started", estimatedTime: "8h", optOut: false },
+                        { task: "Resolve tenant issue at Property A within 48 hours", deadline: "As Arises", weight: 10, score: 0, status: "ongoing", estimatedTime: "2h/issue", optOut: false },
+                    ],
+                    userDefinedDeliverables: [ { task: "Learn basic video editing for social media shorts", weight: 5, score: 0, estimatedTime: "15h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
+                    trainingPlan: [
+                        { task: "Google Digital Garage: 'Fundamentals of Digital Marketing' (Complete)", month: 1, week: "1-4", cost: 0, status: "not-started", deliverable: "Certificate", estimatedTime: "40h" },
+                        { task: "HubSpot Academy: 'Social Media Marketing Course' (Complete)", month: 2, week: "1-4", cost: 0, status: "not-started", deliverable: "Certificate", estimatedTime: "6h" },
+                        { task: "Short Course: Basics of Property/Tenant Management (Online)", month: 3, week: "Self-paced", cost: 300, status: "not-started", deliverable: "Completion Cert/Notes", estimatedTime: "10h"},
+                        { task: "Workshop: Effective Supplier Negotiation", month: 4, week: "1-day", cost: 500, status: "not-started", deliverable: "Attendance & Key Learnings", estimatedTime: "8h"}
+                    ]
+                },
+                performanceKPIs: ["Growth in Social Media Followers & Engagement Rate", "Positive Tenant Feedback Score (>4/5)", "Cost Savings/Efficiency in Supplier Management", "Share Vesting Milestones Met (documented quarterly)", "Timely resolution of tenant issues"],
+                nextLevelEligibility: "Marketing Manager, Senior Marketing Strategist, potential for leading a property management division. Eligibility for first share tranche (up to 5%) after 6-24 months based on sustained high performance."
             },
-            kwakho: {
+             kwakho: {
                 name: "Kwakho Mdeni", role: "Head of Operations Support & Curriculum Development",
                 profileImage: "salatiso/assets/photos/team/kwakho_profile_large.jpg",
-                profile: `Kwakho is meticulous, resourceful, and possesses excellent organizational skills. Her ability to manage multiple tasks efficiently and her knack for finding optimal solutions will be key to smooth operations. Her linguistic skills (including isiXhosa) and cultural sensitivity are assets for translations and curriculum development for Sazi Life. She works from home, supporting all ventures. Product Champion for Sazi Life.`,
-                responsibilities: [
-                    "Providing vital background operational support for all ventures",
-                    "Multilingual translations (English to isiXhosa and vice-versa initially)",
-                    "Sourcing suppliers and managing vendor relationships",
-                    "Curriculum review, compilation, and development for Sazi Life",
-                    "General administrative support and document management"
-                ],
-                trainingPlan: [
-                    { task: "OER Commons & UNESCO: Explore 5 curriculum examples for primary education (focus on language & heritage)", month: 1, week: "1-2", cost: 0, status: "not-started", deliverable: "Notes on curriculum structures & culturally relevant content" },
-                    { task: "Google Workspace Learning Center: Docs, Sheets, Drive & Slides Essentials Training", month: 1, week: "3-4", cost: 0, status: "not-started", deliverable: "Completion of relevant modules" },
-                    { task: "Alison.com: Diploma in Educational Psychology (Select modules on child development & learning theories)", month: 2, week: "1-2", cost: 0, status: "not-started", deliverable: "Summary of 2 learning theories applicable to Sazi Life" },
-                    { task: "Review existing Sazi Life materials & draft initial Sazi Life Curriculum Framework V1 (isiXhosa focus)", month: 2, week: "3-4", cost: 0, status: "not-started", deliverable: "Draft Sazi Life Curriculum Framework V1 Document" },
-                    { task: "Asana or Trello: Basic Project Management Tutorials & Setup", month: 3, week: "1-2", cost: 0, status: "not-started", deliverable: "Setup a sample project board for Sazi Life curriculum development" },
-                    { task: "Research 3 free translation tools; translate 1 page of MFE content (Eng to Xhosa) using best tool", month: 3, week: "3-4", cost: 0, status: "not-started", deliverable: "Translated page & tool comparison notes" },
-                    { task: "Introduction to Supplier Negotiation (Online Article/Short Course)", month: 4, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Notes on 3 negotiation tactics" }
-                ],
-                performanceKPIs: ["Quality & Timeliness of Sazi Life Curriculum Modules", "Accuracy & Efficiency of Translations", "Effectiveness of Admin Support", "Cost Savings from Supplier Sourcing (if applicable)", "Positive Feedback from Team on Ops Support"]
+                profile: `Meticulous, resourceful... Product Champion for Sazi Life. Starts with no shares, earns based on performance (6-24m for 5%, then next 36m for further 5% from Nozukile's trust). Works from her own home, leveraging online tools for collaboration.`,
+                responsibilities: ["Ops support for all ventures", "Multilingual translations (isiXhosa focus)", "Sazi Life Curriculum Dev.", "Admin & Document Mgt.", "Meeting minutes and action tracking"],
+                 padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Fully navigate Intranet and familiarize with MFE vision, structure, policies.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Role Profile & Performance Plan.", status: "not-started", signedOff: null, estimatedTime: "1h" },
+                        { id: "induction", task: "Complete General Company Induction module.", status: "not-started", signedOff: null, estimatedTime: "3h" }
+                    ],
+                    coreDeliverables: [
+                        { task: "Develop Sazi Life Curriculum Framework (Phase 1: Grades R-3 isiXhosa)", weight: 25, score: 0, notes: "", optOut: false },
+                        { task: "Ensure accurate and timely meeting minutes & action item distribution", weight: 15, score: 0, notes: "", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Establish Centralized Document Management System (Google Drive/Intranet)", deadline: "Month 2, Week 2", weight: 15, score: 0, status: "not-started", estimatedTime: "10h", optOut: false },
+                        { task: "Translate MFE Vision & Mission into isiXhosa for Intranet", deadline: "Month 1, Week 3", weight: 10, score: 0, status: "not-started", estimatedTime: "6h", optOut: false },
+                        { task: "Compile and review 2 modules for Sazi Life Grade R curriculum", deadline: "Month 3, Week 4", weight: 15, score: 0, status: "not-started", estimatedTime: "20h", optOut: false },
+                    ],
+                    userDefinedDeliverables: [ { task: "Research and propose 3 EdTech tools for Sazi Life", weight: 10, score: 0, estimatedTime: "12h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
+                    trainingPlan: [
+                        { task: "Alison.com: Diploma in Educational Psychology (Complete relevant modules on curriculum & child dev)", month: "1-2", week: "Self-paced", cost: 0, status: "not-started", deliverable: "Module summaries", estimatedTime: "20h" },
+                        { task: "Asana or Trello: Advanced Project Management Course (Online)", month: 3, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Certificate / Project Board Demo for Sazi Life", estimatedTime: "15h" },
+                        { task: "Course: Professional Translation Techniques (isiXhosa focus if available)", month: 4, week: "Self-paced", cost: 400, status: "not-started", deliverable: "Completion Cert/Notes", estimatedTime: "25h"},
+                        { task: "Workshop: Effective Remote Collaboration Tools & Practices", month: 1, week: "2h online", cost: 0, status: "not-started", deliverable: "Attendance & key takeaways", estimatedTime: "2h"}
+                    ]
+                },
+                performanceKPIs: ["Quality & Timeliness of Sazi Life Curriculum Modules", "Accuracy & Efficiency of Translations and Admin Support", "Effective Document Management", "Share Vesting Milestones Met (documented quarterly)", "Positive team feedback on operational support"],
+                nextLevelEligibility: "Operations Manager, Senior Curriculum Developer, potential for leading Sazi Life education venture. Eligibility for first share tranche (up to 5%) after 6-24 months based on sustained high performance."
             },
             nozukile: {
                 name: "Nozukile Mdeni", role: "Chairperson of the Family Council (Non-Executive Director - Advisory)",
                 profileImage: "salatiso/assets/photos/team/nozukile_profile_large.jpg",
-                profile: `As the matriarch, Nozukile embodies wisdom, stability, and a deep understanding of family dynamics and Xhosa traditions. Her life experience and commitment to her family's well-being make her the ideal guardian of the company's ethical foundation and cultural heritage. Her role is to ensure that as the business grows, its core purpose of family unity, legacy, and community upliftment remains paramount.`,
-                responsibilities: [
-                    "Providing high-level oversight and guidance at Family Council meetings",
-                    "Ensuring the company operates in alignment with family values and ethics",
-                    "Safeguarding the interests of all shareholders, particularly the trusts for grandchildren",
-                    "Acting as a moral compass and mediator for family business matters",
-                    "Championing the integration of Xhosa culture and heritage within the MFE"
-                ],
-                trainingPlan: [
-                    { task: "Attend Quarterly Family Council Meetings", month: "Quarterly", week: "N/A", cost: 0, status: "ongoing", deliverable: "Active Participation" },
-                    { task: "Review Key Strategic Documents prior to Council Meetings", month: "As needed", week: "N/A", cost: 0, status: "ongoing", deliverable: "Informed input during meetings" },
-                    { task: "Short Course/Reading: Basics of Corporate Governance for Family Businesses (Optional)", month: 6, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Personal Notes/Understanding" }
-                ],
-                performanceKPIs: ["Active and insightful participation in Family Council", "Upholding of Family Values within business decisions", "Positive influence on family harmony related to business", "Guidance on cultural integration initiatives"]
+                profile: `As the matriarch, Nozukile embodies wisdom, stability, and a deep understanding of family dynamics and Xhosa traditions... Her role is to ensure that as the business grows, its core purpose of family unity, legacy, and community upliftment remains paramount. She holds 20% of company shares in The Mdeni Grandchildren's Legacy Trust, from which Tina and Kwakho's performance-based shares will be allocated.`,
+                responsibilities: ["Providing high-level oversight at Family Council meetings", "Ensuring alignment with family values and ethics", "Safeguarding shareholder interests (trusts)", "Moral compass & mediator", "Championing Xhosa culture integration"],
+                 padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Review Intranet overview and key governance documents.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Chairperson Role Outline.", status: "not-started", signedOff: null, estimatedTime: "0.5h" },
+                    ],
+                    coreDeliverables: [
+                        { task: "Chair quarterly Family Council meetings effectively", weight: 40, score: 0, notes: "", optOut: false },
+                        { task: "Provide guidance on ethical dilemmas or family business conflicts", weight: 30, score: 0, notes: "", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Review and approve transfer of shares to Tina/Kwakho upon CEO/CSOO certification of performance", deadline: "As per vesting schedule", weight: 20, score: 0, status: "ongoing", estimatedTime: "1h/instance", optOut: false },
+                        { task: "Advise on one cultural integration initiative per year", deadline: "Annual", weight: 10, score: 0, status: "not-started", estimatedTime: "5h/year", optOut: false },
+                    ],
+                    userDefinedDeliverables: [], // Typically non-executive roles might not have these unless specific projects are taken on
+                    trainingPlan: [
+                        { task: "Attend Quarterly Family Council Meetings", month: "Quarterly", week: "N/A", cost: 0, status: "ongoing", deliverable: "Active Participation & Minutes Review", estimatedTime: "2h/meeting" },
+                        { task: "Reading: 'Governance for Family Enterprises' (summary provided by Salatiso)", month: 2, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Discussion points for next council", estimatedTime: "4h" }
+                    ]
+                },
+                performanceKPIs: ["Active and insightful participation in Family Council", "Upholding of Family Values within business decisions", "Positive influence on family harmony related to business", "Guidance on cultural integration initiatives", "Timely execution of trust-related duties for share allocation"],
+                nextLevelEligibility: "Continued advisory role, potential for mentorship roles within the family."
             },
             solonwabo: {
-                name: "Solonwabo Milile Mdeni", role: "Junior Product Designer & Technical Apprentice",
+                name: "Solonwabo Milile Mdeni", role: "Jr. Product Designer & Technical Apprentice",
                 profileImage: "salatiso/assets/photos/team/solonwabo_profile_large.jpg",
-                profile: `A talented and self-motivated young web developer with a clear aptitude for design and technology, as showcased on his personal site solonwabo.art. Solo is eager to learn and contribute, bringing fresh perspectives and modern technical approaches to the company's digital ventures, working under Salatiso's mentorship.`,
-                responsibilities: [
-                    "Assisting with backend product design for digital platforms",
-                    "Website development and maintenance (including this Intranet)",
-                    "Providing technical expertise and support for digital ventures",
-                    "Learning and applying new technologies relevant to MFE projects",
-                    "Collaborating with Salatiso on UI/UX improvements"
-                ],
-                trainingPlan: [
-                    { task: "FreeCodeCamp: Responsive Web Design Certification (Complete 50%)", month: 1, week: "1-4", cost: 0, status: "in-progress", deliverable: "Link to FCC profile showing progress" },
-                    { task: "FreeCodeCamp: Responsive Web Design Certification (Complete 100%)", month: 2, week: "1-4", cost: 0, status: "not-started", deliverable: "Certificate & Deployed Tribute Page project" },
-                    { task: "GitHub Learning Lab: Introduction to GitHub & Basic Git Commands", month: 3, week: "1-2", cost: 0, status: "not-started", deliverable: "Created MFE Intranet repository on GitHub & pushed initial code" },
-                    { task: "Figma Learn: 'Figma for Beginners' series (UI Design Fundamentals)", month: 3, week: "3-4", cost: 0, status: "not-started", deliverable: "3 simple UI mockups for an MFE Intranet feature (e.g., new widget)" },
-                    { task: "MDN Web Docs: JavaScript Basics (Guided Learning Path)", month: 4, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Completed 3 small JS exercises/projects" },
-                    { task: "Develop a new interactive feature for MFE Intranet (e.g., dynamic document list)", month: 5, week: "Project", cost: 0, status: "not-started", deliverable: "Deployed feature on dev branch" }
-                ],
-                performanceKPIs: ["Completion of Technical Training Modules", "Quality of Code and Design Contributions", "Problem-Solving Ability in Technical Tasks", "Timeliness of Intranet Updates & Support", "Proactive Learning and Skill Application"]
+                profile: `A talented and self-motivated young web developer... Accountable to CSOO (Salatiso) for technical mentorship and quality; responsible to CEO (Visa) for project deliverables and operational alignment.`,
+                responsibilities: ["Assisting with product design", "Website development (Intranet, ventures)", "Technical support for digital ventures", "Learning new technologies"],
+                padp: {
+                    commonActions: [
+                        { id: "familiarize", task: "Fully navigate Intranet and familiarize with MFE vision, structure, policies.", status: "not-started", signedOff: null, estimatedTime: "2h" },
+                        { id: "acceptRole", task: "Review and Electronically Accept Role Profile & Performance Plan.", status: "not-started", signedOff: null, estimatedTime: "1h" },
+                        { id: "induction", task: "Complete General Company Induction module.", status: "not-started", signedOff: null, estimatedTime: "3h" }
+                    ],
+                    coreDeliverables: [
+                        { task: "Deliver assigned technical tasks on time and to quality standards", weight: 30, score: 0, notes: "", optOut: false },
+                        { task: "Actively participate in mentorship sessions with CSOO", weight: 20, score: 0, notes: "", optOut: false },
+                    ],
+                    roleSpecificDeliverables: [
+                        { task: "Complete Intranet V1.1 enhancements (styling, dashboard widgets)", deadline: "Month 1, Week 4", weight: 20, score: 0, status: "not-started", estimatedTime: "25h", optOut: false },
+                        { task: "Develop UI mockups for SafetyHelp new module (under Salatiso's guidance)", deadline: "Month 2, Week 3", weight: 15, score: 0, status: "not-started", estimatedTime: "15h", optOut: false },
+                        { task: "Provide tech support for team on Intranet usage (max 2h/week)", deadline: "Ongoing", weight: 10, score: 0, status: "in-progress", estimatedTime: "2h/week", optOut: false },
+                    ],
+                    userDefinedDeliverables: [ { task: "Learn basics of a backend language (e.g., Python Flask or Node.js)", weight: 15, score: 0, estimatedTime: "30h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
+                    trainingPlan: [
+                        { task: "FreeCodeCamp: Responsive Web Design Certification (Complete)", month: "1-2", week: "Self-paced", cost: 0, status: "in-progress", deliverable: "Certificate & Deployed Projects", estimatedTime: "80h" },
+                        { task: "GitHub Learning Lab: Full Suite (Intro, Git Flow, etc.)", month: 3, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Completed Labs", estimatedTime: "10h" },
+                        { task: "Figma Learn: 'UI Design Principles' & 'Prototyping'", month: "3-4", week: "Self-paced", cost: 0, status: "not-started", deliverable: "Sample Prototype Project", estimatedTime: "20h" },
+                        { task: "MDN Web Docs: JavaScript Intermediate Concepts", month: 4, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Completed 5 JS coding challenges", estimatedTime: "30h" }
+                    ]
+                },
+                performanceKPIs: ["Completion of Technical Training Modules & Certifications", "Quality of Code and Design Contributions (minimal bugs, good UX)", "Problem-Solving Ability in Technical Tasks", "Timeliness of Intranet Updates & Tech Support", "Proactive Learning and Application of New Skills"],
+                nextLevelEligibility: "Product Designer, Junior Full-Stack Developer, specialized tech roles based on interest and performance."
             }
         };
+
+        function populateModal(memberKey) {
+            const member = teamMemberData[memberKey];
+            if (!member) { console.error("Member data not found for key:", memberKey); return; }
+
+            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-300 shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-blue-300 shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
+
+            // --- Tabs HTML ---
+            let tabsHtml = `<div class="modal-tabs">
+                <button class="modal-tab-button active" onclick="openModalTab(event, '${memberKey}-padp')">PADP & Role</button>
+                <button class="modal-tab-button" onclick="openModalTab(event, '${memberKey}-training')">Formal Training</button>
+                <button class="modal-tab-button" onclick="openModalTab(event, '${memberKey}-performance')">Performance & Growth</button>
+            </div>`;
+
+            // --- PADP & Role Tab Pane ---
+            let padpPaneHtml = `<div id="${memberKey}-padp" class="modal-tab-pane active">`;
+            padpPaneHtml += commonActionsHtml(member, memberKey);
+            padpPaneHtml += responsibilitiesHtml(member);
+            padpPaneHtml += profileSummaryHtml(member); // Short profile for this tab
+            padpPaneHtml += padpDeliverablesHtml(member, memberKey);
+            padpPaneHtml += `</div>`;
+
+            // --- Formal Training Tab Pane ---
+            let trainingPaneHtml = `<div id="${memberKey}-training" class="modal-tab-pane">`;
+            trainingPaneHtml += formalTrainingPlanHtml(member, memberKey);
+            trainingPaneHtml += `</div>`;
+
+            // --- Performance & Growth Tab Pane ---
+            let performancePaneHtml = `<div id="${memberKey}-performance" class="modal-tab-pane">`;
+            performancePaneHtml += performanceKPIsHtml(member);
+            performancePaneHtml += nextLevelEligibilityHtml(member);
+            performancePaneHtml += assignedTasksHtml(memberKey); // Conceptual
+            performancePaneHtml += `<div class="mt-8 text-right border-t pt-4">
+                                        <button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-5 rounded-md text-sm font-medium"><i class="fas fa-comment-dots mr-2"></i>Request PADP Review</button>
+                                    </div>`;
+            performancePaneHtml += `</div>`;
+
+
+            modalBody.innerHTML = `
+                <h3 class="modal-title text-center">${member.name}</h3>
+                <p class="role-subtitle text-center">${member.role}</p>
+                ${profileImageHtml}
+                ${tabsHtml}
+                ${padpPaneHtml}
+                ${trainingPaneHtml}
+                ${performancePaneHtml}
+            `;
+            memberDetailModal.classList.add('active');
+            attachModalEventListeners(memberKey); // Attach event listeners for the newly created content
+        }
+
+        function commonActionsHtml(member, memberKey) {
+            let html = '<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-check-square mr-2"></i>Initial Actions & Role Acceptance</h4><ul class="list-none p-0 space-y-3">';
+            member.padp.commonActions.forEach((action, index) => {
+                const signedOffText = action.signedOff ? ` (Accepted: ${action.signedOff})` : "";
+                const isChecked = action.status === 'completed' ? 'checked' : '';
+                const isDisabled = action.status === 'completed' ? 'disabled' : '';
+                let actionButtonHtml = '';
+                if (action.id === 'acceptRole' && action.status !== 'completed') {
+                     actionButtonHtml = `<button class="ml-auto text-xs bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded sign-action-btn" data-action-id="${action.id}" ${isDisabled}>Accept Role</button>`;
+                } else if (action.status !== 'completed') {
+                     actionButtonHtml = `<button class="ml-auto text-xs bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded complete-action-btn" data-action-id="${action.id}" ${isDisabled}>Mark Complete</button>`;
+                }
+
+                html += `
+                    <li class="flex items-center p-2 border rounded-md ${isChecked ? 'bg-green-50' : 'bg-gray-50'}">
+                        <input type="checkbox" id="commonAction_${memberKey}_${index}" data-member="${memberKey}" data-action-type="common" data-action-id="${action.id}" class="mr-3 common-action-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500" ${isChecked} ${isDisabled}>
+                        <label for="commonAction_${memberKey}_${index}" class="text-sm flex-grow ${isChecked ? 'line-through text-gray-500' : ''}">${action.task} <span class="text-xs text-gray-400 ml-1">(Est. ${action.estimatedTime})</span><span class="text-xs text-green-600 ml-1 signed-off-text">${signedOffText}</span></label>
+                        ${actionButtonHtml}
+                    </li>`;
+            });
+            html += '</ul></div>';
+            return html;
+        }
+
+        function responsibilitiesHtml(member) {
+            return `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-user-tie mr-2"></i>Key Responsibilities:</h4><ul class="list-disc pl-6 text-sm space-y-1">${member.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
+        }
+        function profileSummaryHtml(member) { // A shorter profile for the PADP tab
+            return `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-id-card mr-2"></i>Profile Summary:</h4><p class="text-sm text-gray-700 leading-relaxed">${member.profile.substring(0,250)}...</p></div>`;
+        }
+
+        function padpDeliverablesHtml(member, memberKey) {
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-bullseye mr-2"></i>PADP Deliverables</h4>`;
+            html += `<p class="text-xs text-gray-500 mb-3">Core deliverables are fixed. Role-specific have initial weights; propose changes and add up to 5 user-defined goals. Total weight of Role-Specific + User-Defined should ideally be 100 - sum of Core weights.</p>`;
+            html += `<div class="overflow-x-auto"><table class="action-plan-table">
+                            <thead><tr><th>Type</th><th>Task / Objective (Est. Time)</th><th>Weight (%)</th><th>Score (1-5)</th><th>Notes / Opt-Out</th><th>Status</th><th>Save</th></tr></thead><tbody>`;
+            // Core Deliverables
+            member.padp.coreDeliverables.forEach((item, index) => {
+                html += `<tr>
+                    <td class="font-medium bg-gray-100">Core</td>
+                    <td><textarea rows="2" data-field="task" data-type="core" data-index="${index}" readonly class="bg-gray-100 cursor-not-allowed">${item.task}</textarea></td>
+                    <td><input type="number" value="${item.weight}" data-field="weight" data-type="core" data-index="${index}" readonly class="bg-gray-100 text-center cursor-not-allowed"></td>
+                    <td><input type="number" value="${item.score}" min="0" max="5" data-field="score" data-type="core" data-index="${index}" class="text-center"></td>
+                    <td><textarea rows="1" data-field="notes" data-type="core" data-index="${index}" readonly class="bg-gray-100 cursor-not-allowed">${item.notes}</textarea></td>
+                    <td class="text-center"><span class="text-xs font-semibold">Ongoing</span></td>
+                    <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="core" data-index="${index}"><i class="fas fa-save"></i></button></td>
+                </tr>`;
+            });
+            // Role-Specific Deliverables
+            member.padp.roleSpecificDeliverables.forEach((item, index) => {
+                 html += `<tr>
+                    <td class="font-medium bg-sky-50">Role-Specific</td>
+                    <td><textarea rows="2" data-field="task" data-type="roleSpecific" data-index="${index}">${item.task} (Est. ${item.estimatedTime || 'N/A'})</textarea></td>
+                    <td><input type="number" value="${item.weight}" data-field="weight" data-type="roleSpecific" data-index="${index}" class="text-center"></td>
+                    <td><input type="number" value="${item.score}" min="0" max="5" data-field="score" data-type="roleSpecific" data-index="${index}" class="text-center"></td>
+                    <td><label class="text-xs block"><input type="checkbox" class="mr-1" data-field="optOut" data-type="roleSpecific" data-index="${index}" ${item.optOut ? 'checked' : ''}> Opt-Out Req.</label><textarea rows="1" data-field="notes" data-type="roleSpecific" data-index="${index}" placeholder="Reason if opting out...">${item.notes || ''}</textarea></td>
+                    <td><select class="status-select text-xs ${item.status === 'completed' ? 'status-completed' : item.status === 'in-progress' ? 'status-in-progress' : 'status-not-started'}" data-field="status" data-type="roleSpecific" data-index="${index}">
+                        <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
+                        <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                        <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
+                    </select></td>
+                    <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="roleSpecific" data-index="${index}"><i class="fas fa-save"></i></button></td>
+                </tr>`;
+            });
+            // User-Defined Deliverables
+             member.padp.userDefinedDeliverables.forEach((item, index) => {
+                html += `<tr>
+                    <td class="font-medium bg-green-50">User-Defined</td>
+                    <td><textarea rows="2" placeholder="Define objective..." data-field="task" data-type="userDefined" data-index="${index}">${item.task}</textarea>
+                        <input type="text" placeholder="Est. Time (e.g., 10h)" value="${item.estimatedTime || ''}" data-field="estimatedTime" data-type="userDefined" data-index="${index}" class="text-xs mt-1"></td>
+                    <td><input type="number" placeholder="0-100" value="${item.weight}" data-field="weight" data-type="userDefined" data-index="${index}" class="text-center"></td>
+                    <td><input type="number" value="${item.score}" min="0" max="5" data-field="score" data-type="userDefined" data-index="${index}" class="text-center"></td>
+                    <td><textarea rows="1" data-field="notes" data-type="userDefined" data-index="${index}" placeholder="Details...">${item.notes || ''}</textarea></td>
+                     <td><select class="status-select text-xs" data-field="status" data-type="userDefined" data-index="${index}">
+                        <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
+                        <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                        <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
+                    </select></td>
+                    <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="userDefined" data-index="${index}"><i class="fas fa-save"></i></button></td>
+                </tr>`;
+            });
+            html += `</tbody></table></div><p class="text-xs text-gray-500 mt-2">Total PADP Weight: <span id="totalPadpWeight_${memberKey}" class="font-bold">0</span>% (Aim for 100% across Core, Role-Specific, User-Defined)</p></div>`;
+            return html;
+        }
+
+        function formalTrainingPlanHtml(member, memberKey) {
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-graduation-cap mr-2"></i>Formal Training Plan</h4>
+                        <p class="text-xs text-gray-500 mb-3">Track progress on formal courses and workshops. You can confirm completion of training done elsewhere.</p>
+                        <div class="overflow-x-auto">
+                        <table class="action-plan-table">
+                            <thead><tr><th>Task/Course</th><th>Month</th><th>Week Ref</th><th>Est. Cost (ZAR)</th><th>Deliverable/Link</th><th>Status</th><th>Confirm/Save</th></tr></thead><tbody>`;
+            member.padp.trainingPlan.forEach((item, index) => {
+                html += `<tr>
+                    <td><textarea rows="2" data-field="task" data-type="training" data-index="${index}">${item.task} (Est. ${item.estimatedTime || 'N/A'})</textarea></td>
+                    <td><input type="text" value="${item.month}" data-field="month" data-type="training" data-index="${index}" class="text-sm"></td>
+                    <td><input type="text" value="${item.week || 'N/A'}" data-field="week" data-type="training" data-index="${index}" class="text-sm"></td>
+                    <td><input type="number" value="${item.cost}" data-field="cost" data-type="training" data-index="${index}" class="text-sm"></td>
+                    <td><textarea rows="2" data-field="deliverable" data-type="training" data-index="${index}" placeholder="Certificate URL, notes...">${item.deliverable || ''}</textarea></td>
+                    <td>
+                        <select class="status-select text-sm ${item.status === 'completed' ? 'status-completed' : item.status === 'in-progress' ? 'status-in-progress' : 'status-not-started'}" data-field="status" data-type="training" data-index="${index}">
+                            <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
+                            <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
+                            <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
+                        </select>
+                    </td>
+                    <td><button class="action-btn save-padp-item" data-member="${memberKey}" data-type="training" data-index="${index}"><i class="fas fa-save"></i> Save</button></td>
+                </tr>`;
+            });
+            html += `</tbody></table></div></div>`;
+            return html;
+        }
+
+        function performanceKPIsHtml(member) {
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-chart-line mr-2"></i>Performance KPIs</h4><ul class="list-disc pl-6 text-sm space-y-1">`;
+            member.performanceKPIs.forEach(kpi => html += `<li>${kpi}</li>`);
+            html += `</ul><p class="text-xs text-gray-500 mt-2">Performance against PADP deliverables and these KPIs will be reviewed quarterly by the CEO (or CSOO for CEO).</p></div>`;
+            return html;
+        }
+
+        function nextLevelEligibilityHtml(member) {
+            let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-layer-group mr-2"></i>Next Level Eligibility & Growth Path</h4><p class="text-sm text-gray-700">${member.nextLevelEligibility || "To be defined based on PADP completion and company needs."}</p>`;
+            if (member.name === "Tina Mdeni" || member.name === "Kwakho Mdeni") {
+                html += `<p class="text-xs text-blue-600 mt-2">Performance-based share vesting: Up to 5% (6-24 months), further 5% (next 36 months) from Nozukile Mdeni's Trust, based on PADP and KPI achievement.</p>`;
+            }
+            html += `</div>`;
+            return html;
+        }
+        
+        function assignedTasksHtml(memberKey) { // Conceptual
+             let html = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-clipboard-check mr-2"></i>My Assigned Tasks (from others)</h4>`;
+            html += `<ul class="list-disc pl-6 text-sm space-y-2">
+                        <li class="p-2 border rounded-md bg-yellow-50">Task: Review Marketing Budget Q3 (Assigned by: Visa, Due: May 28) 
+                            <div class="mt-1">
+                                <button class="text-xs bg-green-500 text-white px-1.5 py-0.5 rounded ml-1">Accept</button> 
+                                <button class="text-xs bg-orange-500 text-white px-1.5 py-0.5 rounded ml-1">Request Assist</button> 
+                                <button class="text-xs bg-red-500 text-white px-1.5 py-0.5 rounded ml-1">Request Transfer</button>
+                            </div>
+                        </li>
+                        <li class="p-2 border rounded-md">Task: Provide Feedback on Sazi Life Module 1 (Assigned by: Kwakho, Due: June 5)</li>
+                     </ul></div>`;
+            return html;
+        }
+
+        function attachModalEventListeners(memberKey) {
+            const currentMemberData = teamMemberData[memberKey];
+            // Common Action Checkboxes / Buttons
+            modalBody.querySelectorAll('.common-action-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', function() { handleCommonActionChange(this, memberKey); });
+            });
+            modalBody.querySelectorAll('.sign-action-btn, .complete-action-btn').forEach(button => {
+                button.addEventListener('click', function() { handleCommonActionButtonClick(this, memberKey); });
+            });
+
+            // PADP Item Saves
+            modalBody.querySelectorAll('.save-padp-item').forEach(button => {
+                button.addEventListener('click', function() { handlePadpItemSave(this, memberKey); });
+            });
+
+            // Status Select visual update
+             modalBody.querySelectorAll('.status-select').forEach(selectEl => {
+                selectEl.addEventListener('change', function() {
+                    this.className = 'status-select text-xs'; // Reset classes
+                    if (this.value === 'completed') this.classList.add('status-completed');
+                    else if (this.value === 'in-progress') this.classList.add('status-in-progress');
+                    else this.classList.add('status-not-started');
+                });
+                // Trigger initial style
+                selectEl.dispatchEvent(new Event('change'));
+            });
+            calculateTotalPadpWeight(memberKey); // Initial calculation
+        }
+        
+        function calculateTotalPadpWeight(memberKey) {
+            const member = teamMemberData[memberKey];
+            let totalWeight = 0;
+            ['coreDeliverables', 'roleSpecificDeliverables', 'userDefinedDeliverables'].forEach(type => {
+                member.padp[type].forEach(item => {
+                    totalWeight += (parseInt(item.weight) || 0);
+                });
+            });
+            const weightDisplay = document.getElementById(`totalPadpWeight_${memberKey}`);
+            if(weightDisplay) weightDisplay.textContent = totalWeight;
+        }
+
+
+        function handleCommonActionChange(checkbox, memberKey) {
+            // This function is now mostly for visual toggling if checkbox itself is used.
+            // The actual logic is in handleCommonActionButtonClick
+            const actionId = checkbox.dataset.actionId;
+            const actionItem = teamMemberData[memberKey].padp.commonActions.find(a => a.id === actionId);
+            if (actionItem) {
+                if (checkbox.checked && actionItem.status !== 'completed') { // If manually checked and not yet completed by button
+                    // Potentially disallow this or make it trigger the button's logic
+                    console.warn("Common action checkbox manually changed. Prefer using action buttons.");
+                } else if (!checkbox.checked && actionItem.status === 'completed') {
+                    // Disallow unchecking a completed & signed action
+                    checkbox.checked = true;
+                    alert("This action has already been completed and signed off.");
+                }
+            }
+        }
+        function handleCommonActionButtonClick(button, memberKey) {
+            const actionId = button.dataset.actionId;
+            const actionItem = teamMemberData[memberKey].padp.commonActions.find(a => a.id === actionId);
+            const checkbox = document.getElementById(`commonAction_${memberKey}_${memberKey}_${actionItem.id === 'familiarize' ? 0 : actionItem.id === 'acceptRole' ? 1 : 2}`); // Brittle mapping
+
+            if (actionItem && actionItem.status !== 'completed') {
+                actionItem.status = 'completed';
+                actionItem.signedOff = new Date().toLocaleDateString() + " " + new Date().toLocaleTimeString();
+                if (checkbox) {
+                    checkbox.checked = true;
+                    checkbox.disabled = true;
+                    checkbox.nextElementSibling.classList.add('line-through', 'text-gray-500');
+                    checkbox.nextElementSibling.querySelector('.signed-off-text').textContent = ` (Accepted: ${actionItem.signedOff})`;
+                }
+                button.textContent = 'Completed';
+                button.disabled = true;
+                button.classList.remove('bg-green-500', 'hover:bg-green-600', 'bg-blue-500', 'hover:bg-blue-600');
+                button.classList.add('bg-gray-400', 'cursor-not-allowed');
+
+                alert(`Action '${actionItem.task}' has been electronically signed off and marked complete.`);
+                populateTrainingProgress(); // Update dashboard
+            }
+        }
+
+        function handlePadpItemSave(button, memberKey) {
+            const itemTypeKey = button.dataset.type; // 'core', 'roleSpecific', 'userDefined', 'training'
+            const itemIndex = parseInt(button.dataset.index);
+            const row = button.closest('tr');
+            
+            let targetArray;
+            if (itemTypeKey === 'training') {
+                targetArray = teamMemberData[memberKey].padp.trainingPlan;
+            } else {
+                targetArray = teamMemberData[memberKey].padp[itemTypeKey + (itemTypeKey.endsWith('s') ? '' : 'Deliverables')];
+            }
+            const itemToUpdate = targetArray[itemIndex];
+
+            row.querySelectorAll('[data-field]').forEach(field => {
+                const fieldName = field.dataset.field;
+                if (field.type === 'checkbox' && fieldName === 'optOut') { // Handle optOut checkbox
+                    itemToUpdate[fieldName] = field.checked;
+                } else if (field.type === 'number') {
+                    itemToUpdate[fieldName] = parseInt(field.value) || 0;
+                } else {
+                    itemToUpdate[fieldName] = field.value;
+                }
+            });
+            
+            console.log(`Updated PADP item for ${memberKey}, type ${itemTypeKey}, index ${itemIndex}:`, itemToUpdate);
+            alert('PADP item updated (conceptual save). Dashboard would refresh.');
+            populateTrainingProgress();
+            if (itemTypeKey !== 'training') calculateTotalPadpWeight(memberKey);
+        }
+
+
+        // Populate Team Carousel on #team section activation
+        let teamCarouselPopulated = false;
+        function populateAndInitTeamCarousel() {
+            if (teamCarouselPopulated) return;
+            const teamCarouselTrack = document.querySelector('#team .mfe-carousel-track');
+            if (!teamCarouselTrack) return;
+
+            teamCarouselTrack.innerHTML = ''; // Clear if repopulating, though ideally only once
+            Object.keys(teamMemberData).forEach(key => {
+                const member = teamMemberData[key];
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'mfe-carousel-item';
+                itemDiv.innerHTML = `
+                    <div class="card-content">
+                        <img src="${member.profileImage || 'salatiso/assets/photos/team_placeholder_carousel.png'}" alt="${member.name}" class="w-24 h-24 rounded-full mx-auto mb-4 border-4">
+                        <h4 class="text-xl font-semibold text-blue-700 text-center">${member.name}</h4>
+                        <p class="text-gray-500 text-sm text-center mb-3">${member.role}</p>
+                        <p class="text-gray-600 text-xs mb-4 flex-grow text-center">${member.profile.substring(0,70)}...</p>
+                        <button class="mt-auto w-full bg-blue-500 text-white py-2.5 px-4 rounded-md hover:bg-blue-600 transition-colors text-sm font-medium view-member-details-btn" data-member="${key}">View PADP & Details</button>
+                    </div>`;
+                teamCarouselTrack.appendChild(itemDiv);
+            });
+            // Re-attach event listeners for newly added buttons
+            teamCarouselTrack.querySelectorAll('.view-member-details-btn').forEach(button => {
+                button.addEventListener('click', () => populateModal(button.dataset.member));
+            });
+            setupCarousel(document.querySelector('#team .mfe-carousel-container'));
+            teamCarouselPopulated = true;
+        }
+
 
         // Populate Dashboard Training Progress
         function populateTrainingProgress() {
@@ -879,12 +1076,13 @@
             widget.innerHTML = ''; // Clear previous
             Object.keys(teamMemberData).forEach(key => {
                 const member = teamMemberData[key];
-                if (member.trainingPlan && member.trainingPlan.length > 0) {
-                    const completedTasks = member.trainingPlan.filter(t => t.status === 'completed').length;
-                    const totalTasks = member.trainingPlan.length;
+                if (member.padp && member.padp.trainingPlan && member.padp.trainingPlan.length > 0) {
+                    const completedTasks = member.padp.trainingPlan.filter(t => t.status === 'completed').length;
+                    const totalTasks = member.padp.trainingPlan.length;
                     const progress = totalTasks > 0 ? Math.round((completedTasks / totalTasks) * 100) : 0;
                     
                     const p = document.createElement('p');
+                    p.className = "text-sm mb-0.5";
                     p.innerHTML = `${member.name.split(' ')[0]} ${member.name.includes('.') ? member.name.split(' ')[1] : ''}: <span class="font-semibold">${progress}%</span>`;
                     widget.appendChild(p);
                     
@@ -893,134 +1091,163 @@
                     const bar = document.createElement('div');
                     bar.className = 'progress-bar';
                     bar.style.width = `${progress}%`;
-                    // bar.textContent = `${progress}%`; // Optional: text inside bar
                     barContainer.appendChild(bar);
                     widget.appendChild(barContainer);
                 }
             });
         }
         
-        // Modal Population & Interaction Logic
-        function populateModal(memberKey) {
-            const member = teamMemberData[memberKey];
-            if (!member) return;
+        // Populate My Pending Actions Widget (Conceptual)
+        function populateMyPendingActions() {
+            const widget = document.getElementById('myPendingActionsWidget');
+            if (!widget || !teamMemberData[currentLoggedInUser]) return;
+            widget.innerHTML = '';
+            const userPADP = teamMemberData[currentLoggedInUser].padp;
+            let actionCount = 0;
 
-            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-blue-300 shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-blue-300 shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
-
-            let trainingPlanHtml = `<div class="modal-section"><h4 class="text-lg font-semibold mt-4 mb-3 text-blue-600"><i class="fas fa-clipboard-list mr-2"></i>Training Action Plan</h4>
-                                    <div class="overflow-x-auto">
-                                    <table class="action-plan-table">
-                                        <thead><tr><th>Task</th><th>Month</th><th>Week Ref</th><th>Est. Cost (ZAR)</th><th>Deliverable</th><th>Status</th><th>Update</th></tr></thead><tbody>`;
-            member.trainingPlan.forEach((item, index) => {
-                trainingPlanHtml += `<tr>
-                    <td><textarea rows="2" data-field="task" data-index="${index}">${item.task}</textarea></td>
-                    <td><input type="text" value="${item.month}" data-field="month" data-index="${index}" class="text-sm"></td>
-                    <td><input type="text" value="${item.week || 'N/A'}" data-field="week" data-index="${index}" class="text-sm"></td>
-                    <td><input type="number" value="${item.cost}" data-field="cost" data-index="${index}" class="text-sm"></td>
-                    <td><textarea rows="2" data-field="deliverable" data-index="${index}">${item.deliverable || 'N/A'}</textarea></td>
-                    <td>
-                        <select class="status-select text-sm ${item.status === 'completed' ? 'status-completed' : item.status === 'in-progress' ? 'status-in-progress' : 'status-not-started'}" data-field="status" data-index="${index}">
-                            <option value="not-started" ${item.status === 'not-started' ? 'selected' : ''}>Not Started</option>
-                            <option value="in-progress" ${item.status === 'in-progress' ? 'selected' : ''}>In Progress</option>
-                            <option value="completed" ${item.status === 'completed' ? 'selected' : ''}>Completed</option>
-                        </select>
-                    </td>
-                    <td><button class="action-btn save-training-item" data-member="${memberKey}" data-index="${index}"><i class="fas fa-save"></i> Save</button></td>
-                </tr>`;
+            // Common Actions not completed
+            userPADP.commonActions.filter(a => a.status !== 'completed').slice(0, 2).forEach(action => { // Show max 2
+                const li = document.createElement('li');
+                li.innerHTML = `<input type="checkbox" id="dash_common_${action.id}" class="mr-2"><label for="dash_common_${action.id}">${action.task} (Initial)</label>`;
+                widget.appendChild(li);
+                actionCount++;
             });
-            trainingPlanHtml += `</tbody></table></div></div>`;
 
-            let kpiHtml = `<div class="modal-section"><h4 class="text-lg font-semibold mt-6 mb-3 text-blue-600"><i class="fas fa-chart-line mr-2"></i>Performance KPIs</h4><ul class="list-disc pl-6 text-sm space-y-1">`;
-            member.performanceKPIs.forEach(kpi => kpiHtml += `<li>${kpi}</li>`);
-            kpiHtml += `</ul></div>`;
-            
-            let responsibilitiesHtml = `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-user-tie mr-2"></i>Key Responsibilities:</h4><ul class="list-disc pl-6 text-sm space-y-1">${member.responsibilities.map(r => `<li>${r}</li>`).join('')}</ul></div>`;
-            
-            let profileHtml = `<div class="modal-section"><h4 class="text-lg font-semibold text-blue-600"><i class="fas fa-id-card mr-2"></i>Profile:</h4><p class="text-sm text-gray-700 leading-relaxed">${member.profile}</p></div>`;
-
-            modalBody.innerHTML = `
-                <h3 class="modal-title text-center">${member.name}</h3>
-                <p class="role-subtitle text-center">${member.role}</p>
-                ${profileImageHtml}
-                ${responsibilitiesHtml}
-                ${profileHtml}
-                ${trainingPlanHtml}
-                ${kpiHtml}
-                <div class="mt-8 text-right border-t pt-4">
-                    <button class="bg-orange-500 hover:bg-orange-600 text-white py-2 px-5 rounded-md text-sm font-medium"><i class="fas fa-comment-dots mr-2"></i>Request Feedback</button>
-                </div>
-            `;
-            memberDetailModal.classList.add('active');
-
-            // Add event listeners for status change and save for training plan updates
-            modalBody.querySelectorAll('.status-select').forEach(selectEl => {
-                selectEl.addEventListener('change', function() {
-                    this.className = 'status-select text-sm'; // Reset classes
-                    if (this.value === 'completed') this.classList.add('status-completed');
-                    else if (this.value === 'in-progress') this.classList.add('status-in-progress');
-                    else this.classList.add('status-not-started');
-                });
+            // Role-Specific Deliverables not completed
+            userPADP.roleSpecificDeliverables.filter(d => d.status !== 'completed').slice(0, 4 - actionCount).forEach(del => { // Show more if space
+                 const li = document.createElement('li');
+                li.innerHTML = `<input type="checkbox" id="dash_role_${del.task.substring(0,5)}" class="mr-2"><label for="dash_role_${del.task.substring(0,5)}">${del.task.substring(0,30)}... (PADP)</label>`;
+                widget.appendChild(li);
             });
-            
-            modalBody.querySelectorAll('.save-training-item').forEach(button => {
-                button.addEventListener('click', function() {
-                    const memberKey = this.dataset.member;
-                    const itemIndex = parseInt(this.dataset.index);
-                    const row = this.closest('tr');
-                    
-                    // Update the teamMemberData object (in a real app, this would be an API call)
-                    teamMemberData[memberKey].trainingPlan[itemIndex].task = row.querySelector('[data-field="task"]').value;
-                    teamMemberData[memberKey].trainingPlan[itemIndex].month = row.querySelector('[data-field="month"]').value;
-                    teamMemberData[memberKey].trainingPlan[itemIndex].week = row.querySelector('[data-field="week"]').value;
-                    teamMemberData[memberKey].trainingPlan[itemIndex].cost = parseInt(row.querySelector('[data-field="cost"]').value) || 0;
-                    teamMemberData[memberKey].trainingPlan[itemIndex].deliverable = row.querySelector('[data-field="deliverable"]').value;
-                    teamMemberData[memberKey].trainingPlan[itemIndex].status = row.querySelector('[data-field="status"]').value;
-                    
-                    console.log(`Updated training item for ${memberKey}, index ${itemIndex}:`, teamMemberData[memberKey].trainingPlan[itemIndex]);
-                    alert('Training item updated (conceptual save). Dashboard would refresh.');
-                    populateTrainingProgress(); // Refresh dashboard widget
-                });
-            });
-        }
-
-        document.querySelectorAll('.view-member-details-btn').forEach(button => {
-            button.addEventListener('click', () => populateModal(button.dataset.member));
-        });
-        document.querySelectorAll('.org-node').forEach(node => {
-            node.addEventListener('click', () => {
-                const memberKey = node.dataset.member.replace('_org', '');
-                populateModal(memberKey);
-            });
-        });
-
-        closeModalButtons.forEach(button => {
-            button.addEventListener('click', () => memberDetailModal.classList.remove('active'));
-        });
-        memberDetailModal.addEventListener('click', (event) => {
-            if (event.target === memberDetailModal) memberDetailModal.classList.remove('active');
-        });
-
-        // Initialize first section and dashboard widgets
-        showMainSection('dashboard');
-        populateTrainingProgress();
-
-
-        // Conceptual: Action tracking and notification system
-        const notificationBell = document.querySelector('.notification-bell');
-        if(notificationBell) {
-            notificationBell.addEventListener('click', () => {
-                // This would ideally open a dropdown or a dedicated notifications panel
-                alert("New Notifications (Conceptual):\n1. Salatiso assigned 'Review Q3 Budget' to Visa.\n2. Tina M. completed 'Brand Voice Guide'.\n3. Kwakho M. requests input on 'Sazi Life isiXhosa Module Grade 2'.");
-                // Clear badge conceptually
-                const badge = notificationBell.querySelector('.notification-badge');
-                if(badge) badge.style.display = 'none';
-            });
+             // Add Salatiso's specific deadline
+            if (currentLoggedInUser === 'salatiso') {
+                 const li = document.createElement('li');
+                li.innerHTML = `<input type="checkbox" id="dash_chatbot_salatiso" class="mr-2"><label for="dash_chatbot_salatiso" class="font-bold text-red-600">Integrate Chatbot on SafetyHelp Staging (Due: May 24)</label>`;
+                widget.appendChild(li);
+            }
         }
         
-        // Function to simulate opening current user's training plan modal (replace 'salatiso' with actual logged-in user logic)
-        function openMyTrainingPlan() {
-            populateModal('salatiso'); // Assuming Salatiso is the logged-in user for this example
+        // Populate Company Launch Roadmap Widget
+        function populateCompanyLaunchRoadmap() {
+            const widget = document.getElementById('companyLaunchRoadmapWidget');
+            if (!widget) return;
+            // Conceptual data - this would come from a project plan
+            const roadmap = [
+                { name: "Phase 1: Legal Foundation", status: "completed", progress: 100, icon: "fas fa-check-circle text-green-500" },
+                { name: "Phase 2: Operational Setup", status: "in-progress", progress: 70, icon: "fas fa-cogs text-blue-500" },
+                { name: "Phase 3: Intranet & Internal Launch", status: "in-progress", progress: 40, icon: "fas fa-users text-purple-500" },
+                { name: "Phase 4: SafetyHelp Public Launch", status: "not-started", progress: 10, icon: "far fa-clock text-orange-500" }
+            ];
+            widget.innerHTML = '';
+            roadmap.forEach(phase => {
+                const li = document.createElement('li');
+                li.className = "mb-2";
+                li.innerHTML = `<i class="${phase.icon} mr-2"></i>${phase.name} (${phase.progress}%)
+                                <div class="progress-bar-container"><div class="progress-bar ${phase.status === 'not-started' ? 'bg-orange-500' : phase.status === 'in-progress' ? 'bg-blue-500' : 'bg-green-500'}" style="width: ${phase.progress}%;"></div></div>`;
+                widget.appendChild(li);
+            });
         }
+
+        // Populate Recent Activity Widget (Conceptual)
+        function populateRecentActivity() {
+            const widget = document.getElementById('recentActivityWidget');
+            if (!widget) return;
+            const activities = [
+                { type: "COMPLETED", user: "Visa M.", text: "submitted CIPC company registration.", time: "1h ago", color: "text-green-600" },
+                { type: "UPDATED", user: "Tina M.", text: "added 'Brand Voice Guide' to Marketing Content Calendar.", time: "3h ago", color: "text-blue-600" },
+                { type: "ASSIGNED", user: "Salatiso M.", text: "to review Phase 2 budget by EOD May 23rd.", time: "Yesterday", color: "text-orange-600" },
+                { type: "COMMENT", user: "Kwakho M.", text: "on Sazi Life Curriculum: 'Need input on Grade 2 isiXhosa module.'", time: "Yesterday", color: "text-purple-600"},
+                { type: "SIGNED OFF", user: "Solonwabo M.", text: "Role Acceptance in PADP.", time: "2 days ago", color: "text-green-700"}
+            ];
+            widget.innerHTML = '';
+            activities.forEach(act => {
+                const p = document.createElement('p');
+                p.innerHTML = `<span class="font-semibold ${act.color}">${act.type}:</span> ${act.user} ${act.text} <span class="text-gray-400 text-xs">- ${act.time}</span>`;
+                widget.appendChild(p);
+            });
+        }
+
+
+        // --- MODAL TABS ---
+        function openModalTab(event, tabIdToOpen) {
+            const modal = event.target.closest('.modal-content');
+            if (!modal) return;
+
+            modal.querySelectorAll('.modal-tab-pane').forEach(pane => pane.classList.remove('active'));
+            modal.querySelectorAll('.modal-tab-button').forEach(btn => btn.classList.remove('active'));
+
+            const tabToActivate = modal.querySelector('#' + tabIdToOpen);
+            if (tabToActivate) tabToActivate.classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+        
+        // --- GOVERNANCE TABS ---
+        function openTab(event, tabName) {
+            var i, tabcontent, tablinks;
+            const governanceSection = document.getElementById('governance');
+            if (!governanceSection) return;
+            tabcontent = governanceSection.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = governanceSection.getElementsByClassName("tabs")[0].getElementsByTagName("button");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            const tabToOpen = document.getElementById(tabName);
+            if (tabToOpen) tabToOpen.style.display = "block";
+            event.currentTarget.className += " active";
+        }
+
+
+        // --- INITIALIZE ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial section display based on hash or default to dashboard
+            // const initialSection = window.location.hash ? window.location.hash.substring(1) : 'dashboard';
+            // showMainSection(initialSection, true); // true to skip history update on initial load
+             showMainSection('dashboard', true);
+
+
+            // Populate dynamic dashboard widgets
+            populateTrainingProgress();
+            populateMyPendingActions();
+            populateCompanyLaunchRoadmap();
+            populateRecentActivity();
+
+            // Setup observer for #team section to populate carousel when it becomes active
+            const teamSectionObserver = new MutationObserver((mutationsList, observer) => {
+                for(const mutation of mutationsList) {
+                    if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                        const teamSection = document.getElementById('team');
+                        if (teamSection.classList.contains('active') && !teamCarouselPopulated) {
+                            populateAndInitTeamCarousel();
+                        }
+                    }
+                }
+            });
+            if (document.getElementById('team')) {
+                teamSectionObserver.observe(document.getElementById('team'), { attributes: true });
+            }
+            
+            // Setup observer for #governance section for tabs
+            const governanceSection = document.getElementById('governance');
+            if (governanceSection) {
+                const governanceSectionObserver = new MutationObserver((mutationsList, observer) => {
+                    for(const mutation of mutationsList) {
+                        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                            if (governanceSection.classList.contains('active')) {
+                                const tabsContainer = governanceSection.querySelector('.tabs');
+                                if (tabsContainer && !tabsContainer.querySelector('button.active')) {
+                                     const firstTabButton = tabsContainer.querySelector('button');
+                                     if(firstTabButton) firstTabButton.click();
+                                }
+                            }
+                        }
+                    }
+                });
+                governanceSectionObserver.observe(governanceSection, { attributes: true });
+            }
+        });
 
     </script>
 </body>
