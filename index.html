@@ -48,9 +48,12 @@
         }
         .logo-container img { height: 50px; margin-right: 15px; }
         .logo-container .company-name { font-size: 1.8em; font-weight: 700; }
+        .main-nav-links { display: flex; flex-wrap: wrap; /* Allow wrapping on smaller screens */ }
         .main-nav-links a {
-            color: white; margin: 0 12px; font-size: 0.95em; font-weight: 500;
-            text-decoration: none; padding: 8px 12px; border-radius: 6px;
+            color: white; margin: 0 8px; /* Reduced margin for more links */
+            font-size: 0.9em; /* Slightly smaller for more links */
+            font-weight: 500;
+            text-decoration: none; padding: 8px 10px; border-radius: 6px;
             transition: background-color 0.3s, color 0.3s;
         }
         .main-nav-links a:hover, .main-nav-links a.active-main-nav {
@@ -68,9 +71,9 @@
         }
         .user-profile-menu img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid white; }
         .dropdown-menu {
-            display: none; position: absolute; right: 0; top: 50px; /* Adjust as needed */
+            display: none; position: absolute; right: 0; top: 50px;
             background-color: white; color: #333; border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 200px; /* Wider dropdown */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 200px;
         }
         .dropdown-menu a { display: block; padding: 10px 15px; text-decoration: none; color: #333; font-size: 0.9em; }
         .dropdown-menu a:hover { background-color: #f0f0f0; }
@@ -79,10 +82,10 @@
 
         /* Main Content Area */
         .main-content-wrapper { display: flex; flex-grow: 1; }
-        .content-display-area { flex-grow: 1; padding: 0; /* Remove padding for full-page carousel dashboard */ overflow: hidden; /* Prevent double scrollbars */ }
+        .content-display-area { flex-grow: 1; padding: 0; overflow: hidden; }
         .content-section { /* For non-dashboard pages */
             background-color: #FFFFFF; padding: 25px 30px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.07); margin: 25px; /* Add margin if not full page */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.07); margin: 25px;
             display: none; opacity: 0; transition: opacity 0.4s ease-in-out;
             max-height: calc(100vh - 80px - 50px); /* Header and margin */
             overflow-y: auto;
@@ -92,18 +95,19 @@
             font-size: 2.2em; color: #0056b3; margin-bottom: 30px;
             padding-bottom: 12px; border-bottom: 3px solid #FD7E14;
         }
+        /* Special handling for dashboard section to be full page */
+        #dashboard.content-section { margin: 0; border-radius: 0; max-height: none; padding:0; background:transparent; box-shadow:none; }
+
 
         /* Dashboard Carousel & Widgets */
-        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); /* Full viewport minus header */ }
+        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); }
         .dashboard-carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); height: 100%; }
         .dashboard-carousel-slide {
             min-width: 100%; padding: 30px 40px; box-sizing: border-box;
-            display: flex; flex-direction: column; align-items: center; justify-content: flex-start; /* Start from top */
-            height: 100%;
-            overflow-y: auto; /* Allow individual slides to scroll if content is too tall */
+            display: flex; flex-direction: column; align-items: center; justify-content: flex-start;
+            height: 100%; overflow-y: auto;
         }
         .dashboard-carousel-slide h2.slide-title { font-size: 2.5em; color: #0056b3; margin-bottom: 25px; text-align: center; }
-
         .dashboard-carousel-button {
             position: absolute; top: 50%; transform: translateY(-50%);
             background-color: rgba(0,123,255,0.6); color: white; opacity: 0.8;
@@ -123,7 +127,6 @@
             transition: background-color 0.3s, transform 0.3s;
         }
         .dashboard-carousel-dot.active { background: #007BFF; transform: scale(1.3); }
-
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width:100%; max-width: 1600px;}
         .dashboard-widget {
             background-color: #F8F9FA; padding: 25px; border-radius: 8px;
@@ -140,37 +143,34 @@
         .task-list label { font-size: 0.9em; }
 
         /* Organogram Styles */
-        .organogram { text-align: center; padding: 20px 0; overflow-x: auto; /* Allow horizontal scroll for wide org charts */ }
-        .org-level { display: flex; justify-content: center; align-items: flex-start; margin-top: 30px; position: relative; min-width: fit-content; /* For scrolling */ }
-        .org-node-container { display: flex; flex-direction: column; align-items: center; margin: 0 10px; /* Spacing between sibling containers */ }
+        .organogram { text-align: center; padding: 20px 0; overflow-x: auto; }
+        .org-level { display: flex; justify-content: center; align-items: flex-start; margin-top: 30px; position: relative; min-width: fit-content; }
+        .org-node-container { display: flex; flex-direction: column; align-items: center; margin: 0 10px; }
         .org-node {
             padding: 12px 18px; border: 1px solid #007BFF; background-color: #E8F0FE;
             border-radius: 8px; cursor: pointer; transition: all 0.3s ease;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); min-width: 220px; text-align: center; /* Wider nodes */
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); min-width: 220px; text-align: center;
         }
         .org-node:hover { background-color: #D0E0F8; transform: translateY(-3px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
         .org-node .name { font-weight: 600; color: #0056b3; font-size: 1em; }
         .org-node .role { font-size: 0.8em; color: #555; margin-top: 4px; }
         .org-node .reporting-line { font-size: 0.7em; color: #777; margin-top: 3px; font-style: italic; }
-        /* Basic connectors - more complex ones need SVG/Canvas or a library */
         .org-children-container { display: flex; justify-content: center; margin-top: 20px; position: relative; }
-        .org-children-container::before { /* Horizontal line above children */
+        .org-children-container::before {
             content: ''; position: absolute; top: -10px; left: 10%; right: 10%; height: 1px; background-color: #ccc;
         }
-        .org-node-container > .org-connector-down { /* Vertical line from parent */
+        .org-node-container > .org-connector-down {
             width: 1px; height: 20px; background-color: #ccc; margin: 0 auto;
         }
 
-
-        /* Team Carousel (mfe-carousel) - styling mostly retained */
+        /* Team Carousel (mfe-carousel) */
         .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: #f0f4f8; border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(0,0,0,0.05);}
         .mfe-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         .mfe-carousel-item { min-width: 100%; padding: 10px; box-sizing: border-box; }
         .mfe-carousel-item .card-content {
             background:white; padding:25px; border-radius:8px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.08);
-            min-height: 220px;
-            display: flex; flex-direction: column; justify-content: space-between;
+            min-height: 220px; display: flex; flex-direction: column; justify-content: space-between;
         }
         .mfe-carousel-item .card-content img { border: 3px solid #007BFF; }
         .mfe-carousel-button {
@@ -187,7 +187,6 @@
         .carousel-dot { display: inline-block; width:12px; height:12px; background:#ccc; border-radius:50%; margin: 0 6px; cursor:pointer; transition: background-color 0.3s; }
         .carousel-dot.active { background: #007BFF; }
 
-
         /* Modal Styles */
         .modal {
             display: none; position: fixed; inset: 0;
@@ -200,7 +199,7 @@
         .modal-content {
             background-color: white; padding: 30px 35px; border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.2);
-            max-width: 950px; width: 100%; /* Wider modal for detailed plans */
+            max-width: 950px; width: 100%;
             max-height: 90vh; overflow-y: auto;
             position: relative;
         }
@@ -220,9 +219,8 @@
         .modal-tab-pane { display: none; }
         .modal-tab-pane.active { display: block; }
 
-
         /* Action Plan Table & Performance Sections */
-        .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85em; /* Smaller font for more info */ }
+        .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85em; }
         .action-plan-table th, .action-plan-table td { border: 1px solid #DEE2E6; padding: 8px 10px; text-align: left; vertical-align: middle;}
         .action-plan-table th { background-color: #E8F0FE; color: #0056b3; font-weight: 600; }
         .action-plan-table input, .action-plan-table select, .action-plan-table textarea {
@@ -238,13 +236,10 @@
             padding: 6px 10px; border-radius:4px; border:none; cursor:pointer;
         }
         .action-btn:hover { background-color: #218838; }
-        .deliverable-section label { font-weight: 500; margin-top: 5px; display: block; }
-        .deliverable-section input[type="checkbox"] { margin-right: 5px; }
         .signature-area { border: 1px dashed #ccc; padding: 10px; margin-top:15px; text-align: center; }
         .signature-area button { background-color: #007BFF; color:white; padding: 8px 15px; border-radius: 5px; border:none; cursor:pointer;}
         .signature-area button:disabled { background-color: #aaa; }
         .signed-confirmation { color: green; font-weight: bold; font-size: 0.9em; }
-
 
         /* Ventures & Documents Section Cards */
         .resource-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
@@ -271,89 +266,182 @@
         footer a { color: #00A2FF; text-decoration: none; }
         footer a:hover { text-decoration: underline; }
 
-        /* Tabs for Governance */
+        /* Tabs for Governance & Welcome Section */
         .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid #ccc; border-bottom: none; background-color: #f0f0f0; cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500;}
         .tabs button.active { background-color: white; border-bottom: 1px solid white; font-weight: bold; color: #007BFF;}
         .tab-content { border: 1px solid #ccc; padding: 20px; border-top: none; border-radius: 0 0 6px 6px; background-color: white;}
+
+        /* Timeline styles */
+        .timeline { position: relative; max-width: 900px; margin: 30px auto; padding: 20px 0; }
+        .timeline::before {
+            content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+            width: 4px; background-color: #007BFF; margin-left: -2px;
+            border-radius: 2px;
+        }
+        .timeline-item { position: relative; margin-bottom: 50px; width: 50%; padding: 10px 40px; box-sizing: border-box; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
+        .timeline-item:nth-child(odd)::after { /* Arrow pointing right */
+            content: ''; position: absolute; width: 0; height: 0;
+            border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+            border-left: 10px solid #fff; top: 20px; right: 30px;
+        }
+        .timeline-item:nth-child(even)::after { /* Arrow pointing left */
+            content: ''; position: absolute; width: 0; height: 0;
+            border-top: 10px solid transparent; border-bottom: 10px solid transparent;
+            border-right: 10px solid #fff; top: 20px; left: 30px;
+        }
+        .timeline-content-wrapper { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.1); position: relative; }
+        .timeline-date {
+            position: absolute; top: 20px; width: 50px; height: 50px;
+            background-color: #FD7E14; color: white; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5em; font-weight: bold;
+            box-shadow: 0 0 0 3px rgba(253, 126, 20, 0.3);
+        }
+        .timeline-item:nth-child(odd) .timeline-date { right: -25px; }
+        .timeline-item:nth-child(even) .timeline-date { left: -25px; }
+        .timeline-title { font-size: 1.4em; color: #0056b3; margin-bottom: 8px; font-weight: 600; }
+        .timeline-text { font-size: 0.9em; color: #444; line-height: 1.6; }
+        .timeline-details-btn {
+            display: inline-block; margin-top: 10px; font-size: 0.8em;
+            color: #007BFF; text-decoration: underline; cursor: pointer;
+        }
+        @media screen and (max-width: 768px) { /* Responsive timeline */
+            .timeline::before { left: 30px; }
+            .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; text-align: left !important; }
+            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
+            .timeline-item::after { border-right: 10px solid #fff; border-left: 0; left: 20px; } /* All arrows point left */
+            .timeline-date { left: 5px; }
+        }
+
 
     </style>
 </head>
 <body>
     <header>
-        </header>
+        <div class="header-container">
+            <div class="logo-container flex items-center">
+                <img src="salatiso/assets/photos/mfe_logo_placeholder.png" alt="Mdeni Family Enterprise Logo">
+                <span class="company-name text-white">Mdeni Family Intranet</span>
+            </div>
+            <nav class="main-nav-links">
+                <a href="#" data-target="welcome">Welcome</a>
+                <a href="#" class="active-main-nav" data-target="dashboard">Dashboard</a>
+                <a href="#" data-target="ourVision">Our Vision</a>
+                <a href="#" data-target="team">Our Team</a>
+                <a href="#" data-target="ourJourney">Our Journey</a>
+                <a href="#" data-target="ventures">Ventures</a>
+                <a href="#" data-target="trainingHub">Training Hub</a>
+                <a href="#" data-target="documents">Docs</a>
+                <a href="#" data-target="governance">Governance</a>
+                <a href="#" data-target="flameaInfo">Flamea</a>
+            </nav>
+            <div class="user-actions">
+                <div class="notification-bell">
+                    <i class="fas fa-bell"></i>
+                    <span class="notification-badge">4</span>
+                </div>
+                <div class="user-profile-menu ml-5 relative">
+                     <button>
+                        <img src="salatiso/assets/photos/team/profile_salatiso_thumb.jpg" alt="Salatiso Mdeni Profile">
+                    </button>
+                    <div class="dropdown-menu">
+                        <a href="#" id="myProfileLink">My Profile & Plan</a>
+                        <a href="#">Settings</a>
+                        <a href="#">Logout (Conceptual)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
     <div class="main-content-wrapper">
         <main class="content-display-area w-full">
-            <section id="dashboard" class="content-section active" style="padding:0; background:transparent; box-shadow:none; margin:0;">
-                <div class="dashboard-carousel-container">
-                    <div class="dashboard-carousel-track">
-                        <div class="dashboard-carousel-slide">
-                            <h2 class="slide-title">Dashboard: Performance Overview</h2>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-tasks text-purple-500"></i>Overall Training Progress</h3>
-                                    <div id="trainingProgressWidget">
-                                        </div>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-rocket text-red-500"></i>Company Launch Roadmap</h3>
-                                    <ul id="companyLaunchRoadmapWidget">
-                                        </ul>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-dollar-sign text-green-500"></i>Visa's Income Replacement Target (Dec 2025)</h3>
-                                    <p class="text-lg">Target: R15,000 / month</p>
-                                    <p class="text-lg">Current Projected: <span id="visaIncomeProjected" class="font-bold text-xl text-blue-600">R4,200</span></p>
-                                    <div class="progress-bar-container mt-2"><div class="progress-bar bg-blue-500" style="width: 28%;"></div></div>
-                                    <p class="text-xs text-gray-500 mt-1">Tracked monthly based on SafetyHelp & early venture profitability.</p>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-chart-pie text-indigo-500"></i>Quick Stats</h3>
-                                    <p class="text-lg">Active Ventures: <span class="font-bold text-2xl text-blue-600">5</span></p>
-                                    <p class="text-lg">Team Members Logged In Today: <span id="activeLogins" class="font-bold text-2xl text-blue-600">3</span></p>
-                                    <p class="text-lg">SafetyHelp Launch: <span class="font-bold text-red-600">June 1, 2025!</span></p>
-                                    <p class="text-lg">Next Performance Review Cycle: <span class="font-bold text-blue-600">Q3 (July)</span></p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dashboard-carousel-slide">
-                             <h2 class="slide-title">Dashboard: My Focus & Team Sync</h2>
-                            <div class="dashboard-grid">
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-user-clock text-teal-500"></i>My Pending Actions (Salatiso)</h3>
-                                    <ul class="task-list" id="myPendingActionsWidget">
-                                        </ul>
-                                    <button class="mt-4 text-sm bg-blue-500 hover:bg-blue-600 text-white py-1.5 px-4 rounded-md">View All My Tasks</button>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-calendar-alt text-cyan-500"></i>Meeting Tracker</h3>
-                                    <p><strong>Last Meeting:</strong> May 17, 2025 - Weekly Sync</p>
-                                    <p class="text-xs text-gray-500">Attendees: Salatiso, Visa, Tina, Kwakho, Solonwabo (5/6 - Nozukile apologies)</p>
-                                    <p class="text-xs mt-1">Key Action: Finalize Intranet User Roles - <span class="font-semibold">Visa</span> (Due: May 20)</p>
-                                    <p class="mt-2"><strong>Next Meeting:</strong> May 24, 2025 - SafetyHelp Launch Prep</p>
-                                    <button class="mt-3 text-sm bg-cyan-500 hover:bg-cyan-600 text-white py-1.5 px-4 rounded-md">View Meeting Logs & Actions</button>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-stream text-gray-500"></i>Recent Company Activity</h3>
-                                    <div id="recentActivityWidget" class="bg-white p-3 rounded-md max-h-48 overflow-y-auto text-xs space-y-1.5 border">
-                                        </div>
-                                </div>
-                                <div class="dashboard-widget">
-                                    <h3><i class="fas fa-comments text-orange-500"></i>Quick Communication</h3>
-                                    <textarea placeholder="Post a quick update or question for the team..." class="w-full p-2 border rounded-md text-sm h-20"></textarea>
-                                    <button class="mt-2 text-sm bg-orange-500 hover:bg-orange-600 text-white py-1.5 px-4 rounded-md">Post Update</button>
-                                </div>
-                            </div>
-                        </div>
+            <section id="welcome" class="content-section">
+                <h2 class="section-title">Siyanamukela! Welcome to the Mdeni Family Enterprise Intranet!</h2>
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-1/2">
+                        <img src="salatiso/assets/photos/heritage_transkei_placeholder.jpg" alt="Transkei Landscape - Our Heritage" class="rounded-lg shadow-xl w-full">
                     </div>
-                    <button class="dashboard-carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
-                    <button class="dashboard-carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
-                    <div class="dashboard-carousel-dots"></div>
+                    <div class="md:w-1/2">
+                        <p class="text-lg text-gray-700 mb-4">
+                            This platform is the heart of our family's collective ambition – a space to collaborate, learn, grow, and build a lasting legacy together. Here, we will manage our ventures, track our progress, support each other's development, and uphold the values that define us.
+                        </p>
+                        <p class="text-gray-600 mb-6">
+                            From the lessons learned "under a tree" in rural Transkei to the digital landscape we navigate today, our journey is one of resilience, unity, and a deep commitment to empowering ourselves and our community. As Salatiso often says, "Everything I do is to be the best dad for my son," and this enterprise extends that spirit to our entire family.
+                        </p>
+                        <blockquote class="border-l-4 border-orange-500 pl-4 py-2 italic text-gray-700">
+                            "Umntu ngumntu ngabantu." (A person is a person through other people.) <br>
+                            <span class="text-sm block mt-1">- Xhosa Proverb</span>
+                        </blockquote>
+                         <p class="mt-6 text-sm text-gray-500">
+                            Your first step: Please navigate through all sections of this Intranet to familiarize yourself. Then, visit "My Profile & Plan" (via the top-right user icon) to review and accept your role.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="dashboard" class="content-section active">
+                </section>
+
+            <section id="ourVision" class="content-section">
+                <h2 class="section-title">Our Guiding Light: Vision & Mission</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div class="bg-blue-50 p-6 rounded-lg shadow-md border-l-4 border-blue-500">
+                        <h3 class="font-display text-3xl text-blue-700 mb-4 flex items-center"><i class="fas fa-eye mr-3 text-blue-500"></i>Our Vision</h3>
+                        <p class="text-gray-700 leading-relaxed">To be a leading family-owned enterprise recognized for its innovation, integrity, and commitment to empowering its members and the community, building a lasting legacy for generations to come, rooted in our Xhosa heritage and South African identity.</p>
+                    </div>
+                    <div class="bg-orange-50 p-6 rounded-lg shadow-md border-l-4 border-orange-500">
+                        <h3 class="font-display text-3xl text-orange-700 mb-4 flex items-center"><i class="fas fa-bullseye mr-3 text-orange-500"></i>Our Mission</h3>
+                        <p class="text-gray-700 leading-relaxed">To strategically manage and grow a diversified portfolio of ventures in OHS consulting, property management, digital solutions, education, and publishing, while fostering the professional development of family members and contributing positively to society through its non-profit activities.</p>
+                    </div>
+                </div>
+                <div class="mt-10 text-center">
+                    <img src="salatiso/assets/photos/african_unity_symbol_placeholder.png" alt="African Symbol of Unity and Strength" class="mx-auto h-40 rounded-lg">
+                    <p class="mt-3 text-gray-600 text-sm">"Indlovu ithwala umboko wayo." (An elephant carries its own trunk - We are self-reliant and carry our own responsibilities.)</p>
                 </div>
             </section>
 
             <section id="team" class="content-section">
                 </section>
+
+            <section id="ourJourney" class="content-section">
+                <h2 class="section-title">Our Journey: From Vision to Operation</h2>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-date">P1</div>
+                        <div class="timeline-content-wrapper">
+                            <h3 class="timeline-title">Phase 1: Foundation & Legal (Est. 4-8 Weeks from May 20, 2025)</h3>
+                            <p class="timeline-text">Key activities: Finalizing Company Name, CIPC Registration, Initial Trust Research, Opening Business Bank Account, SARS Registrations, NPO Registration for Flamea, COID (if applicable).</p>
+                            <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase1">View Detailed Actions & Costs</button>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">P2</div>
+                        <div class="timeline-content-wrapper">
+                            <h3 class="timeline-title">Phase 2: Operational & Content Setup (Est. 4-6 Weeks following P1)</h3>
+                            <p class="timeline-text">Drafting Internal Agreements, Consolidating Venture Info, Setting up Basic Accounting, Developing Initial Budgets, Formalizing Service Offerings, IP Inventory, Creating Company Induction Materials.</p>
+                            <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase2">View Detailed Actions</button>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">P3</div>
+                        <div class="timeline-content-wrapper">
+                            <h3 class="timeline-title">Phase 3: Internal Launch & Initial Operations (Ongoing from ~Aug 26, 2025)</h3>
+                            <p class="timeline-text">Launching this Intranet, Commencing Individual Training Plans, Initial Marketing Content Creation, Establishing Regular Family Council/Management Meetings, SafetyHelp Public Launch (June 1, 2025).</p>
+                             <button class="timeline-details-btn view-journey-details-btn" data-journey-phase="phase3">View Detailed Actions</button>
+                        </div>
+                    </div>
+                     <div class="timeline-item">
+                        <div class="timeline-date"><i class="fas fa-flag-checkered"></i></div>
+                        <div class="timeline-content-wrapper">
+                            <h3 class="timeline-title">Future Milestones (Q4 2025 & Beyond)</h3>
+                            <p class="timeline-text">Full operational capacity, first performance reviews, potential profitability allowing Visa's income replacement, expansion of Sazi Life curriculum, Flamea community projects initiated.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
 
             <section id="ventures" class="content-section">
                 </section>
@@ -366,6 +454,33 @@
 
             <section id="governance" class="content-section">
                 </section>
+            
+            <section id="flameaInfo" class="content-section">
+                <h2 class="section-title">Flamea: Our Commitment to Community</h2>
+                <div class="flex flex-col md:flex-row items-center gap-8">
+                    <div class="md:w-2/5">
+                         <img src="salatiso/assets/photos/flamea_logo_large_placeholder.png" alt="Flamea Logo" class="rounded-lg shadow-lg w-full max-w-xs mx-auto">
+                    </div>
+                    <div class="md:w-3/5">
+                        <p class="text-lg text-gray-700 mb-4">
+                            Flamea (Fathers & Family Legal Advocacy Movement for Equality and Accountability) is the non-profit arm of the Mdeni Family Enterprise. It is dedicated to promoting equality through education, advocating for fathers' and family rights, and undertaking community upliftment initiatives.
+                        </p>
+                        <p class="text-gray-600 mb-3">
+                            Rooted in the belief that every child deserves the support of their entire family and that education is a key enabler of equality, Flamea aims to:
+                        </p>
+                        <ul class="list-disc pl-6 text-gray-600 space-y-1 mb-6">
+                            <li>Challenge discriminatory practices affecting family unity.</li>
+                            <li>Provide access to learning opportunities for underserved communities.</li>
+                            <li>Conduct research and advocate for policy reform.</li>
+                            <li>Collaborate with like-minded organizations to maximize impact.</li>
+                        </ul>
+                        <a href="https://flamea.org/" target="_blank" class="inline-block bg-orange-500 hover:bg-orange-600 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                            Learn More at Flamea.org <i class="fas fa-external-link-alt ml-2"></i>
+                        </a>
+                         <p class="mt-4 text-xs text-gray-500">Flamea is in the process of NPO registration. Its activities will be supported by the Mdeni Family Enterprise.</p>
+                    </div>
+                </div>
+            </section>
         </main>
     </div>
 
@@ -379,6 +494,16 @@
                 </div>
         </div>
     </div>
+    
+    <div id="journeyDetailsModal" class="modal">
+        <div class="modal-content max-w-xl">
+            <button class="close-modal-btn" onclick="closeJourneyModal()">&times;</button>
+            <h3 id="journeyModalTitle" class="modal-title text-blue-700 text-xl">Phase Details</h3>
+            <div id="journeyModalBody" class="text-sm mt-4">
+                </div>
+        </div>
+    </div>
+
 
     <script>
         // --- GLOBAL APP STATE (Conceptual - would be server-driven) ---
@@ -399,23 +524,28 @@
                 }
             });
             const targetSection = document.getElementById(targetId);
+            const contentDisplayArea = document.querySelector('.content-display-area');
+
             if (targetSection) {
-                if (targetId === 'dashboard') { // Special handling for full-page dashboard
-                    document.querySelector('.content-display-area').style.padding = '0';
-                    document.querySelector('.content-display-area').style.overflow = 'hidden';
+                if (targetId === 'dashboard') {
+                    contentDisplayArea.style.padding = '0';
+                    contentDisplayArea.style.overflow = 'hidden'; // Dashboard carousel handles its own scroll
                 } else {
-                    document.querySelector('.content-display-area').style.padding = '25px';
-                     document.querySelector('.content-display-area').style.overflow = 'auto';
+                    contentDisplayArea.style.padding = '0'; // Let section margin handle spacing
+                    contentDisplayArea.style.overflow = 'auto'; // Other sections scroll if needed
                 }
-                document.querySelector('.content-display-area').scrollTop = 0;
+                contentDisplayArea.scrollTop = 0;
                 targetSection.classList.add('active');
 
                 if (!skipHistoryPush) {
-                    // window.location.hash = targetId; // Consider implications for single-page app state
+                    // window.location.hash = targetId;
                 }
-                 // If team section is activated, ensure carousel is populated and initialized
-                if (targetId === 'team') {
+                if (targetId === 'team' && !teamCarouselPopulated) {
                     populateAndInitTeamCarousel();
+                }
+                 // Initialize timeline specific JS if journey section is active
+                if (targetId === 'ourJourney') {
+                    // Any specific JS for timeline animations or interactions can go here
                 }
             }
         }
@@ -437,7 +567,7 @@
         }
 
         // --- DASHBOARD CAROUSEL ---
-        const dashboardCarouselContainer = document.querySelector('.dashboard-carousel-container');
+        const dashboardCarouselContainer = document.querySelector('#dashboard .dashboard-carousel-container');
         if (dashboardCarouselContainer) {
             const track = dashboardCarouselContainer.querySelector('.dashboard-carousel-track');
             const slides = Array.from(track.children);
@@ -456,37 +586,37 @@
                         dotsContainer.appendChild(dot);
                     });
                 }
-            }
-
-            function DupdateActiveDot() {
-                if (dotsContainer && slides.length > 0) {
-                    Array.from(dotsContainer.children).forEach((dot, i) => {
-                        dot.classList.toggle('active', i === DcurrentIndex);
-                    });
+                 function DupdateActiveDot() {
+                    if (dotsContainer && slides.length > 0) {
+                        Array.from(dotsContainer.children).forEach((dot, i) => {
+                            dot.classList.toggle('active', i === DcurrentIndex);
+                        });
+                    }
                 }
-            }
 
-            function DupdateCarousel() {
-                if (slides.length > 0) {
-                    const slideWidth = slides[0].offsetWidth; // Use offsetWidth for accurate width including padding/border
-                    track.style.transform = `translateX(-${DcurrentIndex * slideWidth}px)`;
-                    DupdateActiveDot();
+                function DupdateCarousel() {
+                    if (slides.length > 0) {
+                        const slideWidth = slides[0].offsetWidth;
+                        track.style.transform = `translateX(-${DcurrentIndex * slideWidth}px)`;
+                        DupdateActiveDot();
+                    }
                 }
+
+                if (nextButton) nextButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex + 1) % slides.length; DupdateCarousel(); });
+                if (prevButton) prevButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex - 1 + slides.length) % slides.length; DupdateCarousel(); });
+                
+                let DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000);
+                dashboardCarouselContainer.addEventListener('mouseenter', () => clearInterval(DautoSlideInterval));
+                dashboardCarouselContainer.addEventListener('mouseleave', () => {
+                    clearInterval(DautoSlideInterval);
+                    DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000);
+                });
+
+                window.addEventListener('resize', DupdateCarousel);
+                DupdateCarousel();
             }
-
-            if (nextButton) nextButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex + 1) % slides.length; DupdateCarousel(); });
-            if (prevButton) prevButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex - 1 + slides.length) % slides.length; DupdateCarousel(); });
-            
-            let DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000); // Slower for dashboard
-            dashboardCarouselContainer.addEventListener('mouseenter', () => clearInterval(DautoSlideInterval));
-            dashboardCarouselContainer.addEventListener('mouseleave', () => {
-                clearInterval(DautoSlideInterval);
-                DautoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 12000);
-            });
-
-            window.addEventListener('resize', DupdateCarousel);
-            if (slides.length > 0) DupdateCarousel(); // Initial call
         }
+
 
         // --- TEAM CAROUSEL (MFE) ---
         function setupCarousel(carouselElement) {
@@ -522,9 +652,12 @@
             }
 
             function updateCarouselDisplay() {
-                itemWidth = items[0].getBoundingClientRect().width / itemsPerView;
-                track.style.transform = `translateX(-${currentIndex * itemWidth * itemsPerView}px)`;
-                updateActiveDot();
+                // Ensure itemWidth is calculated correctly, especially if carousel is initially hidden
+                if (items[0].offsetWidth > 0) { // Check if element is visible
+                    itemWidth = items[0].getBoundingClientRect().width / itemsPerView;
+                    track.style.transform = `translateX(-${currentIndex * itemWidth * itemsPerView}px)`;
+                    updateActiveDot();
+                }
             }
 
             if (nextButton) nextButton.addEventListener('click', () => { currentIndex = (currentIndex + 1) % items.length; updateCarouselDisplay(); });
@@ -537,11 +670,22 @@
                  autoSlideInterval = setInterval(() => { if (nextButton) nextButton.click(); }, 7000);
             });
 
-            window.addEventListener('resize', updateCarouselDisplay);
+            // Use ResizeObserver for more reliable width calculation on visibility change
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    if (entry.target.offsetWidth > 0) {
+                         updateCarouselDisplay();
+                    }
+                }
+            });
+            if(items.length > 0) resizeObserver.observe(items[0]);
+
+
             updateCarouselDisplay();
         }
 
-        // --- TEAM MEMBER DATA & MODAL ---
+
+        // --- TEAM MEMBER DATA & MODAL (PADP Logic) ---
         const memberDetailModal = document.getElementById('memberDetailsModal');
         const modalBody = document.getElementById('modalBodyContent');
         const closeModalButtons = memberDetailModal.querySelectorAll('.close-modal-btn');
@@ -550,7 +694,7 @@
             salatiso: {
                 name: "Salatiso L. Mdeni", role: "Chief Strategic & Operations Officer (CSOO)",
                 profileImage: "salatiso/assets/photos/team/salatiso_profile_large.jpg",
-                profile: `A highly experienced OHS and Risk Management expert with over 20 years in diverse sectors... His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli. Key Deadline: Integrate Salatiso Chatbot on safetyfirst.help staging by May 24, 2025.`,
+                profile: `A highly experienced OHS and Risk Management expert... His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli. Key Deadline: Integrate Salatiso Chatbot on safetyfirst.help staging by May 24, 2025.`,
                 responsibilities: ["Overall operational excellence", "Product development", "Risk management & Compliance", "Mentoring next generation", "Appoints Chairperson & CEO (initial)"],
                 padp: {
                     commonActions: [
@@ -690,7 +834,7 @@
                         { task: "Review and approve transfer of shares to Tina/Kwakho upon CEO/CSOO certification of performance", deadline: "As per vesting schedule", weight: 20, score: 0, status: "ongoing", estimatedTime: "1h/instance", optOut: false },
                         { task: "Advise on one cultural integration initiative per year", deadline: "Annual", weight: 10, score: 0, status: "not-started", estimatedTime: "5h/year", optOut: false },
                     ],
-                    userDefinedDeliverables: [], // Typically non-executive roles might not have these unless specific projects are taken on
+                    userDefinedDeliverables: [], 
                     trainingPlan: [
                         { task: "Attend Quarterly Family Council Meetings", month: "Quarterly", week: "N/A", cost: 0, status: "ongoing", deliverable: "Active Participation & Minutes Review", estimatedTime: "2h/meeting" },
                         { task: "Reading: 'Governance for Family Enterprises' (summary provided by Salatiso)", month: 2, week: "Self-paced", cost: 0, status: "not-started", deliverable: "Discussion points for next council", estimatedTime: "4h" }
@@ -956,11 +1100,14 @@
         
         function calculateTotalPadpWeight(memberKey) {
             const member = teamMemberData[memberKey];
+            if (!member || !member.padp) return; // Ensure member and padp exist
             let totalWeight = 0;
             ['coreDeliverables', 'roleSpecificDeliverables', 'userDefinedDeliverables'].forEach(type => {
-                member.padp[type].forEach(item => {
-                    totalWeight += (parseInt(item.weight) || 0);
-                });
+                if (member.padp[type]) { // Check if the deliverable type array exists
+                    member.padp[type].forEach(item => {
+                        totalWeight += (parseInt(item.weight) || 0);
+                    });
+                }
             });
             const weightDisplay = document.getElementById(`totalPadpWeight_${memberKey}`);
             if(weightDisplay) weightDisplay.textContent = totalWeight;
@@ -968,25 +1115,23 @@
 
 
         function handleCommonActionChange(checkbox, memberKey) {
-            // This function is now mostly for visual toggling if checkbox itself is used.
-            // The actual logic is in handleCommonActionButtonClick
             const actionId = checkbox.dataset.actionId;
             const actionItem = teamMemberData[memberKey].padp.commonActions.find(a => a.id === actionId);
             if (actionItem) {
-                if (checkbox.checked && actionItem.status !== 'completed') { // If manually checked and not yet completed by button
-                    // Potentially disallow this or make it trigger the button's logic
+                if (checkbox.checked && actionItem.status !== 'completed') {
                     console.warn("Common action checkbox manually changed. Prefer using action buttons.");
                 } else if (!checkbox.checked && actionItem.status === 'completed') {
-                    // Disallow unchecking a completed & signed action
-                    checkbox.checked = true;
-                    alert("This action has already been completed and signed off.");
+                    checkbox.checked = true; // Prevent unchecking completed/signed
+                    alert("This action has already been completed and signed off. It cannot be reverted here.");
                 }
             }
         }
         function handleCommonActionButtonClick(button, memberKey) {
             const actionId = button.dataset.actionId;
             const actionItem = teamMemberData[memberKey].padp.commonActions.find(a => a.id === actionId);
-            const checkbox = document.getElementById(`commonAction_${memberKey}_${memberKey}_${actionItem.id === 'familiarize' ? 0 : actionItem.id === 'acceptRole' ? 1 : 2}`); // Brittle mapping
+            // Find the corresponding checkbox based on actionId more reliably
+            const checkbox = modalBody.querySelector(`.common-action-checkbox[data-action-id="${actionId}"][data-member="${memberKey}"]`);
+
 
             if (actionItem && actionItem.status !== 'completed') {
                 actionItem.status = 'completed';
@@ -994,21 +1139,30 @@
                 if (checkbox) {
                     checkbox.checked = true;
                     checkbox.disabled = true;
-                    checkbox.nextElementSibling.classList.add('line-through', 'text-gray-500');
-                    checkbox.nextElementSibling.querySelector('.signed-off-text').textContent = ` (Accepted: ${actionItem.signedOff})`;
+                    const label = checkbox.closest('li').querySelector('label');
+                    if (label) {
+                        label.classList.add('line-through', 'text-gray-500');
+                        const signedOffSpan = label.querySelector('.signed-off-text');
+                        if (signedOffSpan) signedOffSpan.textContent = ` (Accepted: ${actionItem.signedOff})`;
+                    }
                 }
                 button.textContent = 'Completed';
                 button.disabled = true;
                 button.classList.remove('bg-green-500', 'hover:bg-green-600', 'bg-blue-500', 'hover:bg-blue-600');
                 button.classList.add('bg-gray-400', 'cursor-not-allowed');
 
-                alert(`Action '${actionItem.task}' has been electronically signed off and marked complete.`);
+                alert(`Action '${actionItem.task}' has been electronically signed off and marked complete by ${memberKey}.`);
+                // In a real app, send this update to the backend.
+                // For now, log it and update any relevant dashboard widgets.
+                console.log("Action Signed Off:", memberKey, actionItem);
                 populateTrainingProgress(); // Update dashboard
+                // Potentially update My Pending Actions widget if this task was listed there
+                populateMyPendingActions();
             }
         }
 
         function handlePadpItemSave(button, memberKey) {
-            const itemTypeKey = button.dataset.type; // 'core', 'roleSpecific', 'userDefined', 'training'
+            const itemTypeKey = button.dataset.type; 
             const itemIndex = parseInt(button.dataset.index);
             const row = button.closest('tr');
             
@@ -1016,13 +1170,20 @@
             if (itemTypeKey === 'training') {
                 targetArray = teamMemberData[memberKey].padp.trainingPlan;
             } else {
-                targetArray = teamMemberData[memberKey].padp[itemTypeKey + (itemTypeKey.endsWith('s') ? '' : 'Deliverables')];
+                // Adjust for 'Deliverables' suffix if not present
+                const deliverableKey = itemTypeKey.endsWith('s') ? itemTypeKey : itemTypeKey + 'Deliverables';
+                targetArray = teamMemberData[memberKey].padp[deliverableKey];
+            }
+
+            if (!targetArray || !targetArray[itemIndex]) {
+                console.error("Could not find PADP item to update:", memberKey, itemTypeKey, itemIndex);
+                return;
             }
             const itemToUpdate = targetArray[itemIndex];
 
             row.querySelectorAll('[data-field]').forEach(field => {
                 const fieldName = field.dataset.field;
-                if (field.type === 'checkbox' && fieldName === 'optOut') { // Handle optOut checkbox
+                if (field.type === 'checkbox' && fieldName === 'optOut') { 
                     itemToUpdate[fieldName] = field.checked;
                 } else if (field.type === 'number') {
                     itemToUpdate[fieldName] = parseInt(field.value) || 0;
@@ -1032,7 +1193,7 @@
             });
             
             console.log(`Updated PADP item for ${memberKey}, type ${itemTypeKey}, index ${itemIndex}:`, itemToUpdate);
-            alert('PADP item updated (conceptual save). Dashboard would refresh.');
+            alert('PADP item updated (conceptual save). Dashboard would refresh if connected to backend.');
             populateTrainingProgress();
             if (itemTypeKey !== 'training') calculateTotalPadpWeight(memberKey);
         }
@@ -1041,11 +1202,15 @@
         // Populate Team Carousel on #team section activation
         let teamCarouselPopulated = false;
         function populateAndInitTeamCarousel() {
-            if (teamCarouselPopulated) return;
+            if (teamCarouselPopulated) { // If already populated, just ensure carousel is initialized/updated
+                 const teamCarouselEl = document.querySelector('#team .mfe-carousel-container');
+                 if(teamCarouselEl) setupCarousel(teamCarouselEl);
+                return;
+            }
             const teamCarouselTrack = document.querySelector('#team .mfe-carousel-track');
             if (!teamCarouselTrack) return;
 
-            teamCarouselTrack.innerHTML = ''; // Clear if repopulating, though ideally only once
+            teamCarouselTrack.innerHTML = ''; 
             Object.keys(teamMemberData).forEach(key => {
                 const member = teamMemberData[key];
                 const itemDiv = document.createElement('div');
@@ -1060,7 +1225,6 @@
                     </div>`;
                 teamCarouselTrack.appendChild(itemDiv);
             });
-            // Re-attach event listeners for newly added buttons
             teamCarouselTrack.querySelectorAll('.view-member-details-btn').forEach(button => {
                 button.addEventListener('click', () => populateModal(button.dataset.member));
             });
@@ -1073,7 +1237,7 @@
         function populateTrainingProgress() {
             const widget = document.getElementById('trainingProgressWidget');
             if (!widget) return;
-            widget.innerHTML = ''; // Clear previous
+            widget.innerHTML = ''; 
             Object.keys(teamMemberData).forEach(key => {
                 const member = teamMemberData[key];
                 if (member.padp && member.padp.trainingPlan && member.padp.trainingPlan.length > 0) {
@@ -1097,46 +1261,40 @@
             });
         }
         
-        // Populate My Pending Actions Widget (Conceptual)
         function populateMyPendingActions() {
             const widget = document.getElementById('myPendingActionsWidget');
-            if (!widget || !teamMemberData[currentLoggedInUser]) return;
+            if (!widget || !teamMemberData[currentLoggedInUser] || !teamMemberData[currentLoggedInUser].padp) return;
             widget.innerHTML = '';
             const userPADP = teamMemberData[currentLoggedInUser].padp;
             let actionCount = 0;
 
-            // Common Actions not completed
-            userPADP.commonActions.filter(a => a.status !== 'completed').slice(0, 2).forEach(action => { // Show max 2
+            userPADP.commonActions.filter(a => a.status !== 'completed').slice(0, 2).forEach(action => {
                 const li = document.createElement('li');
-                li.innerHTML = `<input type="checkbox" id="dash_common_${action.id}" class="mr-2"><label for="dash_common_${action.id}">${action.task} (Initial)</label>`;
+                li.innerHTML = `<input type="checkbox" id="dash_common_${action.id}" class="mr-2"><label for="dash_common_${action.id}">${action.task} (Initial Action)</label>`;
                 widget.appendChild(li);
                 actionCount++;
             });
 
-            // Role-Specific Deliverables not completed
-            userPADP.roleSpecificDeliverables.filter(d => d.status !== 'completed').slice(0, 4 - actionCount).forEach(del => { // Show more if space
+            userPADP.roleSpecificDeliverables.filter(d => d.status !== 'completed').slice(0, 4 - actionCount).forEach(del => {
                  const li = document.createElement('li');
-                li.innerHTML = `<input type="checkbox" id="dash_role_${del.task.substring(0,5)}" class="mr-2"><label for="dash_role_${del.task.substring(0,5)}">${del.task.substring(0,30)}... (PADP)</label>`;
+                li.innerHTML = `<input type="checkbox" id="dash_role_${del.task.replace(/\s+/g, '_').substring(0,10)}" class="mr-2"><label for="dash_role_${del.task.replace(/\s+/g, '_').substring(0,10)}">${del.task.substring(0,35)}... (PADP)</label>`;
                 widget.appendChild(li);
             });
-             // Add Salatiso's specific deadline
-            if (currentLoggedInUser === 'salatiso') {
+            if (currentLoggedInUser === 'salatiso' && userPADP.roleSpecificDeliverables.find(d=>d.task.includes("Chatbot") && d.status !== 'completed')) {
                  const li = document.createElement('li');
                 li.innerHTML = `<input type="checkbox" id="dash_chatbot_salatiso" class="mr-2"><label for="dash_chatbot_salatiso" class="font-bold text-red-600">Integrate Chatbot on SafetyHelp Staging (Due: May 24)</label>`;
                 widget.appendChild(li);
             }
         }
         
-        // Populate Company Launch Roadmap Widget
         function populateCompanyLaunchRoadmap() {
             const widget = document.getElementById('companyLaunchRoadmapWidget');
             if (!widget) return;
-            // Conceptual data - this would come from a project plan
             const roadmap = [
                 { name: "Phase 1: Legal Foundation", status: "completed", progress: 100, icon: "fas fa-check-circle text-green-500" },
                 { name: "Phase 2: Operational Setup", status: "in-progress", progress: 70, icon: "fas fa-cogs text-blue-500" },
                 { name: "Phase 3: Intranet & Internal Launch", status: "in-progress", progress: 40, icon: "fas fa-users text-purple-500" },
-                { name: "Phase 4: SafetyHelp Public Launch", status: "not-started", progress: 10, icon: "far fa-clock text-orange-500" }
+                { name: "Phase 4: SafetyHelp Public Launch (June 1)", status: "not-started", progress: 10, icon: "far fa-clock text-orange-500" }
             ];
             widget.innerHTML = '';
             roadmap.forEach(phase => {
@@ -1148,7 +1306,6 @@
             });
         }
 
-        // Populate Recent Activity Widget (Conceptual)
         function populateRecentActivity() {
             const widget = document.getElementById('recentActivityWidget');
             if (!widget) return;
@@ -1166,6 +1323,50 @@
                 widget.appendChild(p);
             });
         }
+
+        // --- JOURNEY DETAILS MODAL ---
+        const journeyDetailsModal = document.getElementById('journeyDetailsModal');
+        const journeyModalTitle = document.getElementById('journeyModalTitle');
+        const journeyModalBody = document.getElementById('journeyModalBody');
+
+        const journeyPhaseDetails = {
+            phase1: {
+                title: "Phase 1: Foundation & Legal Details",
+                content: `<ul>
+                            <li>Finalize Holding Company Name (Lead: Visa, Cost: R50)</li>
+                            <li>Register Holding Company (Pty) Ltd (Lead: Visa, Cost: R125)</li>
+                            <li>Draft Basic Trust Deeds (Research - Salatiso)</li>
+                            <li>Open Business Bank Account (Lead: Visa)</li>
+                            <li>SARS Registrations (Lead: Visa/Salatiso)</li>
+                            <li>Register Flamea as NPO (Lead: Visa/Salatiso)</li>
+                            <li>COID Registration (if applicable - Salatiso)</li>
+                         </ul>
+                         <p class="mt-3 text-xs">Refer to Strategic Roadmap v4 for full details.</p>`
+            },
+            phase2: { title: "Phase 2: Operational & Content Setup Details", content: `<p>Key tasks: Internal Agreements, Venture Info Consolidation, Basic Accounting Setup, Initial Operating Budget, Formalize Service Offerings, IP Inventory, Company Induction Materials Development. Full details in Strategic Roadmap v4.</p>`},
+            phase3: { title: "Phase 3: Internal Launch & Initial Operations Details", content: `<p>Key tasks: Intranet Launch, Training Plan Commencement, Initial Marketing Content, Regular Council Meetings, Critical: SafetyHelp Public Launch (June 1, 2025). Full details in Strategic Roadmap v4.</p>`}
+        };
+
+        document.querySelectorAll('.view-journey-details-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                const phaseKey = this.dataset.journeyPhase;
+                const details = journeyPhaseDetails[phaseKey];
+                if (details) {
+                    journeyModalTitle.textContent = details.title;
+                    journeyModalBody.innerHTML = details.content;
+                    journeyDetailsModal.classList.add('active');
+                }
+            });
+        });
+        function closeJourneyModal() {
+            journeyDetailsModal.classList.remove('active');
+        }
+        // Close journey modal if clicking outside content
+         journeyDetailsModal.addEventListener('click', (event) => {
+            if (event.target === journeyDetailsModal) {
+                closeJourneyModal();
+            }
+        });
 
 
         // --- MODAL TABS ---
@@ -1202,19 +1403,14 @@
 
         // --- INITIALIZE ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Initial section display based on hash or default to dashboard
-            // const initialSection = window.location.hash ? window.location.hash.substring(1) : 'dashboard';
-            // showMainSection(initialSection, true); // true to skip history update on initial load
-             showMainSection('dashboard', true);
+            const initialSection = 'dashboard'; // Default to dashboard
+            showMainSection(initialSection, true);
 
-
-            // Populate dynamic dashboard widgets
             populateTrainingProgress();
             populateMyPendingActions();
             populateCompanyLaunchRoadmap();
             populateRecentActivity();
 
-            // Setup observer for #team section to populate carousel when it becomes active
             const teamSectionObserver = new MutationObserver((mutationsList, observer) => {
                 for(const mutation of mutationsList) {
                     if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
@@ -1229,7 +1425,6 @@
                 teamSectionObserver.observe(document.getElementById('team'), { attributes: true });
             }
             
-            // Setup observer for #governance section for tabs
             const governanceSection = document.getElementById('governance');
             if (governanceSection) {
                 const governanceSectionObserver = new MutationObserver((mutationsList, observer) => {
@@ -1239,7 +1434,7 @@
                                 const tabsContainer = governanceSection.querySelector('.tabs');
                                 if (tabsContainer && !tabsContainer.querySelector('button.active')) {
                                      const firstTabButton = tabsContainer.querySelector('button');
-                                     if(firstTabButton) firstTabButton.click();
+                                     if(firstTabButton) firstTabButton.click(); // Click to also trigger openTab
                                 }
                             }
                         }
