@@ -11,23 +11,23 @@
     <style>
         /* --- Earthy Theme Color Palette --- */
         :root {
-            --color-primary-dark: #5D4037; /* Deep Brown */
-            --color-primary-medium: #795548; /* Brown */
-            --color-primary-light: #A1887F; /* Light Brown */
-            --color-secondary-dark: #38761D; /* Dark Green */
-            --color-secondary-medium: #689F38; /* Green */
-            --color-secondary-light: #AED581; /* Light Green */
-            --color-accent-orange: #F57C00; /* Burnt Orange (was FD7E14) */
-            --color-accent-gold: #FFB300;   /* Gold/Yellow Ochre */
-            --color-background-light: #F5F5F5; /* Off-white / Very Light Grey (was E8F0FE) */
-            --color-background-cream: #FFF8E1; /* Creamy Beige */
-            --color-text-dark: #3E2723;    /* Dark Brown for text */
-            --color-text-medium: #5D4037;  /* Medium Brown for text */
-            --color-text-light: #8D6E63;   /* Light Brown for text */
-            --color-border: #D7CCC8;       /* Light Brownish Grey for borders */
-            --color-success: #4CAF50;      /* Green for success states */
-            --color-warning: #FFC107;      /* Amber for warnings */
-            --color-danger: #F44336;       /* Red for errors/danger */
+            --color-primary-dark: #5D4037;      /* Deep Brown */
+            --color-primary-medium: #795548;    /* Brown */
+            --color-primary-light: #A1887F;     /* Light Brown */
+            --color-secondary-dark: #2E7D32;    /* Darker Green */
+            --color-secondary-medium: #4CAF50;  /* Vibrant Green */
+            --color-secondary-light: #C8E6C9;   /* Light Green */
+            --color-accent-orange: #EF6C00;     /* Deep Terracotta/Orange */
+            --color-accent-gold: #FFAB00;       /* Warm Gold */
+            --color-background-cream: #FAF3E0;  /* Warmer Cream */
+            --color-background-light-tan: #EFEBE9; /* Light Tan */
+            --color-text-dark: #3E2723;        /* Darkest Brown for text */
+            --color-text-medium: #5D4037;      /* Medium Brown for text */
+            --color-text-light: #8D6E63;       /* Light Brown for text */
+            --color-border: #BCAAA4;           /* Brownish Grey for borders */
+            --color-success: var(--color-secondary-medium);
+            --color-warning: var(--color-accent-gold);
+            --color-danger: #D32F2F;           /* Deeper Red */
         }
 
         /* Global Styles */
@@ -39,7 +39,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            padding-top: 80px; /* Fixed header height */
+            padding-top: 80px;
         }
 
         h1, h2, h3, h4, h5, h6, .font-display {
@@ -49,18 +49,18 @@
 
         /* Header */
         header {
-            background-color: var(--color-primary-medium); /* Brown */
+            background-color: var(--color-primary-dark); /* Deep Brown Header */
             color: var(--color-background-cream);
             position: fixed;
             top: 0; left: 0; right: 0; z-index: 1000;
-            width: 100%; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            width: 100%; box-shadow: 0 3px 8px rgba(0,0,0,0.25);
         }
         .header-container {
             max-width: 100%; margin: 0 auto; display: flex;
             justify-content: space-between; align-items: center;
             padding: 10px 30px; height: 80px;
         }
-        .logo-container img { height: 50px; margin-right: 15px; filter: brightness(0) invert(1); /* Make logo white if it's dark */ }
+        .logo-container img { height: 50px; margin-right: 15px; /* Assuming logo is light or has transparency */ }
         .logo-container .company-name { font-size: 1.8em; font-weight: 700; color: var(--color-background-cream); }
         .main-nav-links { display: flex; flex-wrap: wrap; }
         .main-nav-links a {
@@ -84,13 +84,13 @@
         }
         .user-profile-menu img { width: 38px; height: 38px; border-radius: 50%; border: 2px solid var(--color-background-cream); }
         .dropdown-menu {
-            display: none; position: absolute; right: 0; top: 55px; /* Adjusted for potential thicker header elements */
+            display: none; position: absolute; right: 0; top: 55px;
             background-color: white; color: var(--color-text-dark); border-radius: 6px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 220px; /* Wider */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 1001; width: 220px;
             border: 1px solid var(--color-border);
         }
         .dropdown-menu a { display: block; padding: 12px 18px; text-decoration: none; color: var(--color-text-medium); font-size: 0.9em; }
-        .dropdown-menu a:hover { background-color: var(--color-background-light); color: var(--color-primary-dark); }
+        .dropdown-menu a:hover { background-color: var(--color-background-light-tan); color: var(--color-primary-dark); }
         .user-profile-menu:hover .dropdown-menu { display: block; }
 
 
@@ -98,11 +98,11 @@
         .main-content-wrapper { display: flex; flex-grow: 1; }
         .content-display-area { flex-grow: 1; padding: 0; overflow: hidden; }
         .content-section {
-            background-color: #FFFFFF; padding: 30px 35px; /* Increased padding */
-            border-radius: 10px; box-shadow: 0 5px 15px rgba(93,64,55,0.1); /* Brownish shadow */
+            background-color: #FFFFFF; padding: 30px 35px;
+            border-radius: 10px; box-shadow: 0 5px 15px rgba(93,64,55,0.1);
             margin: 25px; display: none; opacity: 0;
             transition: opacity 0.4s ease-in-out;
-            max-height: calc(100vh - 80px - 50px);
+            max-height: calc(100vh - 80px - 50px); /* Header and margin */
             overflow-y: auto; border: 1px solid var(--color-border);
         }
         .content-section.active { display: block; opacity: 1; }
@@ -114,7 +114,7 @@
 
 
         /* Dashboard Carousel & Widgets */
-        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); background-color: var(--color-background-light); }
+        .dashboard-carousel-container { position: relative; width: 100%; overflow: hidden; height: calc(100vh - 80px); background-color: var(--color-background-light-tan); }
         .dashboard-carousel-track { display: flex; transition: transform 0.7s cubic-bezier(0.68, -0.55, 0.27, 1.55); height: 100%; }
         .dashboard-carousel-slide {
             min-width: 100%; padding: 30px 40px; box-sizing: border-box;
@@ -124,9 +124,9 @@
         .dashboard-carousel-slide h2.slide-title { font-size: 2.5em; color: var(--color-primary-dark); margin-bottom: 25px; text-align: center; }
         .dashboard-carousel-button {
             position: absolute; top: 50%; transform: translateY(-50%);
-            background-color: rgba(93,64,55,0.6); /* Brownish transparent */
-            color: white; opacity: 0.8; border: none; width: 45px; height: 45px;
-            border-radius: 50%; cursor: pointer; z-index:10; transition: all 0.3s;
+            background-color: rgba(93,64,55,0.6); color: white; opacity: 0.8;
+            border: none; width: 45px; height: 45px; border-radius: 50%;
+            cursor: pointer; z-index:10; transition: all 0.3s;
             font-size: 1.5em; display: flex; align-items: center; justify-content: center;
         }
         .dashboard-carousel-button:hover { background-color: var(--color-primary-medium); opacity: 1; }
@@ -144,14 +144,14 @@
         .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 25px; width:100%; max-width: 1600px;}
         .dashboard-widget {
             background-color: #FFFFFF; padding: 25px; border-radius: 8px;
-            box-shadow: 0 3px 8px rgba(93,64,55,0.1); border-left: 5px solid var(--color-secondary-medium); /* Green accent */
+            box-shadow: 0 3px 8px rgba(93,64,55,0.1); border-left: 5px solid var(--color-secondary-medium);
         }
         .dashboard-widget h3 { font-size: 1.4em; color: var(--color-primary-dark); margin-bottom: 18px; display: flex; align-items: center; }
         .dashboard-widget h3 i { margin-right: 10px; color: var(--color-secondary-dark); }
         .dashboard-widget ul { list-style: none; padding: 0; }
         .dashboard-widget li { margin-bottom: 10px; font-size: 0.95em; display: flex; align-items: center; color: var(--color-text-medium); }
         .dashboard-widget li i { margin-right: 8px; color: var(--color-secondary-medium); }
-        .progress-bar-container { background-color: #E0E0E0; /* Lighter grey */ border-radius: 6px; height: 12px; margin-top: 6px; overflow: hidden; }
+        .progress-bar-container { background-color: #E0E0E0; border-radius: 6px; height: 12px; margin-top: 6px; overflow: hidden; }
         .progress-bar { background-color: var(--color-secondary-medium); height: 100%; border-radius: 6px; transition: width 0.6s ease-in-out; }
         .task-list input[type="checkbox"] { margin-right: 10px; accent-color: var(--color-primary-medium); }
         .task-list label { font-size: 0.9em; color: var(--color-text-medium); }
@@ -178,7 +178,7 @@
         }
 
         /* Team Carousel (mfe-carousel) */
-        .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: var(--color-background-light); border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(93,64,55,0.05);}
+        .mfe-carousel-container { position: relative; width: 100%; overflow: hidden; background: var(--color-background-light-tan); border-radius: 8px; padding:20px; margin-top:20px; box-shadow: inset 0 0 10px rgba(93,64,55,0.05);}
         .mfe-carousel-track { display: flex; transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
         .mfe-carousel-item { min-width: 100%; padding: 10px; box-sizing: border-box; }
         .mfe-carousel-item .card-content {
@@ -204,7 +204,7 @@
         /* Modal Styles */
         .modal {
             display: none; position: fixed; inset: 0;
-            background-color: rgba(62,39,35,0.7); /* Darker brown overlay */
+            background-color: rgba(62,39,35,0.7);
             display: flex; justify-content: center; align-items: center;
             padding: 20px; z-index: 1001;
             opacity: 0; pointer-events: none; transition: opacity 0.3s ease-in-out;
@@ -228,7 +228,7 @@
         .modal-section h4 { font-size: 1.25em; color: var(--color-primary-medium); margin-top: 25px; margin-bottom: 10px; display:flex; align-items:center;}
         .modal-section h4 i { margin-right: 8px; color: var(--color-secondary-medium); }
         .modal-tabs { display: flex; border-bottom: 1px solid var(--color-border); margin-bottom: 15px; }
-        .modal-tab-button { padding: 10px 15px; cursor: pointer; background: var(--color-background-light); border: 1px solid var(--color-border); border-bottom: none; margin-right: 5px; border-radius: 5px 5px 0 0; font-size: 0.9em; color: var(--color-text-medium);}
+        .modal-tab-button { padding: 10px 15px; cursor: pointer; background: var(--color-background-light-tan); border: 1px solid var(--color-border); border-bottom: none; margin-right: 5px; border-radius: 5px 5px 0 0; font-size: 0.9em; color: var(--color-text-medium);}
         .modal-tab-button.active { background: white; border-bottom: 1px solid white; font-weight: bold; color: var(--color-primary-dark);}
         .modal-tab-pane { display: none; }
         .modal-tab-pane.active { display: block; }
@@ -236,15 +236,15 @@
         /* Action Plan Table & Performance Sections */
         .action-plan-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 0.85em; }
         .action-plan-table th, .action-plan-table td { border: 1px solid var(--color-border); padding: 8px 10px; text-align: left; vertical-align: middle;}
-        .action-plan-table th { background-color: var(--color-background-light); color: var(--color-primary-dark); font-weight: 600; }
+        .action-plan-table th { background-color: var(--color-background-light-tan); color: var(--color-primary-dark); font-weight: 600; }
         .action-plan-table input, .action-plan-table select, .action-plan-table textarea {
             width: 100%; padding: 7px; border: 1px solid var(--color-border); border-radius: 4px; box-sizing: border-box; font-size:0.95em; background-color: #fff; color: var(--color-text-dark);
         }
         .action-plan-table textarea { min-height: 40px; resize: vertical; }
         .action-plan-table .status-select { padding: 7px 5px; }
-        .status-completed { background-color: #E8F5E9 !important; color: var(--color-secondary-dark); } /* Light Green */
-        .status-in-progress { background-color: #FFFDE7 !important; color: #795548; } /* Light Yellow/Cream */
-        .status-not-started { background-color: #FFEBEE !important; color: #C62828; } /* Light Red */
+        .status-completed { background-color: var(--color-secondary-light) !important; color: var(--color-secondary-dark); }
+        .status-in-progress { background-color: var(--color-accent-gold) !important; color: var(--color-primary-dark); opacity: 0.8; }
+        .status-not-started { background-color: #FFCCBC !important; color: var(--color-danger); } /* Light terracotta/peach */
         .action-btn {
             background-color: var(--color-secondary-medium); color:white; font-size:0.8em;
             padding: 6px 10px; border-radius:4px; border:none; cursor:pointer;
@@ -252,7 +252,7 @@
         .action-btn:hover { background-color: var(--color-secondary-dark); }
         .signature-area { border: 1px dashed var(--color-border); padding: 10px; margin-top:15px; text-align: center; }
         .signature-area button { background-color: var(--color-primary-medium); color:white; padding: 8px 15px; border-radius: 5px; border:none; cursor:pointer;}
-        .signature-area button:disabled { background-color: #BDBDBD; } /* Greyed out */
+        .signature-area button:disabled { background-color: #BDBDBD; }
         .signed-confirmation { color: var(--color-success); font-weight: bold; font-size: 0.9em; }
 
         /* Ventures & Documents Section Cards */
@@ -281,131 +281,139 @@
         footer a:hover { text-decoration: underline; }
 
         /* Tabs for Governance & Welcome Section */
-        .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid var(--color-border); border-bottom: none; background-color: var(--color-background-light); cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500; color: var(--color-text-medium);}
+        .tabs button { padding: 10px 18px; margin-right: 5px; border: 1px solid var(--color-border); border-bottom: none; background-color: var(--color-background-light-tan); cursor: pointer; border-radius: 6px 6px 0 0; font-size: 0.95em; font-weight: 500; color: var(--color-text-medium);}
         .tabs button.active { background-color: white; border-bottom: 1px solid white; font-weight: bold; color: var(--color-primary-dark);}
         .tab-content { border: 1px solid var(--color-border); padding: 20px; border-top: none; border-radius: 0 0 6px 6px; background-color: white;}
 
-        /* Timeline styles */
-        .timeline { position: relative; max-width: 1000px; margin: 30px auto; padding: 20px 0; }
-        .timeline::before {
-            content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
-            width: 4px; background-color: var(--color-primary-medium); margin-left: -2px;
-            border-radius: 2px;
+        /* Horizontal Timeline styles */
+        .horizontal-timeline-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 20px 0;
+            background-color: var(--color-background-light-tan);
+            border-radius: 8px;
+            margin-top: 20px;
         }
-        .timeline-item { position: relative; margin-bottom: 50px; width: 50%; padding: 10px 40px; box-sizing: border-box; }
-        .timeline-item:nth-child(odd) { left: 0; text-align: right; }
-        .timeline-item:nth-child(even) { left: 50%; text-align: left; }
-        .timeline-item:nth-child(odd)::after {
-            content: ''; position: absolute; width: 0; height: 0;
-            border-top: 10px solid transparent; border-bottom: 10px solid transparent;
-            border-left: 10px solid #fff; top: 20px; right: 30px; z-index: 1;
+        .horizontal-timeline {
+            display: flex;
+            position: relative;
+            min-width: 1800px; /* Adjust based on number of items */
+            padding: 30px 0;
         }
-        .timeline-item:nth-child(even)::after {
-            content: ''; position: absolute; width: 0; height: 0;
-            border-top: 10px solid transparent; border-bottom: 10px solid transparent;
-            border-right: 10px solid #fff; top: 20px; left: 30px; z-index: 1;
+        .horizontal-timeline::before { /* The main line */
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background-color: var(--color-primary-light);
+            transform: translateY(-50%);
+            z-index: 0;
         }
-        .timeline-content-wrapper { background: white; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(93,64,55,0.15); position: relative; border: 1px solid var(--color-border); }
-        .timeline-date {
-            position: absolute; top: 15px; width: 60px; height: 60px;
-            background-color: var(--color-accent-orange); color: white; border-radius: 50%;
-            display: flex; flex-direction:column; align-items: center; justify-content: center;
-            font-size: 1em; font-weight: bold; text-align:center; line-height:1.1;
-            box-shadow: 0 0 0 4px rgba(245,124,0, 0.2); z-index: 2;
+        .timeline-event {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            min-width: 280px; /* Width of each event box */
+            padding: 0 15px;
+            z-index: 1;
         }
-        .timeline-date span { font-size: 0.7em; display:block; }
-        .timeline-item:nth-child(odd) .timeline-date { right: -30px; }
-        .timeline-item:nth-child(even) .timeline-date { left: -30px; }
-        .timeline-title { font-size: 1.4em; color: var(--color-primary-dark); margin-bottom: 8px; font-weight: 600; }
-        .timeline-text { font-size: 0.9em; color: var(--color-text-medium); line-height: 1.6; }
-        .timeline-status { font-size: 0.8em; font-weight: bold; margin-top:10px; display:inline-block; padding: 3px 8px; border-radius:4px;}
-        .status-timeline-completed { background-color: var(--color-secondary-light); color: var(--color-secondary-dark); }
-        .status-timeline-inprogress { background-color: var(--color-accent-gold); color: var(--color-primary-dark); }
-        .status-timeline-pending { background-color: #E0E0E0; color: var(--color-text-medium); }
+        .timeline-event-marker {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: var(--color-accent-orange);
+            border: 3px solid var(--color-background-light-tan);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2;
+        }
+        .timeline-event-content {
+            background-color: white;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(93,64,55,0.15);
+            text-align: center;
+            width: 100%;
+            border: 1px solid var(--color-border);
+        }
+        .timeline-event:nth-child(odd) .timeline-event-content { margin-top: 30px; }
+        .timeline-event:nth-child(even) .timeline-event-content { margin-bottom: 30px; }
+        .timeline-event-date {
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            margin-bottom: 8px;
+        }
+        .timeline-event-title {
+            font-size: 1em;
+            font-weight: bold;
+            color: var(--color-primary-medium);
+            margin-bottom: 5px;
+        }
+        .timeline-event-details {
+            font-size: 0.8em;
+            color: var(--color-text-medium);
+            max-height: 60px; /* For brief details */
+            overflow: hidden;
+        }
+        .timeline-event-status {
+            font-size: 0.75em; font-weight: bold; margin-top:8px; display:inline-block;
+            padding: 3px 8px; border-radius:10px;
+        }
+        .timeline-status-completed { background-color: var(--color-secondary-light); color: var(--color-secondary-dark); }
+        .timeline-status-inprogress { background-color: var(--color-accent-gold); color: var(--color-primary-dark); opacity: 0.9;}
+        .timeline-status-pending { background-color: #E0E0E0; color: var(--color-text-medium); }
 
-        @media screen and (max-width: 768px) { /* Responsive timeline */
-            .timeline::before { left: 30px; }
-            .timeline-item { width: 100%; padding-left: 80px; padding-right: 15px; text-align: left !important; margin-bottom: 30px; }
-            .timeline-item:nth-child(odd), .timeline-item:nth-child(even) { left: 0; }
-            .timeline-item::after { border-right: 10px solid #fff; border-left: 0; left: 20px; }
-            .timeline-date { left: 0px; }
-        }
 
     </style>
 </head>
 <body>
     <header>
-        <div class="header-container">
-            <div class="logo-container flex items-center">
-                <img src="salatiso/assets/photos/mfe_logo_earthy_placeholder.png" alt="Mdeni Family Enterprise Logo"> <span class="company-name">Mdeni Family Intranet</span>
-            </div>
-            <nav class="main-nav-links">
-                <a href="#" data-target="dashboard" class="active-main-nav">Dashboard</a>
-                <a href="#" data-target="ourVision">Our Vision</a>
-                <a href="#" data-target="team">Our Team</a>
-                <a href="#" data-target="ourJourney">Our Journey</a>
-                <a href="#" data-target="ventures">Ventures</a>
-                <a href="#" data-target="trainingHub">Training Hub</a>
-                <a href="#" data-target="documents">Docs</a>
-                <a href="#" data-target="governance">Governance</a>
-            </nav>
-            <div class="user-actions">
-                <div class="notification-bell">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-badge">4</span>
-                </div>
-                <div class="user-profile-menu ml-5 relative">
-                     <button>
-                        <img src="salatiso/assets/photos/team/profile_salatiso_thumb.jpg" alt="Salatiso Mdeni Profile">
-                    </button>
-                    <div class="dropdown-menu">
-                        <a href="#" id="myProfileLink">My Profile & Plan</a>
-                        <a href="#">Settings</a>
-                        <a href="#">Logout (Conceptual)</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+        </header>
 
     <div class="main-content-wrapper">
         <main class="content-display-area w-full">
             <section id="dashboard" class="content-section active">
                 <div class="dashboard-carousel-container">
                     <div class="dashboard-carousel-track">
-                        <div class="dashboard-carousel-slide bg-gradient-to-br from-green-100 via-yellow-50 to-orange-100">
+                        <div class="dashboard-carousel-slide" style="background: linear-gradient(to bottom right, var(--color-background-cream), var(--color-background-light-tan));">
                             <img src="salatiso/assets/photos/mfe_logo_large_earthy.png" alt="Mdeni Family Enterprise" class="h-24 mx-auto mb-6">
-                            <h2 class="slide-title text-4xl">Siyanamukela! Welcome, Mdeni Family!</h2>
-                            <p class="text-center text-lg text-gray-700 max-w-3xl mx-auto mb-8">
+                            <h2 class="slide-title text-4xl">Molweni! Welcome, Mdeni Family!</h2>
+                            <p class="text-center text-lg text-text-medium max-w-3xl mx-auto mb-8">
                                 This Intranet is our central hub for collaboration, growth, and building our shared legacy.
                                 Let's track our progress, support each other, and achieve our collective goals.
                             </p>
                             <div class="dashboard-grid">
-                                <div class="dashboard-widget border-l-green-600">
-                                    <h3 class="text-green-700"><i class="fas fa-rocket text-green-600"></i>Company Launch Roadmap</h3>
+                                <div class="dashboard-widget border-l-secondary-dark">
+                                    <h3 class="text-secondary-dark"><i class="fas fa-rocket text-secondary-dark"></i>Company Launch Roadmap</h3>
                                     <ul id="companyLaunchRoadmapWidget"></ul>
                                 </div>
-                                <div class="dashboard-widget border-l-orange-600">
-                                    <h3 class="text-orange-700"><i class="fas fa-dollar-sign text-orange-600"></i>Visa's Income Target (Dec 2025)</h3>
+                                <div class="dashboard-widget border-l-accent-orange">
+                                    <h3 class="text-accent-orange"><i class="fas fa-dollar-sign text-accent-orange"></i>Visa's Income Target (Dec 2025)</h3>
                                     <p class="text-lg">Target: R15,000 / month</p>
-                                    <p class="text-lg">Current Projected: <span id="visaIncomeProjected" class="font-bold text-xl text-orange-700">R4,200</span></p>
-                                    <div class="progress-bar-container mt-2"><div class="progress-bar bg-orange-500" style="width: 28%;"></div></div>
+                                    <p class="text-lg">Current Projected: <span id="visaIncomeProjected" class="font-bold text-xl text-accent-orange">R4,200</span></p>
+                                    <div class="progress-bar-container mt-2"><div class="progress-bar bg-accent-orange" style="width: 28%;"></div></div>
                                 </div>
-                                 <div class="dashboard-widget border-l-yellow-600">
-                                    <h3 class="text-yellow-700"><i class="fas fa-calendar-check text-yellow-600"></i>Key Upcoming Deadlines</h3>
+                                 <div class="dashboard-widget border-l-accent-gold">
+                                    <h3 class="text-accent-gold"><i class="fas fa-calendar-check text-accent-gold"></i>Key Upcoming Deadlines</h3>
                                     <ul class="text-sm">
-                                        <li class="text-red-700 font-semibold">Integrate Chatbot (Salatiso): May 24</li>
-                                        <li class="text-red-700 font-semibold">SafetyHelp Launch: June 1</li>
+                                        <li class="text-danger font-semibold">Integrate Chatbot (Salatiso): May 24</li>
+                                        <li class="text-danger font-semibold">SafetyHelp Launch: June 1</li>
                                         <li>Q3 Budget Approval (Salatiso): June 15</li>
                                     </ul>
                                 </div>
-                                <div class="dashboard-widget border-l-purple-600">
-                                    <h3 class="text-purple-700"><i class="fas fa-users text-purple-600"></i>Next Family Council Meeting</h3>
+                                <div class="dashboard-widget border-l-primary-light">
+                                    <h3 class="text-primary-light"><i class="fas fa-users text-primary-light"></i>Next Family Council Meeting</h3>
                                     <p class="text-lg font-semibold">June 10, 2025 - 6 PM</p>
                                     <p class="text-sm">Agenda: Q2 Review, SafetyHelp Post-Launch Analysis</p>
                                 </div>
                             </div>
-                            <p class="mt-10 text-sm text-center text-gray-600">Use the arrows or dots below to navigate other dashboard views.</p>
+                            <p class="mt-10 text-sm text-center text-text-light">Use the arrows or dots below to navigate other dashboard views.</p>
                         </div>
                         <div class="dashboard-carousel-slide">
                             <h2 class="slide-title">Dashboard: Performance Overview</h2>
@@ -464,53 +472,11 @@
 
             <section id="ourJourney" class="content-section">
                 <h2 class="section-title">Our Journey: MFE Launch & Growth Timeline (Year 1)</h2>
-                <p class="text-sm text-gray-600 mb-6">This timeline tracks our key phases and major deliverables for the first year, starting May 19, 2025. Completed items will be marked. Click on items for more details or to see linked PADP actions.</p>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-date">MAY <span>2025</span></div>
-                        <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Month 1: Foundation & Initial Setup</h3>
-                            <p class="timeline-text">Focus: Legal registration, bank accounts, Intranet V1, initial PADP acceptance, SafetyHelp Chatbot integration.</p>
-                            <ul class="text-xs list-disc pl-5 mt-2 space-y-1">
-                                <li>Wk 1 (May 19-25): Company Name Finalized, CIPC Reg. Started (Visa). Chatbot Integration (Salatiso). Intranet Familiarization (All).</li>
-                                <li>Wk 2 (May 26-Jun 1): Bank Account Opened (Visa). SafetyHelp Launch! (All support). Role Acceptance (All).</li>
-                                </ul>
-                            <span class="timeline-status status-timeline-inprogress">In Progress</span>
+                <p class="text-sm text-text-medium mb-6">This timeline tracks our key phases and major deliverables for the first year, starting May 19, 2025. Completed items will be marked. Click on items for more details or to see linked PADP actions.</p>
+                <div class="horizontal-timeline-container">
+                    <div class="horizontal-timeline" id="horizontalTimeline">
                         </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">JUN <span>2025</span></div>
-                        <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Month 2: Operational Kickstart & Marketing Launch</h3>
-                            <p class="timeline-text">Focus: Finalize internal agreements, supplier database, social media launch, Sazi Life curriculum framework.</p>
-                             <span class="timeline-status status-timeline-pending">Pending</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">JUL <span>2025</span></div>
-                        <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Month 3: First Performance Cycle & Content Dev.</h3>
-                            <p class="timeline-text">Focus: First PADP check-ins, SafetyHelp marketing push, Sazi Life module 1 development, document management system.</p>
-                            <span class="timeline-status status-timeline-pending">Pending</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Q3 <span>2025</span></div>
-                        <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Quarter 3: Growth & Refinement</h3>
-                            <p class="timeline-text">Focus: Expanding SafetyHelp client base, Sazi Life pilot, NPO Flamea formalization, first quarterly performance reviews.</p>
-                             <span class="timeline-status status-timeline-pending">Pending</span>
-                        </div>
-                    </div>
-                    <div class="timeline-item">
-                        <div class="timeline-date">Q4 <span>25/26</span></div>
-                        <div class="timeline-content-wrapper">
-                            <h3 class="timeline-title">Quarter 4: Consolidation & Year-End Review</h3>
-                            <p class="timeline-text">Focus: Assessing Visa's income replacement target, planning for Year 2, celebrating successes, Flamea initial outreach.</p>
-                            <span class="timeline-status status-timeline-pending">Pending</span>
-                        </div>
-                    </div>
-                     </div>
+                </div>
             </section>
 
             <section id="ventures" class="content-section">
@@ -529,11 +495,7 @@
     </div>
 
     <footer>
-        <div class="container mx-auto px-6">
-            <p>&copy; 2025 Mdeni Family Enterprise (Pty) Ltd. All Rights Reserved.</p>
-            <p>Internal Portal - Confidential. Built with <i class="fas fa-heart text-red-400"></i> by the Mdeni Family, for the Mdeni Family.</p>
-        </div>
-    </footer>
+        </footer>
 
     <div id="memberDetailsModal" class="modal">
         <div class="modal-content">
@@ -546,7 +508,7 @@
     <div id="journeyDetailsModal" class="modal">
         <div class="modal-content max-w-xl">
             <button class="close-modal-btn" onclick="closeJourneyModal()">&times;</button>
-            <h3 id="journeyModalTitle" class="modal-title text-blue-700 text-xl">Phase Details</h3>
+            <h3 id="journeyModalTitle" class="modal-title text-primary-dark text-xl">Phase Details</h3>
             <div id="journeyModalBody" class="text-sm mt-4">
                 </div>
         </div>
@@ -555,12 +517,12 @@
 
     <script>
         // --- GLOBAL APP STATE (Conceptual - would be server-driven) ---
-        let currentLoggedInUser = 'salatiso'; // Assume Salatiso is logged in for now
+        let currentLoggedInUser = 'salatiso'; 
         const MFE_Data = { /* This would hold all dynamic data if not using a backend */ };
 
         // --- NAVIGATION & SECTION DISPLAY ---
         const mainNavLinks = document.querySelectorAll('.main-nav-links a');
-        const contentSections = document.querySelectorAll('.content-display-area > .content-section'); // Direct children
+        const contentSections = document.querySelectorAll('.content-display-area > .content-section');
         const myProfileLink = document.getElementById('myProfileLink');
 
         function showMainSection(targetId, skipHistoryPush) {
@@ -592,7 +554,7 @@
                     populateAndInitTeamCarousel();
                 }
                 if (targetId === 'ourJourney') {
-                    // Any specific JS for timeline animations or interactions can go here
+                    populateHorizontalTimeline();
                 }
             }
         }
@@ -642,13 +604,12 @@
                 }
 
                 function DupdateCarousel() {
-                    if (slides.length > 0 && slides[0]) { // Check if slides[0] exists
+                    if (slides.length > 0 && slides[0]) { 
                         const slideWidth = slides[0].offsetWidth;
                         track.style.transform = `translateX(-${DcurrentIndex * slideWidth}px)`;
                         DupdateActiveDot();
                     }
                 }
-
 
                 if (nextButton) nextButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex + 1) % slides.length; DupdateCarousel(); });
                 if (prevButton) prevButton.addEventListener('click', () => { DcurrentIndex = (DcurrentIndex - 1 + slides.length) % slides.length; DupdateCarousel(); });
@@ -661,12 +622,11 @@
                 });
 
                 window.addEventListener('resize', DupdateCarousel);
-                DupdateCarousel(); // Initial call
+                DupdateCarousel();
             }
         }
 
-
-        // --- TEAM CAROUSEL (MFE) ---
+        // --- TEAM CAROUSEL ---
         function setupCarousel(carouselElement) {
             const track = carouselElement.querySelector('.mfe-carousel-track');
             if (!track) return;
@@ -718,16 +678,11 @@
             });
 
             const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    if (entry.target.offsetWidth > 0) {
-                         updateCarouselDisplay();
-                    }
-                }
+                for (let entry of entries) { if (entry.target.offsetWidth > 0) { updateCarouselDisplay(); } }
             });
             if(items.length > 0) resizeObserver.observe(items[0]);
             updateCarouselDisplay();
         }
-
 
         // --- TEAM MEMBER DATA & MODAL (PADP Logic) ---
         const memberDetailModal = document.getElementById('memberDetailsModal');
@@ -737,7 +692,7 @@
         const teamMemberData = {
             salatiso: {
                 name: "Salatiso L. Mdeni", role: "Chief Strategic & Operations Officer (CSOO)",
-                profileImage: "salatiso/assets/photos/team/salatiso_profile_thumb.jpg", // Use consistent thumb or large
+                profileImage: "salatiso/assets/photos/team/salatiso_profile_thumb.jpg",
                 profile: `A highly experienced OHS and Risk Management expert... His guiding principle: "I am a father to my son; all else is a means to this end," extending this to his role as an Umlandeli. Key Deadline: Integrate Salatiso Chatbot on safetyfirst.help staging by May 24, 2025.`,
                 responsibilities: ["Overall operational excellence", "Product development", "Risk management & Compliance", "Mentoring next generation", "Appoints Chairperson & CEO (initial)"],
                 padp: {
@@ -785,7 +740,7 @@
                         { task: "Finalize Company Name & CIPC Name Reservation", deadline: "Month 1, Week 1", weight: 5, score: 0, status: "not-started", estimatedTime: "4h", optOut: false },
                         { task: "Achieve SafetyHelp Launch (Construction Module & Chatbot)", deadline: "June 1, 2025", weight: 20, score: 0, status: "not-started", estimatedTime: "Dedicated Focus", optOut: false },
                         { task: "Onboard Tina & Kwakho, finalize their PADPs", deadline: "Month 1, Week 3", weight: 10, score: 0, status: "not-started", estimatedTime: "6h", optOut: false },
-                        { task: "Secure first paying client for SafetyHelp", deadline: "Month 3", weight: 15, score: 0, status: "not-started", estimatedTime: "Ongoing", optOut: true },
+                        { task: "Secure first paying client for SafetyHelp", deadline: "Month 3", weight: 15, score: 0, status: "not-started", estimatedTime: "Ongoing", optOut: true }, 
                     ],
                     userDefinedDeliverables: [ { task: "Explore partnership with 2 local construction firms", weight: 10, score: 0, estimatedTime: "10h"}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""}, { task: "", weight: 0, score: 0, estimatedTime: ""} ],
                     trainingPlan: [
@@ -924,16 +879,14 @@
             const member = teamMemberData[memberKey];
             if (!member) { console.error("Member data not found for key:", memberKey); return; }
 
-            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-green-600 shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-green-600 shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
+            let profileImageHtml = member.profileImage ? `<img src="${member.profileImage}" alt="${member.name}" class="w-32 h-32 rounded-full mx-auto mb-6 border-4 border-secondary-medium shadow-lg">` : `<div class="w-32 h-32 rounded-full mx-auto mb-6 bg-gray-300 flex items-center justify-center text-gray-500 text-4xl border-4 border-secondary-medium shadow-lg">${member.name.split(' ').map(n=>n[0]).join('')}</div>`;
 
-            // --- Tabs HTML ---
             let tabsHtml = `<div class="modal-tabs">
                 <button class="modal-tab-button active" onclick="openModalTab(event, '${memberKey}-padp')">PADP & Role</button>
                 <button class="modal-tab-button" onclick="openModalTab(event, '${memberKey}-training')">Formal Training</button>
                 <button class="modal-tab-button" onclick="openModalTab(event, '${memberKey}-performance')">Performance & Growth</button>
             </div>`;
 
-            // --- PADP & Role Tab Pane ---
             let padpPaneHtml = `<div id="${memberKey}-padp" class="modal-tab-pane active">`;
             padpPaneHtml += commonActionsHtml(member, memberKey);
             padpPaneHtml += responsibilitiesHtml(member);
@@ -941,12 +894,10 @@
             padpPaneHtml += padpDeliverablesHtml(member, memberKey);
             padpPaneHtml += `</div>`;
 
-            // --- Formal Training Tab Pane ---
             let trainingPaneHtml = `<div id="${memberKey}-training" class="modal-tab-pane">`;
             trainingPaneHtml += formalTrainingPlanHtml(member, memberKey);
             trainingPaneHtml += `</div>`;
 
-            // --- Performance & Growth Tab Pane ---
             let performancePaneHtml = `<div id="${memberKey}-performance" class="modal-tab-pane">`;
             performancePaneHtml += performanceKPIsHtml(member);
             performancePaneHtml += nextLevelEligibilityHtml(member);
@@ -1234,7 +1185,7 @@
         function populateAndInitTeamCarousel() {
             if (teamCarouselPopulated) {
                  const teamCarouselEl = document.querySelector('#team .mfe-carousel-container');
-                 if(teamCarouselEl) setupCarousel(teamCarouselEl); // Re-init in case DOM changed
+                 if(teamCarouselEl) setupCarousel(teamCarouselEl);
                 return;
             }
             const teamCarouselTrack = document.querySelector('#team .mfe-carousel-track');
@@ -1281,7 +1232,7 @@
                     const barContainer = document.createElement('div');
                     barContainer.className = 'progress-bar-container mb-2';
                     const bar = document.createElement('div');
-                    bar.className = 'progress-bar bg-secondary-medium'; // Use theme color
+                    bar.className = 'progress-bar bg-secondary-medium';
                     bar.style.width = `${progress}%`;
                     barContainer.appendChild(bar);
                     widget.appendChild(barContainer);
@@ -1355,6 +1306,64 @@
                 widget.appendChild(p);
             });
         }
+
+        // --- HORIZONTAL TIMELINE ---
+        function populateHorizontalTimeline() {
+            const timelineContainer = document.getElementById('horizontalTimeline');
+            if (!timelineContainer) return;
+            timelineContainer.innerHTML = ''; // Clear existing
+
+            const year1Plan = [
+                // May 2025
+                { month: "MAY", year: "2025", week: "Wk 1 (19-25)", title: "Foundation Week", details: "Company Name, CIPC Start (Visa). Chatbot Integration (Salatiso). Intranet Familiarization (All).", status: "inprogress"},
+                { month: "MAY", year: "2025", week: "Wk 2 (26-01)", title: "Launch Week!", details: "Bank Account (Visa). SafetyHelp Launch! Role Acceptance (All).", status: "inprogress"},
+                // June 2025
+                { month: "JUN", year: "2025", week: "Wk 1 (02-08)", title: "Ops Kickstart", details: "Internal Agreements Drafted. Supplier DB Setup (Tina).", status: "pending"},
+                { month: "JUN", year: "2025", week: "Wk 2 (09-15)", title: "Marketing & Curriculum", details: "Social Media Launch (Tina). Sazi Life Framework V1 (Kwakho). Q3 Budget Approved (Salatiso).", status: "pending"},
+                { month: "JUN", year: "2025", week: "Wk 3 (16-22)", title: "Legal & Compliance", details: "SARS Reg Finalized. Trust Deed Review.", status: "pending"},
+                { month: "JUN", year: "2025", week: "Wk 4 (23-29)", title: "Content & Systems", details: "SafetyHelp Brochure (Tina). Document Mgt System (Kwakho).", status: "pending"},
+                // July 2025
+                { month: "JUL", year: "2025", week: "Wk 1 (30-06)", title: "Performance Cycle Start", details: "First PADP Check-ins (Visa). SafetyHelp Marketing Push.", status: "pending"},
+                // ... Add more weekly/monthly items for the whole year
+                { month: "AUG", year: "2025", week: "", title: "Sazi Life Module 1 Dev", details: "Focus on Grade R content.", status: "pending"},
+                { month: "SEP", year: "2025", week: "", title: "Q3 Review Prep", details: "Compile performance data.", status: "pending"},
+                { month: "OCT", year: "2025", week: "", title: "Flamea NPO Update", details: "Check registration status.", status: "pending"},
+                { month: "NOV", year: "2025", week: "", title: "Year 2 Planning", details: "Initial strategic discussions.", status: "pending"},
+                { month: "DEC", year: "2025", week: "", title: "Visa Income Target Review", details: "Assess progress towards R15k.", status: "pending"},
+                { month: "JAN", year: "2026", week: "", title: "Year-End Performance Reviews", details: "Full PADP reviews.", status: "pending"},
+                { month: "FEB", year: "2026", week: "", title: "Sazi Life Pilot Launch", details: "Internal testing of curriculum.", status: "pending"},
+                { month: "MAR", year: "2026", week: "", title: "Expand SafetyHelp Modules", details: "Plan next features.", status: "pending"},
+                { month: "APR", year: "2026", week: "", title: "Community Outreach (Flamea)", details: "Plan first initiative.", status: "pending"},
+                { month: "MAY", year: "2026", week: "", title: "One Year Anniversary Review", details: "Celebrate successes, plan ahead.", status: "pending"},
+            ];
+
+            year1Plan.forEach((eventData, index) => {
+                const eventDiv = document.createElement('div');
+                eventDiv.className = 'timeline-event';
+                
+                let statusClass = 'timeline-status-pending';
+                if (eventData.status === 'completed') statusClass = 'timeline-status-completed';
+                else if (eventData.status === 'inprogress') statusClass = 'timeline-status-inprogress';
+
+                eventDiv.innerHTML = `
+                    <div class="timeline-event-marker"></div>
+                    <div class="timeline-event-content">
+                        <div class="timeline-event-date">${eventData.month} <span>${eventData.week ? eventData.week : eventData.year}</span></div>
+                        <h4 class="timeline-event-title">${eventData.title}</h4>
+                        <p class="timeline-event-details">${eventData.details}</p>
+                        <span class="timeline-status ${statusClass}">${eventData.status.toUpperCase()}</span>
+                    </div>
+                `;
+                // Alternate content above/below the line
+                if (index % 2 === 0) {
+                    eventDiv.querySelector('.timeline-event-content').style.marginBottom = '30px';
+                } else {
+                    eventDiv.querySelector('.timeline-event-content').style.marginTop = '30px';
+                }
+                timelineContainer.appendChild(eventDiv);
+            });
+        }
+
 
         // --- JOURNEY DETAILS MODAL ---
         const journeyDetailsModal = document.getElementById('journeyDetailsModal');
@@ -1474,36 +1483,108 @@
                 governanceSectionObserver.observe(governanceSection, { attributes: true });
             }
              // Fill in any missing sections that were previously removed
+             // Our Vision
+            const ourVisionSection = document.getElementById('ourVision');
+            if (ourVisionSection && ourVisionSection.innerHTML.trim() === "") {
+                ourVisionSection.innerHTML = `<h2 class="section-title">Our Guiding Light: Vision & Mission</h2>
+                <div class="grid md:grid-cols-2 gap-8 items-start">
+                    <div class="bg-secondary-light bg-opacity-30 p-6 rounded-lg shadow-md border-l-4 border-secondary-medium">
+                        <h3 class="font-display text-3xl text-secondary-dark mb-4 flex items-center"><i class="fas fa-eye mr-3 text-secondary-dark"></i>Our Vision</h3>
+                        <p class="text-text-medium leading-relaxed">To be a leading family-owned enterprise recognized for its innovation, integrity, and commitment to empowering its members and the community, building a lasting legacy for generations to come, rooted in our Xhosa heritage and South African identity.</p>
+                    </div>
+                    <div class="bg-accent-orange bg-opacity-10 p-6 rounded-lg shadow-md border-l-4 border-accent-orange">
+                        <h3 class="font-display text-3xl text-accent-orange mb-4 flex items-center"><i class="fas fa-bullseye mr-3 text-accent-orange"></i>Our Mission</h3>
+                        <p class="text-text-medium leading-relaxed">To strategically manage and grow a diversified portfolio of ventures in OHS consulting, property management, digital solutions, education, and publishing, while fostering the professional development of family members and contributing positively to society through its non-profit activities.</p>
+                    </div>
+                </div>
+                <div class="mt-10 text-center">
+                    <p class="mt-3 text-text-medium text-sm">"Indlovu ithwala umboko wayo." (An elephant carries its own trunk - We are self-reliant and carry our own responsibilities.)</p>
+                </div>`;
+            }
+            // Team Section (basic structure if empty)
+            const teamSection = document.getElementById('team');
+            if (teamSection && teamSection.innerHTML.trim() === "") {
+                teamSection.innerHTML = `<h2 class="section-title">Our Family Team & Structure</h2>
+                <p class="text-text-medium mb-4 text-sm">
+                    Our strength lies in our family, working together with clearly defined roles and accountabilities. Solonwabo, while technically proficient and contributing significantly to product design, is in an apprentice role. He is accountable to the CSOO (Salatiso) for technical mentorship, skill development, and quality of technical output. He is responsible to the CEO (Visa) for project deliverables, timelines, and day-to-day operational alignment with company priorities. Tina and Kwakho report directly to the CEO.
+                </p>
+                <div class="organogram mb-10">
+                    <div class="org-level">
+                        <div class="org-node-container">
+                            <div class="org-node" data-member="nozukile_org">
+                                <div class="name">Nozukile Mdeni</div> <div class="role">Chairperson, Family Council</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="org-connector-down"></div>
+                    <div class="org-level">
+                        <div class="org-node-container">
+                            <div class="org-node" data-member="salatiso_org">
+                               <div class="name">Salatiso L. Mdeni</div> <div class="role">CSOO</div>
+                            </div>
+                            <div class="org-connector-down"></div>
+                            <div class="org-level"> <div class="org-node-container">
+                                    <div class="org-node" data-member="solonwabo_org">
+                                        <div class="name">Solonwabo M. Mdeni</div> <div class="role">Jr. Product Designer & Tech Apprentice</div>
+                                        <div class="reporting-line">(Acct: CSOO, Resp: CEO)</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="org-node-container">
+                            <div class="org-node" data-member="visa_org">
+                                <div class="name">Visa Mdeni</div> <div class="role">CEO</div>
+                            </div>
+                            <div class="org-connector-down"></div>
+                            <div class="org-level"> <div class="org-node-container">
+                                    <div class="org-node" data-member="tina_org">
+                                        <div class="name">Tina Mdeni</div> <div class="role">Head of Marketing & Comms, Tenant/Supplier Mgt.</div>
+                                    </div>
+                                </div>
+                                <div class="org-node-container">
+                                    <div class="org-node" data-member="kwakho_org">
+                                        <div class="name">Kwakho Mdeni</div> <div class="role">Head of Ops Support & Curriculum Dev.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="text-center text-sm text-text-light mb-8">Click on a team member in the organogram or the carousel below for detailed profiles, Personalized Action & Development Plans (PADP), and performance metrics.</p>
+                <div class="mfe-carousel-container">
+                    <div class="mfe-carousel-track"></div>
+                    <button class="mfe-carousel-button prev-btn"><i class="fas fa-chevron-left"></i></button>
+                    <button class="mfe-carousel-button next-btn"><i class="fas fa-chevron-right"></i></button>
+                    <div class="carousel-dots mt-4"></div>
+                </div>`;
+                 if (!teamCarouselPopulated) populateAndInitTeamCarousel(); // Populate if section is active and carousel not yet done
+            }
+
             const venturesSection = document.getElementById('ventures');
             if (venturesSection && venturesSection.innerHTML.trim() === "") {
                 venturesSection.innerHTML = `<h2 class="section-title">Our Family Ventures</h2>
                 <div class="resource-grid">
                     <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/safetyhelp_logo_earthy.png" alt="SafetyHelp Logo" class="h-16 mb-3 mx-auto">
                         <h4>SafetyHelp OHS Platform</h4>
                         <p>AI-enhanced tools for OHS compliance, risk assessments, and safety management. Led by Visa Mdeni.</p>
                         <a href="#" class="learn-more-btn">Explore SafetyHelp Details</a>
                     </div>
                     <div class="resource-card">
-                         <img src="salatiso/assets/photos/ventures/sazilife_logo_earthy.png" alt="Sazi Life Logo" class="h-16 mb-3 mx-auto">
                         <h4>Sazi Life Education</h4>
                         <p>Personalized learning resources and homeschooling support, fostering lifelong learning. Led by Kwakho Mdeni.</p>
                         <a href="#" class="learn-more-btn">Discover Sazi Life</a>
                     </div>
                     <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/consulting_icon_earthy.png" alt="Consulting Icon" class="h-16 mb-3 mx-auto">
                         <h4>Salatiso Mdeni Ventures</h4>
                         <p>Expert OHS, Risk Management, Compliance, and Business Continuity consulting services.</p>
                         <a href="#" class="learn-more-btn">Consulting Services</a>
                     </div>
                     <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/digital_icon_earthy.png" alt="Digital Icon" class="h-16 mb-3 mx-auto">
                         <h4>Digital Creations & Publishing</h4>
                         <p>Website design, e-learning content, and book publishing services. Showcasing our family's creative and tech skills.</p>
                         <a href="#" class="learn-more-btn">Our Digital Portfolio</a>
                     </div>
                     <div class="resource-card">
-                        <img src="salatiso/assets/photos/ventures/property_icon_earthy.png" alt="Property Icon" class="h-16 mb-3 mx-auto">
                         <h4>Property Management</h4>
                         <p>Management of family rental properties and Airbnb units, ensuring optimal returns and guest satisfaction.</p>
                         <a href="#" class="learn-more-btn">View Properties</a>
@@ -1616,14 +1697,12 @@
                     </ul>
                      <p class="mt-4 text-xs text-text-light"><em>Policy documents will be uploaded here as they are finalized.</em></p>
                 </div>`;
-                 // Ensure the first tab is active by default if governance section is shown
                 const tabsContainer = governanceSectionContent.querySelector('.tabs');
                 if (tabsContainer && !tabsContainer.querySelector('button.active')) {
                         const firstTabButton = tabsContainer.querySelector('button');
                         if(firstTabButton) firstTabButton.click();
                 }
             }
-            // Ensure footer is present
             const footerElement = document.querySelector('footer');
             if (footerElement && footerElement.innerHTML.trim() === "") {
                 footerElement.innerHTML = `<div class="container mx-auto px-6">
@@ -1631,7 +1710,6 @@
                     <p>Internal Portal - Confidential. Built with <i class="fas fa-heart text-red-400"></i> by the Mdeni Family, for the Mdeni Family.</p>
                 </div>`;
             }
-             // Ensure header is present
             const headerElement = document.querySelector('header');
             if (headerElement && headerElement.innerHTML.trim() === "") {
                  headerElement.innerHTML = `<div class="header-container">
@@ -1640,8 +1718,7 @@
                         <span class="company-name">Mdeni Family Intranet</span>
                     </div>
                     <nav class="main-nav-links">
-                        <a href="#" data-target="welcome">Welcome</a>
-                        <a href="#" class="active-main-nav" data-target="dashboard">Dashboard</a>
+                        <a href="#" data-target="dashboard" class="active-main-nav">Dashboard</a>
                         <a href="#" data-target="ourVision">Our Vision</a>
                         <a href="#" data-target="team">Our Team</a>
                         <a href="#" data-target="ourJourney">Our Journey</a>
@@ -1667,7 +1744,6 @@
                         </div>
                     </div>
                 </div>`;
-                // Re-attach event listeners for header if it was re-created
                 document.querySelectorAll('.main-nav-links a').forEach(link => {
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
